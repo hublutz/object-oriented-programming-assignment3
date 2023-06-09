@@ -59,4 +59,23 @@ public class Point
         int yDelta = this.y - other.y;
         return Math.sqrt((xDelta * xDelta) + (yDelta * yDelta));
     }
+
+    /**
+     * Checks if the given parameter is a Point and if its axes
+     * are equal to this Point's axes
+     * @param obj an object
+     * @return true if the object is a Point whose axes equal to this one's.
+     * Else false
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Point))
+        {
+            return false;
+        }
+
+        Point other = (Point)obj;
+        return this.x == other.x && this.y == other.y;
+    }
 }
