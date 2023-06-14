@@ -46,5 +46,16 @@ public abstract class UnitTile extends Tile{
         if(attackRoll -defendRoll>0)
             health.decreaseHealthAmount(attackRoll -defendRoll);
     }
+    /**
+     * The method that is used to check if a unit is dead
+     */
+    public boolean isDead(){
+        return health.isDead();
+    }
 
+    /**
+     * The method that is used upon UnitDeath
+     * @param killer  the killer of this unit
+     */
+    public abstract void onDeath(UnitTile killer);
 }
