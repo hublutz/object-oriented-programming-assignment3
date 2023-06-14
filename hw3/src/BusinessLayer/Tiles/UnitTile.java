@@ -29,13 +29,18 @@ public abstract class UnitTile extends Tile{
         this.defencePoints = defencePoints;
         this.messageCallback = messageCallback;
     }
+    /**
+     * The method that is used to attack other units
+     *
+     * @param unit the unit to attack
+     */
+    public abstract void attack(UnitTile unit);
 
-    public void attack(UnitTile unit){ //player needs to overide
-        int attackRoll = new Random().nextInt(attackPoints);
-        unit.defend(attackRoll);
-
-    }
-
+    /**
+     * The method that is used to defend against attacks from other units
+     *
+     * @param attackRoll the attack roll of the attacking unit
+     */
     public void defend(int attackRoll){
         int defendRoll = new Random().nextInt(defencePoints);
         if(attackRoll -defendRoll>0)
