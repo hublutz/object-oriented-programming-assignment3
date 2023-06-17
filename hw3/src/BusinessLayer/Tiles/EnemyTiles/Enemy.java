@@ -8,9 +8,9 @@ import BusinessLayer.Tiles.UnitTile;
  */
 public abstract class Enemy extends UnitTile
 {
-    private int experienceValue;
-    private Player player;
-    private IEnemyDeathCallback deathCallback;
+    protected int experienceValue;
+    protected Player player;
+    protected IEnemyDeathCallback deathCallback;
     /**
      * Enemy constructor, receives all UnitTile parameters and
      * experience value and the player reference
