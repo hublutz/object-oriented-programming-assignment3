@@ -1,8 +1,11 @@
 package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.UnitTile;
+import BusinessLayer.Tiles.VisitorPattern.IVisitor;
+import BusinessLayer.Tiles.WallTile;
 
 /**
  * Abstract class Enemy represents an Enemy Tile in the game board
@@ -10,6 +13,8 @@ import BusinessLayer.Tiles.Units.UnitTile;
 public abstract class Enemy extends UnitTile
 {
     protected int experienceValue;
+
+
     protected Player player;
     protected IEnemyDeathCallback deathCallback;
     /**
@@ -35,4 +40,49 @@ public abstract class Enemy extends UnitTile
     {
         this.deathCallback.callEnemyDeath(this);
     }
+
+    /**
+     * experienceValue getter
+     * */
+    public int getExperienceValue() {
+        return experienceValue;
+    }
+
+    /**
+     * Enemy accept as part of visitor pattern
+     */
+    @Override
+    public void accept(IVisitor visitor){
+        visitor.visit(this);
+    }
+
+    /**
+     * Enemy visits empty tile
+     * */
+    @Override
+    public void visit(EmptyTile empty) {
+        this.switchPlaces(empty);
+    }
+    /**
+     * Enemy visits wall tile
+     * */
+    @Override
+    public void visit(WallTile wall) {}
+
+    /**
+     * Enemy visits player tile
+     * */
+    @Override
+    public void visit(Player player) {
+        this.attack(player);
+        if(player.isDead()){
+            player.onDeath(this);
+        }
+    }
+
+    /**
+     * Enemy visits enemy tile
+     * */
+    @Override
+    public void visit(Enemy enemy) {}
 }

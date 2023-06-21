@@ -1,7 +1,13 @@
 package BusinessLayer.Tiles.Units.Players.Warrior;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.EmptyTile;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
+import BusinessLayer.Tiles.VisitorPattern.IVisitor;
+import BusinessLayer.Tiles.WallTile;
+
+import java.util.List;
 
 public class Warrior extends Player {
 
@@ -23,7 +29,7 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void castAbility() {
+    public void castAbility(List<Enemy> enemies) {
 
     }
 

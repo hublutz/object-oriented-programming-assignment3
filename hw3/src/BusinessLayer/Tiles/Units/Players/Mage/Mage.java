@@ -1,7 +1,10 @@
 package BusinessLayer.Tiles.Units.Players.Mage;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
+
+import java.util.List;
 
 public class Mage extends Player {
 
@@ -35,7 +38,7 @@ public class Mage extends Player {
     }
 
     @Override
-    public void castAbility() {
+    public void castAbility(List<Enemy> enemies) {
         try {
             if(mana.useMana(this.manaCost)){
 

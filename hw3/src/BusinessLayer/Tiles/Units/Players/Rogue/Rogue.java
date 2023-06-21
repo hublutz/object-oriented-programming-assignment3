@@ -1,7 +1,10 @@
 package BusinessLayer.Tiles.Units.Players.Rogue;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
+
+import java.util.List;
 
 public class Rogue extends Player {
     final private int INITIAL_ENERGY =100;
@@ -21,7 +24,7 @@ public class Rogue extends Player {
     }
 
     @Override
-    public void castAbility() {
+    public void castAbility(List<Enemy> enemies) {
         this.currentEnergy -=this.cost;
     }
 
