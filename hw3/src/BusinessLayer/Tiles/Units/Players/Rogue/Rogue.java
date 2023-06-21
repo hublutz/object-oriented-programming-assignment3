@@ -1,7 +1,7 @@
-package BusinessLayer.Units.Players.Rogue;
+package BusinessLayer.Tiles.Units.Players.Rogue;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Units.Players.Player;
+import BusinessLayer.Tiles.Units.Players.Player;
 
 public class Rogue extends Player {
     final private int INITIAL_ENERGY =100;

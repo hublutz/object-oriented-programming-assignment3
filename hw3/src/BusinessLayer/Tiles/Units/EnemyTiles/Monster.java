@@ -1,9 +1,7 @@
-package BusinessLayer.Tiles.EnemyTiles;
+package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.UnitTile;
-
-import java.util.Random;
 
 /**
  * Class Monster represents a monster tile in the board

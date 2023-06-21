@@ -1,6 +1,5 @@
-package BusinessLayer.Units;
+package BusinessLayer.Tiles.Units;
 
-import BusinessLayer.Units.Health.Health;
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.Tile;
 

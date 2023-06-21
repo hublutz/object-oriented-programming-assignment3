@@ -1,4 +1,4 @@
-package BusinessLayer.Units.Health;
+package BusinessLayer.Tiles.Units;
 
 public class Health {
     private static final int DEAD_HEALTH_AMOUNT =0 ;

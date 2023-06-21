@@ -1,4 +1,4 @@
-package BusinessLayer.Tiles.EnemyTiles;
+package BusinessLayer.Tiles.Units.EnemyTiles;
 
 /**
  * Interface IEnemyDeathCallback declares behaviour
