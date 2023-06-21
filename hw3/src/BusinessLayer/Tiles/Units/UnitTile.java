@@ -48,7 +48,16 @@ public abstract class UnitTile extends Tile {
     }
 
     /**
+     * The methods check if the unit is dead
+     * @return true if the unit is dead, else false
+     */
+    public boolean isDead()
+    {
+        return this.health.isDead();
+    }
+
+    /**
      * This method is called upon a Unit's death
      */
-    public abstract void onDeath();
+    public abstract void onDeath(UnitTile killer);
 }
