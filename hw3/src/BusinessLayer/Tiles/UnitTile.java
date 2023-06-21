@@ -44,7 +44,7 @@ public abstract class UnitTile extends Tile{
     public void defend(int attackRoll){
         int defendRoll = new Random().nextInt(defencePoints);
         if(attackRoll -defendRoll>0)
-            health.decreaseHealthAmount(attackRoll -defendRoll);
+            this.dealDamage(attackRoll -defendRoll);
     }
     /**
      * The method that is used to check if a unit is dead
@@ -58,4 +58,12 @@ public abstract class UnitTile extends Tile{
      * @param killer  the killer of this unit
      */
     public abstract void onDeath(UnitTile killer);
+
+    /**
+     * Deals damage to this unit
+     * @param damage amount of damage to deal
+     * */
+    public void dealDamage(int damage){
+        this.health.decreaseHealthAmount(damage);
+    };
 }

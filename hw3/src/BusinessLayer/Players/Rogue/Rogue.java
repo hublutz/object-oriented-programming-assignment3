@@ -4,25 +4,25 @@ import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Players.Player;
 
 public class Rogue extends Player {
+    final private int INITIAL_ENERGY =100;
+
+    private int cost;
+    private int currentEnergy;
+
     /**
      * Tile constructor
-     *
-     * @param tile            the tile character
-     * @param x               the x-axis value of the Tile
-     * @param y               the y-axis value of the Tile
-     * @param name
-     * @param healthPool
-     * @param attackPoints
-     * @param defencePoints
-     * @param messageCallback
+     * @param cost the cost of the rogues ability
      */
-    public Rogue(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+    public Rogue(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+                 IMessageCallback messageCallback, int cost) {
         super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.currentEnergy = INITIAL_ENERGY;
+        this.cost = cost;
     }
 
     @Override
     public void castAbility() {
-
+        this.currentEnergy -=this.cost;
     }
 
     @Override

@@ -10,16 +10,9 @@ public class Warrior extends Player {
     private int remainingCooldown;
 
     /**
-     * Tile constructor
+     * Warrior constructor
      *
-     * @param tile            the tile character
-     * @param x               the x-axis value of the Tile
-     * @param y               the y-axis value of the Tile
-     * @param name
-     * @param healthPool
-     * @param attackPoints
-     * @param defencePoints
-     * @param messageCallback
+     * @param abilityCooldown the ability cooldown of the warier
      */
     public Warrior(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
                    IMessageCallback messageCallback, int abilityCooldown) {
