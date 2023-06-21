@@ -44,29 +44,11 @@ public abstract class UnitTile extends Tile{
     public void defend(int attackRoll){
         int defendRoll = new Random().nextInt(defencePoints);
         if(attackRoll -defendRoll>0)
-            this.receiveDamage(attackRoll -defendRoll);
-    }
-    /**
-     * The method that is used to check if a unit is dead
-     */
-    public boolean isDead(){
-        return health.isDead();
+            health.decreaseHealthAmount(attackRoll -defendRoll);
     }
 
     /**
-
-     * The method that is used upon UnitDeath
-     * @param killer  the killer of this unit
+     * This method is called upon a Unit's death
      */
-    public abstract void onDeath(UnitTile killer);
-
-    /**
-     * Deals damage to this unit
-     * @param damage amount of damage to deal
-     * */
-    public void receiveDamage(int damage){
-        this.health.decreaseHealthAmount(damage);
-    };
-
-
+    public abstract void onDeath();
 }
