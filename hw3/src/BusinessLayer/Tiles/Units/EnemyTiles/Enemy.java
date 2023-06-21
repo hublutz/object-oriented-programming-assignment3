@@ -1,7 +1,8 @@
 package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Tiles.UnitTile;
+import BusinessLayer.Tiles.Units.Players.Player;
+import BusinessLayer.Tiles.Units.UnitTile;
 
 /**
  * Abstract class Enemy represents an Enemy Tile in the game board
@@ -30,7 +31,7 @@ public abstract class Enemy extends UnitTile
     }
 
     @Override
-    public void onDeath()
+    public void onDeath(UnitTile killer)
     {
         this.deathCallback.callEnemyDeath(this);
     }

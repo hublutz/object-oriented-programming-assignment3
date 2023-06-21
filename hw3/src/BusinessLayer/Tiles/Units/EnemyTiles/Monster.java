@@ -1,7 +1,8 @@
 package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Tiles.UnitTile;
+import BusinessLayer.Tiles.Units.Players.Player;
+import BusinessLayer.Tiles.Units.UnitTile;
 
 /**
  * Class Monster represents a monster tile in the board

@@ -2,7 +2,8 @@ package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
-import BusinessLayer.Tiles.UnitTile;
+import BusinessLayer.Tiles.Units.Players.Player;
+import BusinessLayer.Tiles.Units.UnitTile;
 
 /**
  * Class Trap represents a trap tile in the board
