@@ -1,6 +1,7 @@
 package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.UnitTile;
 
@@ -17,6 +18,8 @@ public class Monster extends Enemy
     private static final int MOVE_RIGHT = 3;
     private static final int NO_MOVEMENT = 4;
 
+    private final MonsterMovementFactory movementFactory;
+
 
     /**
      * Monster constructor, receives all Enemy parameters and
@@ -30,6 +33,8 @@ public class Monster extends Enemy
         super(tile, x, y, name, healthPool, attackPoints, defencePoints,
                 messageCallback, experienceValue, player, deathCallback);
         this.visionRange = visionRange;
+
+        this.movementFactory = new MonsterMovementFactory();
     }
 
 
@@ -39,7 +44,35 @@ public class Monster extends Enemy
     @Override
     public void onGameTick()
     {
+        MoveOperation moveOperation;
 
+        if (this.range(this.player) < this.visionRange)
+        {
+            int dx = this.getX() - this.player.getX();
+            int dy = this.getY() - this.player.getY();
+            if (Math.abs(dx) > Math.abs(dy))
+            {
+                if (dx > 0)
+                    moveOperation = this.movementFactory.
+                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_LEFT);
+                else
+                    moveOperation = this.movementFactory.
+                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_RIGHT);
+            }
+            else
+            {
+                if (dx > 0)
+                    moveOperation = this.movementFactory.
+                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_UP);
+                else
+                    moveOperation = this.movementFactory.
+                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_DOWN);
+            }
+        }
+        else
+            moveOperation = this.movementFactory.getRandomMovement();
+
+        moveOperation.move(this.position);
     }
 
     /**
