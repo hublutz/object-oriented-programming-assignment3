@@ -55,6 +55,7 @@ public abstract class UnitTile extends Tile {
     }
 
     /**
+
      * The method that is used upon UnitDeath
      * @param killer  the killer of this unit
      */
@@ -67,4 +68,6 @@ public abstract class UnitTile extends Tile {
     public void receiveDamage(int damage){
         this.health.decreaseHealthAmount(damage);
     };
+
+
 }
