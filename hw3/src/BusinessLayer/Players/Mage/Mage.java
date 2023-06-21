@@ -5,6 +5,8 @@ import BusinessLayer.Players.Player;
 
 public class Mage extends Player {
 
+    private static final int TIMES_INCREASE_POOL_ON_LEVEL_UP = 25;
+    private static final int DIV_TIMES_REFILL_ON_LEVEL_UP = 4;
     private Mana mana;
     private int manaCost;
     private int spellPower;
@@ -12,16 +14,13 @@ public class Mage extends Player {
     private int abilityRange;
 
     /**
-     * Tile constructor
+     * Mage constructor
      *
-     * @param tile            the tile character
-     * @param x               the x-axis value of the Tile
-     * @param y               the y-axis value of the Tile
-     * @param name
-     * @param healthPool
-     * @param attackPoints
-     * @param defencePoints
-     * @param messageCallback
+     * @param manaCost the initial mana cost of spells
+     * @param spellPower the initial spell power
+     * @param hitsCount the initial hitsCount
+     * @param abilityRange the initial ability range
+
      */
     public Mage(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
                 IMessageCallback messageCallback, int abilityRange, int hitsCount, int spellPower, int manaCost, int manaPool) {
@@ -33,12 +32,17 @@ public class Mage extends Player {
         this.abilityRange = abilityRange;
         this.mana = new Mana(manaPool);
 
-
     }
 
     @Override
     public void castAbility() {
+        try {
+            if(mana.useMana(this.manaCost)){
 
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -48,6 +52,16 @@ public class Mage extends Player {
 
     @Override
     public void levelUp(){
+        super.levelUp();
+
+        try {
+            mana.increaseManaPool(TIMES_INCREASE_POOL_ON_LEVEL_UP * this
+                    .playerLevel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        this.mana.refillMana(mana.getManaPool()/DIV_TIMES_REFILL_ON_LEVEL_UP);
 
     }
 }

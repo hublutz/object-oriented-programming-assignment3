@@ -35,7 +35,7 @@ public class Mana {
                 this.manaAmount-=amount;
                 return true;
             }else
-                throw new Exception("player doesn't have enough mana");
+               return false;
         }else
             throw new Exception("amount cant be negative");
     }
@@ -45,16 +45,25 @@ public class Mana {
      * @throws Exception if increaseBy <=0
      * */
     public void increaseManaPool(int increaseBy) throws Exception {
-        if (increaseBy > 0){
+        if (increaseBy > 0)
             this.manaPool = this.manaPool + increaseBy;
-        }else
+
+        else
             throw new Exception("cannot increase by negative amount");
     }
     /**
-     * Getter for manaAmount
-     * @return The manaAmount
+     * Getter for getManaPool
+     * @return The mana pool
      * */
-    public int getManaAmount(){
+    public int getManaPool(){
         return this.manaAmount;
+    }
+
+    public void refillMana(int amount){
+        if(this.manaAmount +amount > this.manaPool)
+            manaAmount = manaPool;
+        else
+            manaAmount+= amount;
+
     }
 }

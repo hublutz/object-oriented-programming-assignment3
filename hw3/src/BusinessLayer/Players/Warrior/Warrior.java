@@ -5,6 +5,7 @@ import BusinessLayer.Players.Player;
 
 public class Warrior extends Player {
 
+    private static final int INITIAL_REMAINING_COOLDOWN = 0;
     private int abilityCooldown;
 
     private int remainingCooldown;
@@ -18,7 +19,7 @@ public class Warrior extends Player {
                    IMessageCallback messageCallback, int abilityCooldown) {
         super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.abilityCooldown = abilityCooldown;
-        this.remainingCooldown = 0;
+        this.remainingCooldown = INITIAL_REMAINING_COOLDOWN;
     }
 
     @Override
