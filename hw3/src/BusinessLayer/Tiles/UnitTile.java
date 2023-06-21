@@ -47,4 +47,8 @@ public abstract class UnitTile extends Tile{
             health.decreaseHealthAmount(attackRoll -defendRoll);
     }
 
+    /**
+     * This method is called upon a Unit's death
+     */
+    public abstract void onDeath();
 }

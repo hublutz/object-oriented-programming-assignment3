@@ -58,6 +58,24 @@ public abstract class Tile
     }
 
     /**
+     * X-axis position getter
+     * @return the x-axis position of the tile
+     */
+    public int getX()
+    {
+        return this.position.getX();
+    }
+
+    /**
+     * Y-axis position getter
+     * @return the y-axis position of the tile
+     */
+    public int getY()
+    {
+        return this.position.getY();
+    }
+
+    /**
      * Calculates the range between two tiles
      * @param other a tile to calculate the distance from
      * @return the distance between this Tile and the other Tile
