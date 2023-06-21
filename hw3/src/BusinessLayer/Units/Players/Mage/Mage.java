@@ -1,7 +1,7 @@
-package BusinessLayer.Players.Mage;
+package BusinessLayer.Units.Players.Mage;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Players.Player;
+import BusinessLayer.Units.Players.Player;
 
 public class Mage extends Player {
 

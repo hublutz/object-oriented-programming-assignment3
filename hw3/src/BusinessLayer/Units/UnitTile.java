@@ -1,11 +1,12 @@
-package BusinessLayer.Tiles;
+package BusinessLayer.Units;
 
-import BusinessLayer.Health.Health;
+import BusinessLayer.Units.Health.Health;
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.Tile;
 
 import java.util.Random;
 
-public abstract class UnitTile extends Tile{
+public abstract class UnitTile extends Tile {
 
     protected String name;
     protected int attackPoints;

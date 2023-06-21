@@ -1,7 +1,7 @@
-package BusinessLayer.Players.Warrior;
+package BusinessLayer.Units.Players.Warrior;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Players.Player;
+import BusinessLayer.Units.Players.Player;
 
 public class Warrior extends Player {
 

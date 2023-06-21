@@ -1,7 +1,7 @@
-package BusinessLayer.Players;
+package BusinessLayer.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Tiles.UnitTile;
+import BusinessLayer.Units.UnitTile;
 
 import java.util.Random;
 

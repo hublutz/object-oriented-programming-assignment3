@@ -1,4 +1,4 @@
-package BusinessLayer.MoveOperations;
+package BusinessLayer.Units.MoveOperations;
 
 import BusinessLayer.Tiles.Point;
 

@@ -1,4 +1,4 @@
-package BusinessLayer.Players.Mage;
+package BusinessLayer.Units.Players.Mage;
 
 public class Mana {
 
