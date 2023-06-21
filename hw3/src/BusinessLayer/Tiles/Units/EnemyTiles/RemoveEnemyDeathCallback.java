@@ -1,4 +1,4 @@
-package BusinessLayer.Tiles.EnemyTiles;
+package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
