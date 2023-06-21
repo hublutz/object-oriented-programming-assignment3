@@ -68,7 +68,7 @@ public class Health {
     }
 
     /**
-     * The method that is used to check if a player is dead
+     * The method that is used to check if a unit is dead
      */
     public boolean isDead(){
         return this.healthAmount ==DEAD_HEALTH_AMOUNT;
