@@ -72,7 +72,7 @@ public class Monster extends Enemy
         else
             moveOperation = this.movementFactory.getRandomMovement();
 
-        moveOperation.move(this.position);
+        moveOperation.move(this);
     }
 
     /**

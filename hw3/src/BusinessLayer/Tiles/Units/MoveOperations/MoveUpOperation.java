@@ -1,19 +1,28 @@
 package BusinessLayer.Tiles.Units.MoveOperations;
 
-import BusinessLayer.Tiles.Point;
+import BusinessLayer.Tiles.Units.UnitTile;
 
 /**
  * MoveOperation for moving up one tile
  */
-public class MoveUpOperation implements MoveOperation
+public class MoveUpOperation extends AbstractBoardMovement
 {
     /**
+     * MoveUpOperation constructor
+     * @param gameBoard The game board containing the tiles of the level
+     */
+    public MoveUpOperation(GameBoard gameBoard)
+    {
+        super(gameBoard);
+    }
+
+    /**
      * This method move the given position up one tile
-     * @param position the position to move
+     * @param unit the unit to move
      */
     @Override
-    public void move(Point position)
+    public void move(UnitTile unit)
     {
-        position.move(position.getX(), position.getY() + 1);
+        //position.move(position.getX(), position.getY() + 1);
     }
 }

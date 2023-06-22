@@ -1,6 +1,6 @@
 package BusinessLayer.Tiles.Units.MoveOperations;
 
-import BusinessLayer.Tiles.Point;
+import BusinessLayer.Tiles.Units.UnitTile;
 
 /**
  * MoveOperation for no movement
@@ -9,8 +9,8 @@ public class NothingMoveOperation implements MoveOperation
 {
     /**
      * This method performs no movements on the position
-     * @param position the position given
+     * @param unit the unit given
      */
     @Override
-    public void move(Point position) { }
+    public void move(UnitTile unit) { }
 }

@@ -1,8 +1,8 @@
 package BusinessLayer.Tiles.Units.MoveOperations;
 
-import BusinessLayer.Tiles.Point;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
+import BusinessLayer.Tiles.Units.UnitTile;
 
 import java.util.List;
 
@@ -27,10 +27,10 @@ public class CastAbilityMoveOperation implements MoveOperation
 
     /**
      * This method calls the ability cast of the player
-     * @param position The position given
+     * @param unit The unit given
      */
     @Override
-    public void move(Point position)
+    public void move(UnitTile unit)
     {
         player.castAbility(enemyList);
     }
