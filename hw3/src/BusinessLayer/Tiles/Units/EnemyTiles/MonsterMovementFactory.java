@@ -18,20 +18,20 @@ public class MonsterMovementFactory
      */
     public enum MonsterMovements
     {
-        MOVE_UP,
-        MOVE_DOWN,
-        MOVE_LEFT,
-        MOVE_RIGHT,
-        NO_MOVEMENT
+        MOVE_UP, MOVE_DOWN, MOVE_LEFT,
+        MOVE_RIGHT, NO_MOVEMENT
     }
 
+    private GameBoard gameBoard;
     private final Map<MonsterMovements, Supplier<MoveOperation>> movements;
 
     /**
      * MonsterMovementFactory constructor
+     * @param gameBoard the current game level
      */
-    public MonsterMovementFactory()
+    public MonsterMovementFactory(GameBoard gameBoard)
     {
+        this.gameBoard = gameBoard;
         this.movements = new HashMap<>();
         this.initialiseMovements();
     }
@@ -41,10 +41,10 @@ public class MonsterMovementFactory
      */
     private void initialiseMovements()
     {
-        this.movements.put(MonsterMovements.MOVE_UP, MoveUpOperation::new);
-        this.movements.put(MonsterMovements.MOVE_DOWN, MoveDownOperation::new);
-        this.movements.put(MonsterMovements.MOVE_LEFT, MoveLeftOperation::new);
-        this.movements.put(MonsterMovements.MOVE_RIGHT, MoveRightOperation::new);
+        this.movements.put(MonsterMovements.MOVE_UP, () -> new MoveUpOperation(this.gameBoard));
+        this.movements.put(MonsterMovements.MOVE_DOWN, () -> new MoveDownOperation(this.gameBoard));
+        this.movements.put(MonsterMovements.MOVE_LEFT, () -> new MoveLeftOperation(this.gameBoard));
+        this.movements.put(MonsterMovements.MOVE_RIGHT, () -> new MoveRightOperation(this.gameBoard));
         this.movements.put(MonsterMovements.NO_MOVEMENT, NothingMoveOperation::new);
     }
 

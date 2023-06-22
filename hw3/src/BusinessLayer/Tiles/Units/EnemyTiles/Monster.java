@@ -11,13 +11,6 @@ import BusinessLayer.Tiles.Units.UnitTile;
 public class Monster extends Enemy
 {
     private int visionRange;
-
-    private static final int MOVE_UP = 0;
-    private static final int MOVE_DOWN = 1;
-    private static final int MOVE_LEFT = 2;
-    private static final int MOVE_RIGHT = 3;
-    private static final int NO_MOVEMENT = 4;
-
     private final MonsterMovementFactory movementFactory;
 
 
@@ -28,13 +21,14 @@ public class Monster extends Enemy
      */
     public Monster(char tile, int x, int y, String name, int healthPool, int attackPoints,
                    int defencePoints, IMessageCallback messageCallback, int experienceValue,
-                   Player player, IEnemyDeathCallback deathCallback, int visionRange)
+                   Player player, IEnemyDeathCallback deathCallback, int visionRange,
+                   MonsterMovementFactory movementFactory)
     {
         super(tile, x, y, name, healthPool, attackPoints, defencePoints,
                 messageCallback, experienceValue, player, deathCallback);
         this.visionRange = visionRange;
 
-        this.movementFactory = new MonsterMovementFactory();
+        this.movementFactory = movementFactory;
     }
 
 
