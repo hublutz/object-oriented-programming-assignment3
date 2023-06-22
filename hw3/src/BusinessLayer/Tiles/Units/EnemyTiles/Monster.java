@@ -18,6 +18,7 @@ public class Monster extends Enemy
      * Monster constructor, receives all Enemy parameters and
      * the vision range of the monster
      * @param visionRange The vision range of the monster
+     * @param movementFactory The movement factory for the monster
      */
     public Monster(char tile, int x, int y, String name, int healthPool, int attackPoints,
                    int defencePoints, IMessageCallback messageCallback, int experienceValue,
