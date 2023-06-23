@@ -1,10 +1,15 @@
 package BusinessLayer.Tiles.Units.MoveOperations;
 
-import BusinessLayer.Tiles.Point;
+import BusinessLayer.Tiles.Units.UnitTile;
 
-public interface MoveOperation {
+/**
+ * Interface MoveOperation represents a movement to perform on
+ * a given UnitTile
+ */
+public interface MoveOperation
+{
     /**
      * preforms the move operation
      * */
-    public void move(Point position);
+    void move(UnitTile unit);
 }
