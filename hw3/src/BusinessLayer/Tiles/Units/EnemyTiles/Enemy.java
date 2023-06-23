@@ -36,7 +36,7 @@ public abstract class Enemy extends UnitTile
     }
 
     @Override
-    public void onDeath(UnitTile killer)
+    public void onDeath()
     {
         this.deathCallback.callEnemyDeath(this);
     }
@@ -75,9 +75,6 @@ public abstract class Enemy extends UnitTile
     @Override
     public void visit(Player player) {
         this.attack(player);
-        if(player.isDead()){
-            player.onDeath(this);
-        }
     }
 
     /**

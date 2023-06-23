@@ -100,4 +100,12 @@ public abstract class Tile implements IVisited
     {
         this.position.move(x,y);
     }
+
+
+    /**
+     * Position getter
+     * */
+    public Point getPosition() {
+        return position;
+    }
 }

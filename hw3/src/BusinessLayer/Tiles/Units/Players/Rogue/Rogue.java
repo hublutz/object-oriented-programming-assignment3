@@ -5,8 +5,10 @@ import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Rogue extends Player {
+    private static final int ABILITY_RANGE = 2;
     final private int INITIAL_ENERGY =100;
 
     private int cost;
@@ -25,7 +27,13 @@ public class Rogue extends Player {
 
     @Override
     public void castAbility(List<Enemy> enemies) {
-        this.currentEnergy -=this.cost;
+        if(this.currentEnergy >= this.cost) {
+            this.currentEnergy -= this.cost;
+            enemies.stream().filter((enemy) -> this.position.range(enemy.getPosition()) < ABILITY_RANGE)
+                    .forEach(enemy -> enemy.defend(attackPoints));
+        }else{
+            messageCallback.passMessage("The Rogue doesn't have enough energy: " + currentEnergy +" the cost of the Fan of Knives is:" + cost);
+        }
     }
 
     @Override

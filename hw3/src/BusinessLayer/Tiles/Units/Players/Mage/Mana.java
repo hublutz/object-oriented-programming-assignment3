@@ -24,13 +24,21 @@ public class Mana {
         this.manaAmount = manaPool/INITIAL_MANA_PROPORTION_OF_POOL;
     }
     /**
+     * ManaAmount getter
+     * @return the manaAmount
+     * */
+    public int getManaAmount() {
+        return manaAmount;
+    }
+
+    /**
      * Function that is used by the player to use mana
      * @param amount amount of mana to use
      * @return true if operation was successful throws exception otherwise
      * @throws Exception if amount <=0 or player doesn't have enough mana
      * */
     public boolean useMana(int amount) throws Exception {
-        if(amount >0){
+        if(amount >=0){
             if(manaAmount - amount >=0){
                 this.manaAmount-=amount;
                 return true;

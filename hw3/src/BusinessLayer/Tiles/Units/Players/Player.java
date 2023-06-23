@@ -55,7 +55,7 @@ public abstract class Player extends UnitTile {
 
     }
     @Override
-    public void onDeath(UnitTile killer){
+    public void onDeath(){
         this.tile = DEAD_CHAR;
     }
 
@@ -107,9 +107,13 @@ public abstract class Player extends UnitTile {
         if (enemy.isDead()){
             this.experience += enemy.getExperienceValue();
             this.switchPlaces(enemy);
-            enemy.onDeath(this);
         }
 
+    }
+
+    protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy){
+        if (enemy.isDead())
+            this.experience  += enemy.getExperienceValue();
     }
 
 

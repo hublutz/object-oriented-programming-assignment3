@@ -45,7 +45,7 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     public void defend(int attackRoll){
         int defendRoll = new Random().nextInt(defencePoints);
         if(attackRoll -defendRoll>0)
-            health.decreaseHealthAmount(attackRoll -defendRoll);
+            this.receiveDamage(attackRoll -defendRoll);
     }
 
     /**
@@ -60,9 +60,16 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     /**
      * This method is called upon a Unit's death
      */
-    public abstract void onDeath(UnitTile killer);
+    public abstract void onDeath();
 
-
+    /**
+     * This method is used to receive damage
+     * */
+    public void receiveDamage(int amount){
+        health.decreaseHealthAmount(amount);
+        if (this.isDead())
+            this.onDeath();
+    }
 
 
     /**
