@@ -11,8 +11,15 @@ import java.util.stream.Collectors;
 
 public class GameBoard {
 
-    private List<Tile> boardTiles;
+    /**
+     * list of all the tiles in the game
+     * */
+    private final List<Tile> boardTiles;
 
+    /**
+     * GameBoard constructor
+     * @param boardTiles an array of all the boardTiles
+     * */
     public GameBoard(Tile[][] boardTiles){
         this.boardTiles = new ArrayList<>();
 
@@ -20,16 +27,28 @@ public class GameBoard {
             Collections.addAll(this.boardTiles, tileRow);
         }
     }
-
+    /**
+     * Return a tile according to its location
+     * @param x the x value of the tile
+     * @param y the y value of the tile
+     * @return a tile in the position x y
+     * */
     public Tile getTile(int x, int y){
         return boardTiles.stream().filter(tile -> tile.getX() == x && tile.getY() == y).collect(Collectors.toList()).get(0);
     }
 
+    /**
+     * Removes an enemy and replaces it with an empty tile
+     * @param enemy the enemy to remove
+     * */
     public void remove(Enemy enemy){
         boardTiles.remove(enemy);
         boardTiles.add(new EmptyTile(enemy.getX(),enemy.getY()));
     }
-
+    /**
+     * Converts the board to a string
+     * @return the string representing the board
+     * */
     public String toString(){
         StringBuilder ret = new StringBuilder();
         for(int y =0; y<Math.sqrt(boardTiles.size()); y++) {
@@ -40,7 +59,9 @@ public class GameBoard {
         }
         return ret.toString();
     }
-
+    /**
+     * Advances the game by a Tick
+     * */
     public void tick(){
         boardTiles.forEach(Tile::onGameTick);
     }
