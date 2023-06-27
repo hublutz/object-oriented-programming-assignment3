@@ -1,7 +1,9 @@
-package BusinessLayer.Tiles.Units.EnemyTiles;
+package BusinessLayer.Tiles.Units.EnemyTiles.Trap;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.UnitTile;
 
@@ -58,23 +60,14 @@ public class Trap extends Enemy
     }
 
     /**
-     * Attack method of Trap
-     * @param unit the unit to attack
-     */
-    @Override
-    public void attack(UnitTile unit)
-    {
-
-    }
-
-    /**
      * Represents the Trap as a String, according to its visibility state
      * @return the tile character of the Trap, if visible, else the tile of an empty tile
      */
     @Override
     public String toString()
     {
-        return String.valueOf(this.visible ? this.tile : EmptyTile.EMPTY_TILE_CHAR);
+        return String.valueOf(this.visible ? this.tile :
+                EmptyTile.EMPTY_TILE_CHAR);
     }
 
     /**
