@@ -1,5 +1,7 @@
 package BusinessLayer.Tiles;
 
+import BusinessLayer.Tiles.VisitorPattern.IVisitor;
+
 /**
  * Class EmptyTile represents an empty space in the board
  */
@@ -24,4 +26,12 @@ public class EmptyTile extends Tile
      */
     @Override
     public void onGameTick() { }
+
+    /**
+     * Accept action as part of the visitor pattern in the player class
+     * */
+    @Override
+    public void accept(IVisitor visitor){
+        visitor.visit(this);
+    }
 }

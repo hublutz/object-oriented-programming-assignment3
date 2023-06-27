@@ -1,7 +1,12 @@
 package BusinessLayer.Tiles.Units.Players.Mage;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
+
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Mage extends Player {
 
@@ -35,10 +40,22 @@ public class Mage extends Player {
     }
 
     @Override
-    public void castAbility() {
+    public void castAbility(List<Enemy> enemies) {
         try {
             if(mana.useMana(this.manaCost)){
-
+                List<Enemy> enemiesInRange = enemies.stream().filter((enemy -> this.position.range(enemy.getPosition())< abilityRange))
+                        .collect(Collectors.toList());
+                int hits =0;
+                while (hits< hitsCount && !enemiesInRange.isEmpty()) {
+                    Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
+                    enemy.defend(spellPower);
+                    checkIfEnemyIsDeadAndGetEx(enemy);
+                    if(enemy.isDead())
+                        enemiesInRange.remove(enemy);
+                    hits++;
+                }
+            }else{
+                messageCallback.passMessage("The Mage doesn't have enough mana: " + mana.getManaAmount() +" the cost of Blizzard is:" + manaCost);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

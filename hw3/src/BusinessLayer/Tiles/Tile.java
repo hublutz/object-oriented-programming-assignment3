@@ -1,9 +1,11 @@
 package BusinessLayer.Tiles;
 
+import BusinessLayer.Tiles.VisitorPattern.IVisited;
+
 /**
  * Class Tile represents a general tile in the game board
  */
-public abstract class Tile
+public abstract class Tile implements IVisited
 {
     protected char tile;
     protected Point position;
@@ -90,4 +92,20 @@ public abstract class Tile
      * one game tick
      */
     public abstract void onGameTick();
+
+    /**
+     * Moves this tile to new position
+     * */
+    public void move(int x, int y)
+    {
+        this.position.move(x,y);
+    }
+
+
+    /**
+     * Position getter
+     * */
+    public Point getPosition() {
+        return position;
+    }
 }

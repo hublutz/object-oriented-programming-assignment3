@@ -74,6 +74,10 @@ public class Health {
         return this.healthAmount ==DEAD_HEALTH_AMOUNT;
     }
 
-
-
+    /**
+     * Getter for healthPool
+     * */
+    public int getHealthPool() {
+        return healthPool;
+    }
 }

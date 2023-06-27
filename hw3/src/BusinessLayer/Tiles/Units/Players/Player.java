@@ -1,8 +1,15 @@
 package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.EmptyTile;
+import BusinessLayer.Tiles.Tile;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.UnitTile;
+import BusinessLayer.Tiles.VisitorPattern.IVisitor;
+import BusinessLayer.Tiles.WallTile;
 
+import java.security.KeyPair;
+import java.util.List;
 import java.util.Random;
 
 public abstract class Player extends UnitTile {
@@ -40,19 +47,15 @@ public abstract class Player extends UnitTile {
         this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * playerLevel;
     }
 
-    public abstract void castAbility();
+    public abstract void castAbility(List<Enemy> enemies);
 
     @Override
     public void attack(UnitTile unitTile){
         unitTile.defend(new Random().nextInt(this.attackPoints));
 
-        if(unitTile.isDead()){
-            unitTile.onDeath(this);// I think we should remove the death observer
-            // need to move player to the enemies spot
-        }
     }
     @Override
-    public void onDeath(UnitTile killer){
+    public void onDeath(){
         this.tile = DEAD_CHAR;
     }
 
@@ -63,6 +66,55 @@ public abstract class Player extends UnitTile {
         }
     }
 
+    /**
+     * Accept action as part of the visitor pattern in the player class
+     * */
+    @Override
+    public void accept(IVisitor visitor){
+        visitor.visit(this);
+    }
+
+    /**
+     * Player visits empty tile
+     * */
+    @Override
+    public void visit(EmptyTile empty) {
+        switchPlaces(empty);
+    }
+
+    /**
+     * Player visits wall tile
+     * */
+    @Override
+    public void visit(WallTile wall) {
+    }
+
+    /**
+     * Player visits player tile
+     * */
+    @Override
+    public void visit(Player player) {
+
+    }
+
+    /**
+     * Player visits enemy tile
+     * */
+    @Override
+    public void visit(Enemy enemy) {
+        this.attack(enemy);
+
+        if (enemy.isDead()){
+            this.experience += enemy.getExperienceValue();
+            this.switchPlaces(enemy);
+        }
+
+    }
+
+    protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy){
+        if (enemy.isDead())
+            this.experience  += enemy.getExperienceValue();
+    }
 
 
 }
