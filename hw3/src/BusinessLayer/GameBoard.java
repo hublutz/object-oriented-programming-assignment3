@@ -1,6 +1,7 @@
 package BusinessLayer;
 
 import BusinessLayer.Tiles.EmptyTile;
+import BusinessLayer.Tiles.Point;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 
@@ -35,6 +36,15 @@ public class GameBoard {
      * */
     public Tile getTile(int x, int y){
         return boardTiles.stream().filter(tile -> tile.getX() == x && tile.getY() == y).collect(Collectors.toList()).get(0);
+    }
+
+    /**
+     * Return a tile according to its location
+     * @param position the position of the tile to get
+     * @return a tile in the position x y
+     * */
+    public Tile getTile(Point position){
+        return this.getTile(position.getX(), position.getY());
     }
 
     /**

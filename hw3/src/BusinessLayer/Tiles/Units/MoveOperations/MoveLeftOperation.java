@@ -1,5 +1,7 @@
 package BusinessLayer.Tiles.Units.MoveOperations;
 
+import BusinessLayer.GameBoard;
+
 /**
  * MoveOperation for moving left one tile
  */
