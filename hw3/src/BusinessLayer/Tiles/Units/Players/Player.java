@@ -10,7 +10,11 @@ import BusinessLayer.Tiles.WallTile;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Player extends UnitTile {
+/**
+ * Abstract class Player represents a Player tile in the board
+ */
+public abstract class Player extends UnitTile
+{
     private static final int LEVEL_UP_ON_TIMES_LEVEL = 50;
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
     private static final int ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL = 1;
@@ -48,18 +52,22 @@ public abstract class Player extends UnitTile {
     public abstract void castAbility(List<Enemy> enemies);
 
     @Override
-    public void attack(UnitTile unitTile){
+    public void attack(UnitTile unitTile)
+    {
         unitTile.defend(new Random().nextInt(this.attackPoints));
-
     }
+
     @Override
-    public void onDeath(){
+    public void onDeath()
+    {
         this.tile = DEAD_CHAR;
+        this.messageCallback.passMessage("Game Over! You Died");
     }
 
     @Override
     public  void onGameTick(){
-        while (experience >= playerLevel * LEVEL_UP_ON_TIMES_LEVEL ){
+        while (experience >= playerLevel * LEVEL_UP_ON_TIMES_LEVEL)
+        {
             this.levelUp();
         }
     }
@@ -103,9 +111,11 @@ public abstract class Player extends UnitTile {
     {
         this.attack(enemy);
 
-        if (enemy.isDead()){
+        if (enemy.isDead())
+        {
             this.experience += enemy.getExperienceValue();
             this.switchPlaces(enemy);
+            enemy.onDeath();
         }
     }
 

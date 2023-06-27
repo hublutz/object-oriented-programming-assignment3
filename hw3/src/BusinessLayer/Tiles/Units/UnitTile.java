@@ -42,9 +42,10 @@ public abstract class UnitTile extends Tile  implements IVisitor {
      *
      * @param attackRoll the attack roll of the attacking unit
      */
-    public void defend(int attackRoll){
+    public void defend(int attackRoll)
+    {
         int defendRoll = new Random().nextInt(defencePoints);
-        if(attackRoll -defendRoll>0)
+        if(attackRoll - defendRoll > 0)
             this.receiveDamage(attackRoll - defendRoll);
     }
 
@@ -65,10 +66,9 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     /**
      * This method is used to receive damage
      * */
-    public void receiveDamage(int amount){
-        health.decreaseHealthAmount(amount);
-        if (this.isDead())
-            this.onDeath();
+    public void receiveDamage(int amount)
+    {
+        this.health.decreaseHealthAmount(amount);
     }
 
 

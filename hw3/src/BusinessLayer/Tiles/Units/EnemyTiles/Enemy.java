@@ -7,6 +7,8 @@ import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
+import java.util.Random;
+
 /**
  * Abstract class Enemy represents an Enemy Tile in the game board
  */
@@ -43,8 +45,9 @@ public abstract class Enemy extends UnitTile
     /**
      * experienceValue getter
      * */
-    public int getExperienceValue() {
-        return experienceValue;
+    public int getExperienceValue()
+    {
+        return this.experienceValue;
     }
 
     /**
@@ -72,8 +75,25 @@ public abstract class Enemy extends UnitTile
      * Enemy visits player tile
      * */
     @Override
-    public void visit(Player player) {
+    public void visit(Player player)
+    {
         this.attack(player);
+    }
+
+    /**
+     * Enemy attack method, enrolls a random attack value
+     * and attacks the given unit
+     * @param unit the unit to attack
+     */
+    @Override
+    public void attack(UnitTile unit)
+    {
+        unit.defend(new Random().nextInt(this.attackPoints));
+        if (unit.isDead())
+        {
+            this.switchPlaces(unit);
+            unit.onDeath();
+        }
     }
 
     /**
