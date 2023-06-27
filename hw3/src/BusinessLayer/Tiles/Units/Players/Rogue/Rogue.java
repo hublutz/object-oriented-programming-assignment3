@@ -74,4 +74,23 @@ public class Rogue extends Player {
         this.currentEnergy = MAX_ENERGY;
         this.attackPoints += (LEVEL_UP_ATTACK_MULTIPLIER * this.playerLevel);
     }
+
+    /**
+     * This method returns the description of the Rogue
+     */
+    @Override
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Ability Cost: ");
+        builder.append(this.cost);
+        builder.append('\n');
+        builder.append("\t- Current Energy: ");
+        builder.append(this.currentEnergy);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

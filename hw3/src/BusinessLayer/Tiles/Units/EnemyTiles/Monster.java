@@ -79,4 +79,19 @@ public class Monster extends Enemy
     {
 
     }
+
+    /**
+     * This method returns the stats of the monster
+     */
+    @Override
+    public String description() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Monster Vision Range: ");
+        builder.append(this.visionRange);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

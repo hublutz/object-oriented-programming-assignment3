@@ -76,4 +76,29 @@ public class Trap extends Enemy
     {
         return String.valueOf(this.visible ? this.tile : EmptyTile.EMPTY_TILE_CHAR);
     }
+
+    /**
+     * This method returns the stats of the Trap
+     */
+    @Override
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Trap Visibility Time: ");
+        builder.append(this.visibilityTime);
+        builder.append('\n');
+        builder.append("\t- Trap Invisibility Time: ");
+        builder.append(this.invisibilityTime);
+        builder.append('\n');
+        builder.append("\t- Ticks Count: ");
+        builder.append(this.ticksCount);
+        builder.append('\n');
+        builder.append("\t- Is Visible: ");
+        builder.append(this.visible);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

@@ -14,7 +14,6 @@ public abstract class Enemy extends UnitTile
 {
     protected int experienceValue;
 
-
     protected Player player;
     protected IEnemyDeathCallback deathCallback;
     /**
@@ -82,4 +81,20 @@ public abstract class Enemy extends UnitTile
      * */
     @Override
     public void visit(Enemy enemy) {}
+
+    /**
+     * This method returns the stats of the enemy
+     */
+    @Override
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Enemy Experience Value: ");
+        builder.append(this.experienceValue);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

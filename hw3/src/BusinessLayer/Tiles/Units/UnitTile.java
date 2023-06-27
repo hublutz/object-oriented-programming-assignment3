@@ -83,4 +83,35 @@ public abstract class UnitTile extends Tile  implements IVisitor {
         tile.move(thisX,thisY);
     }
 
+    /**
+     * getter for Unit name
+     * @return The name of the unit
+     */
+    public String getName()
+    {
+        return this.name;
+    }
+
+    /**
+     * This method returns the description of the Unit
+     */
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("~~ Stats for ");
+        builder.append(this.name);
+        builder.append(": ~~");
+
+        builder.append("\t- Health: ");
+        builder.append(this.health.getHealthAmount());
+        builder.append('\n');
+        builder.append("\t- Attack Points: ");
+        builder.append(this.attackPoints);
+        builder.append('\n');
+        builder.append("\t- Defence Points: ");
+        builder.append(this.defencePoints);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

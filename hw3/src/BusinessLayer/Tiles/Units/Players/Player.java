@@ -2,13 +2,11 @@ package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
-import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
-import java.security.KeyPair;
 import java.util.List;
 import java.util.Random;
 
@@ -101,20 +99,41 @@ public abstract class Player extends UnitTile {
      * Player visits enemy tile
      * */
     @Override
-    public void visit(Enemy enemy) {
+    public void visit(Enemy enemy)
+    {
         this.attack(enemy);
 
         if (enemy.isDead()){
             this.experience += enemy.getExperienceValue();
             this.switchPlaces(enemy);
         }
-
     }
 
-    protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy){
+    /**
+     * This method checks the enemy given is dead,
+     * and if so, takes its experience
+     * @param enemy an Enemy tile
+     */
+    protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy)
+    {
         if (enemy.isDead())
             this.experience  += enemy.getExperienceValue();
     }
 
+    /**
+     * This method returns the description of the PLayer
+     */
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+        builder.append("\t- Level: ");
+        builder.append(this.playerLevel);
+        builder.append('\n');
+        builder.append("\t- Experience: ");
+        builder.append(this.experience);
+        builder.append('\n');
 
+        return builder.toString();
+    }
 }

@@ -1,11 +1,8 @@
 package BusinessLayer.Tiles.Units.Players.Warrior;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
-import BusinessLayer.Tiles.VisitorPattern.IVisitor;
-import BusinessLayer.Tiles.WallTile;
 
 import java.util.List;
 import java.util.Random;
@@ -94,5 +91,24 @@ public class Warrior extends Player {
         super.onGameTick();
         if(this.remainingCooldown > 0)
             this.remainingCooldown--;
+    }
+
+    /**
+     * This method returns the description of the Warrior
+     */
+    @Override
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Ability Cool Down: ");
+        builder.append(this.abilityCooldown);
+        builder.append('\n');
+        builder.append("\t- Remaining Cool Down: ");
+        builder.append(this.remainingCooldown);
+        builder.append('\n');
+
+        return builder.toString();
     }
 }
