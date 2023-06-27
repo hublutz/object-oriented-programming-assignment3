@@ -35,18 +35,31 @@ public abstract class Player extends UnitTile
         this.playerLevel = INITIAL_LEVEL;
     }
 
-    public void levelUp(){
+    /**
+     * This method performs leveling up procedure, common to all player types
+     */
+    public void levelUp()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Level Up! You are now of level ");
 
         this.experience -=  LEVEL_UP_ON_TIMES_LEVEL * this.playerLevel;
         this.playerLevel++;
-        try {
-            this.health.increaseHealthPool(ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL*playerLevel);
-        } catch (Exception e) {
+        builder.append(this.playerLevel);
+        builder.append('\n');
+
+        try
+        {
+            this.health.increaseHealthPool(ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL *
+                    this.playerLevel);
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
         this.health.refillHealth();
-        this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * playerLevel;
-        this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * playerLevel;
+        this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * this.playerLevel;
+        this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * this.playerLevel;
     }
 
     public abstract void castAbility(List<Enemy> enemies);
@@ -54,6 +67,9 @@ public abstract class Player extends UnitTile
     @Override
     public void attack(UnitTile unitTile)
     {
+        this.messageCallback.passMessage(this.name + " attacks " + unitTile.getName() + "!");
+        this.messageCallback.passMessage(this.description());
+        this.messageCallback.passMessage(unitTile.description());
         unitTile.defend(new Random().nextInt(this.attackPoints));
     }
 
@@ -61,7 +77,7 @@ public abstract class Player extends UnitTile
     public void onDeath()
     {
         this.tile = DEAD_CHAR;
-        this.messageCallback.passMessage("Game Over! You Died");
+        this.messageCallback.passMessage("Player " + this.name + " died");
     }
 
     @Override
@@ -116,6 +132,8 @@ public abstract class Player extends UnitTile
             this.experience += enemy.getExperienceValue();
             this.switchPlaces(enemy);
             enemy.onDeath();
+            this.messageCallback.passMessage("You received " + enemy.getExperienceValue() +
+                    " experience points!");
         }
     }
 
@@ -127,7 +145,11 @@ public abstract class Player extends UnitTile
     protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy)
     {
         if (enemy.isDead())
-            this.experience  += enemy.getExperienceValue();
+        {
+            this.experience += enemy.getExperienceValue();
+            this.messageCallback.passMessage("You received " + enemy.getExperienceValue() +
+                    " experience points!");
+        }
     }
 
     /**

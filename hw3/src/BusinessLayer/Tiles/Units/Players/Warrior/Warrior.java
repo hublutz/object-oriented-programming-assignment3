@@ -40,8 +40,9 @@ public class Warrior extends Player {
     @Override
     public void castAbility(List<Enemy> enemies)
     {
-        if (this.remainingCooldown == 0)
+        if (this.remainingCooldown == INITIAL_REMAINING_COOLDOWN)
         {
+            this.messageCallback.passMessage("Avenger's Shield!");
             this.remainingCooldown = this.abilityCooldown;
             this.health.increaseHealthAmount(defencePoints *
                     TIME_INCREASE_HEALTH_ON_ABILITY);
@@ -80,6 +81,8 @@ public class Warrior extends Player {
         }
         this.attackPoints += (LEVEL_UP_ATTACK_INCREASE * this.playerLevel);
         this.defencePoints += (LEVEL_UP_DEFENCE_INCREASE * this.playerLevel);
+
+        this.messageCallback.passMessage(this.description());
     }
 
     /**

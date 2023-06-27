@@ -39,6 +39,7 @@ public abstract class Enemy extends UnitTile
     @Override
     public void onDeath()
     {
+        this.messageCallback.passMessage("Enemy " + this.name + " died");
         this.deathCallback.callEnemyDeath(this);
     }
 
@@ -91,7 +92,6 @@ public abstract class Enemy extends UnitTile
         unit.defend(new Random().nextInt(this.attackPoints));
         if (unit.isDead())
         {
-            this.switchPlaces(unit);
             unit.onDeath();
         }
     }

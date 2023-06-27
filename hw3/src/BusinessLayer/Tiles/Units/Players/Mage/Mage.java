@@ -53,6 +53,7 @@ public class Mage extends Player {
         {
             if(mana.useMana(this.manaCost))
             {
+                this.messageCallback.passMessage("Blizzard!");
                 List<Enemy> enemiesInRange = enemies.stream().
                         filter((enemy -> this.range(enemy) < abilityRange))
                         .collect(Collectors.toList());
@@ -111,6 +112,8 @@ public class Mage extends Player {
 
         this.mana.refillMana(mana.getManaPool() / DIV_TIMES_REFILL_ON_LEVEL_UP);
         this.spellPower += (10 * this.playerLevel);
+
+        this.messageCallback.passMessage(this.description());
     }
 
     /**
@@ -123,23 +126,17 @@ public class Mage extends Player {
         builder.append(super.description());
 
         builder.append("\t- Mana Pool: ");
-        builder.append(this.mana.getManaPool());
-        builder.append('\n');
+        builder.append(this.mana.getManaPool()); builder.append('\n');
         builder.append("\t- Mana Amount: ");
-        builder.append(this.mana.getManaAmount());
-        builder.append('\n');
+        builder.append(this.mana.getManaAmount()); builder.append('\n');
         builder.append("\t- Mana Cost: ");
-        builder.append(this.manaCost);
-        builder.append('\n');
+        builder.append(this.manaCost); builder.append('\n');
         builder.append("\t- Spell Power: ");
-        builder.append(this.spellPower);
-        builder.append('\n');
+        builder.append(this.spellPower); builder.append('\n');
         builder.append("\t- Hits Count: ");
-        builder.append(this.hitsCount);
-        builder.append('\n');
+        builder.append(this.hitsCount); builder.append('\n');
         builder.append("\t- Ability Range: ");
-        builder.append(this.abilityRange);
-        builder.append('\n');
+        builder.append(this.abilityRange); builder.append('\n');
 
         return builder.toString();
     }

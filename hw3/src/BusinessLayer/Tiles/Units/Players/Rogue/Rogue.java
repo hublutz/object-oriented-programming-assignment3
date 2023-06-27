@@ -36,6 +36,7 @@ public class Rogue extends Player {
     {
         if(this.currentEnergy >= this.cost)
         {
+            this.messageCallback.passMessage("Fan of Knives!");
             this.currentEnergy -= this.cost;
             List<Enemy> enemiesInRange = enemies.stream().filter((enemy) -> this.range(enemy) < ABILITY_RANGE)
                     .collect(Collectors.toList());
@@ -73,6 +74,8 @@ public class Rogue extends Player {
         super.levelUp();
         this.currentEnergy = MAX_ENERGY;
         this.attackPoints += (LEVEL_UP_ATTACK_MULTIPLIER * this.playerLevel);
+
+        this.messageCallback.passMessage(this.description());
     }
 
     /**

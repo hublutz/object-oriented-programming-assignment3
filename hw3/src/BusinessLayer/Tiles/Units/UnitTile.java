@@ -44,7 +44,9 @@ public abstract class UnitTile extends Tile  implements IVisitor {
      */
     public void defend(int attackRoll)
     {
-        int defendRoll = new Random().nextInt(defencePoints);
+        int defendRoll = new Random().nextInt(this.defencePoints);
+        this.messageCallback.passMessage("\t- Attack roll: " + attackRoll);
+        this.messageCallback.passMessage("\t -Defence roll: " + defendRoll);
         if(attackRoll - defendRoll > 0)
             this.receiveDamage(attackRoll - defendRoll);
     }
@@ -69,6 +71,7 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     public void receiveDamage(int amount)
     {
         this.health.decreaseHealthAmount(amount);
+        this.messageCallback.passMessage(this.name + " received " + amount + " damage");
     }
 
 
@@ -98,7 +101,7 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     public String description()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("~~ Stats for ");
+        builder.append("\n~~ Stats for ");
         builder.append(this.name);
         builder.append(": ~~");
 
