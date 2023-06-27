@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * This class represents the Mage player type
+ */
 public class Mage extends Player {
 
     private static final int TIMES_INCREASE_POOL_ON_LEVEL_UP = 25;
@@ -39,46 +42,74 @@ public class Mage extends Player {
 
     }
 
+    /**
+     * This method cast the ability of the mage
+     * @param enemies the list of enemies in the board
+     */
     @Override
-    public void castAbility(List<Enemy> enemies) {
-        try {
-            if(mana.useMana(this.manaCost)){
-                List<Enemy> enemiesInRange = enemies.stream().filter((enemy -> this.position.range(enemy.getPosition())< abilityRange))
+    public void castAbility(List<Enemy> enemies)
+    {
+        try
+        {
+            if(mana.useMana(this.manaCost))
+            {
+                List<Enemy> enemiesInRange = enemies.stream().
+                        filter((enemy -> this.range(enemy) < abilityRange))
                         .collect(Collectors.toList());
                 int hits =0;
-                while (hits< hitsCount && !enemiesInRange.isEmpty()) {
+
+                while (hits < hitsCount && !enemiesInRange.isEmpty())
+                {
                     Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
-                    enemy.defend(spellPower);
+                    enemy.defend(this.spellPower);
                     checkIfEnemyIsDeadAndGetEx(enemy);
                     if(enemy.isDead())
                         enemiesInRange.remove(enemy);
                     hits++;
                 }
-            }else{
-                messageCallback.passMessage("The Mage doesn't have enough mana: " + mana.getManaAmount() +" the cost of Blizzard is:" + manaCost);
             }
-        } catch (Exception e) {
+            else
+            {
+                this.messageCallback.passMessage(
+                        "The Mage doesn't have enough mana: " + this.mana.getManaAmount() +
+                                " the cost of Blizzard is:" + this.manaCost);
+            }
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * This method performs logic for the mage for each game tick
+     */
     @Override
-    public void onGameTick() {
-
+    public void onGameTick()
+    {
+        super.onGameTick();
+        this.mana.refillMana(this.playerLevel);
     }
 
+    /**
+     * This method performs the level up procedure for a mage
+     */
     @Override
-    public void levelUp(){
+    public void levelUp()
+    {
         super.levelUp();
 
-        try {
-            mana.increaseManaPool(TIMES_INCREASE_POOL_ON_LEVEL_UP * this
-                    .playerLevel);
-        } catch (Exception e) {
+        try
+        {
+            mana.increaseManaPool(TIMES_INCREASE_POOL_ON_LEVEL_UP *
+                    this.playerLevel);
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
 
-        this.mana.refillMana(mana.getManaPool()/DIV_TIMES_REFILL_ON_LEVEL_UP);
-
+        this.mana.refillMana(mana.getManaPool() / DIV_TIMES_REFILL_ON_LEVEL_UP);
+        this.spellPower += (10 * this.playerLevel);
     }
 }

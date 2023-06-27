@@ -45,7 +45,7 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     public void defend(int attackRoll){
         int defendRoll = new Random().nextInt(defencePoints);
         if(attackRoll -defendRoll>0)
-            this.receiveDamage(attackRoll -defendRoll);
+            this.receiveDamage(attackRoll - defendRoll);
     }
 
     /**
