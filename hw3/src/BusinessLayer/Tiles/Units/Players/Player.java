@@ -52,12 +52,12 @@ public abstract class Player extends UnitTile
         {
             this.health.increaseHealthPool(ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL *
                     this.playerLevel);
+            this.health.refillHealth();
         }
         catch (Exception e)
         {
             throw new RuntimeException(e);
         }
-        this.health.refillHealth();
         this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * this.playerLevel;
         this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * this.playerLevel;
     }

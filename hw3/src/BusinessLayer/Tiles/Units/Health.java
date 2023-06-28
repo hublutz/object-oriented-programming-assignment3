@@ -44,7 +44,7 @@ public class Health
         if(amount > DEAD_HEALTH_AMOUNT)
             this.healthPool += amount;
         else
-            throw new Exception("cannot decrease healthPool");
+            throw new Exception("Cannot decrease health pool");
     }
 
     /**
@@ -52,10 +52,15 @@ public class Health
      *
      * @param amount the amount to increase the healthAmount
      */
-    public void increaseHealthAmount(int amount) {
+    public void increaseHealthAmount(int amount) throws Exception
+    {
+        if (this.isDead())
+        {
+            throw new Exception("Cannot increase health amount of a dead unit");
+        }
         if(this.healthAmount + amount > this.healthPool)
         {
-            refillHealth();
+            this.refillHealth();
             return;
         }
         this.healthAmount += amount;
@@ -77,8 +82,12 @@ public class Health
      * The method that is used to refill the healthAmount to the healthPool number
 
      */
-    public void refillHealth()
+    public void refillHealth() throws Exception
     {
+        if (this.isDead())
+        {
+            throw new Exception("Cannot refill health amount of a dead unit");
+        }
         this.healthPool = this.healthAmount;
     }
 

@@ -44,8 +44,14 @@ public class Warrior extends Player {
         {
             this.messageCallback.passMessage("Avenger's Shield!");
             this.remainingCooldown = this.abilityCooldown;
-            this.health.increaseHealthAmount(defencePoints *
-                    TIME_INCREASE_HEALTH_ON_ABILITY);
+            try {
+                this.health.increaseHealthAmount(defencePoints *
+                        TIME_INCREASE_HEALTH_ON_ABILITY);
+            }
+            catch (Exception exception)
+            {
+                throw new RuntimeException(exception);
+            }
 
             List<Enemy> enemiesInRange = enemies.stream().filter((enemy) -> this.range(enemy) < ABILITY_RANGE)
                     .collect(Collectors.toList());
