@@ -73,9 +73,9 @@ public class GameBoard
     {
         StringBuilder ret = new StringBuilder();
 
-        for(int x = 0; x < Math.sqrt(boardTiles.size()); x++)
+        for(int y = 0; y < Math.sqrt(boardTiles.size()); y++)
         {
-            for (int y = 0; y < Math.sqrt(boardTiles.size()); y++)
+            for (int x = 0; x < Math.sqrt(boardTiles.size()); x++)
                 ret.append(getTile(x, y));
 
             ret.append("\n");
