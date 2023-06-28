@@ -1,6 +1,5 @@
 package Tests.Units;
 
-import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import BusinessLayer.Tiles.Units.UnitTile;
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MageTests  extends AbstractPlayerTest{
+public class MageTests  extends AbstractUnitTest {
 
     private Mage mage;
     public int abRange;

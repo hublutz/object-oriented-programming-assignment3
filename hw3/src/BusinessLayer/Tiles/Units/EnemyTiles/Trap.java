@@ -76,4 +76,12 @@ public class Trap extends Enemy
     {
         return String.valueOf(this.visible ? this.tile : EmptyTile.EMPTY_TILE_CHAR);
     }
+
+    /**
+     * used for tests
+     * */
+
+    public boolean getVisible(){
+        return visible;
+    }
 }

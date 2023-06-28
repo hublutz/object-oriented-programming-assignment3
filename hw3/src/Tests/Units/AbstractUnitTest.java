@@ -2,7 +2,7 @@ package Tests.Units;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 
-public abstract class AbstractPlayerTest {
+public abstract class AbstractUnitTest {
 
     public char c ;
     public int x ;
@@ -14,7 +14,7 @@ public abstract class AbstractPlayerTest {
     public String lastM;
     IMessageCallback messageCallback;
 
-    public AbstractPlayerTest(){
+    public AbstractUnitTest(){
         lastM ="";
         c ='5';
         x =0;

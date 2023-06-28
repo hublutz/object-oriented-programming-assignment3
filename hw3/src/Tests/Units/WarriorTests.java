@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WarriorTests extends AbstractPlayerTest{
+public class WarriorTests extends AbstractUnitTest {
 
     Warrior warrior;
     int abilityCooldown;

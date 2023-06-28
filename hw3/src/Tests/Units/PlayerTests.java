@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-public class PlayerTests extends AbstractPlayerTest {
+public class PlayerTests extends AbstractUnitTest {
 
     private Mage mage;
 
