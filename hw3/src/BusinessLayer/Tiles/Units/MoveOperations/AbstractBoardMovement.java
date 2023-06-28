@@ -1,5 +1,6 @@
 package BusinessLayer.Tiles.Units.MoveOperations;
 
+import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.Point;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.UnitTile;
@@ -37,7 +38,7 @@ public abstract class AbstractBoardMovement implements MoveOperation
     {
         Point newPosition = new Point(unit.getX() + xAxisChange,
                 unit.getY() + yAxisChange);
-        Tile newPositionTile = this.gameBoard.get(newPosition);
-        unit.accept(newPositionTile);
+        Tile newPositionTile = this.gameBoard.getTile(newPosition);
+        newPositionTile.accept(unit);
     }
 }

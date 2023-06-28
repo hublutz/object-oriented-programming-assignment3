@@ -42,10 +42,13 @@ public abstract class UnitTile extends Tile  implements IVisitor {
      *
      * @param attackRoll the attack roll of the attacking unit
      */
-    public void defend(int attackRoll){
-        int defendRoll = new Random().nextInt(defencePoints);
-        if(attackRoll -defendRoll>0)
-            this.receiveDamage(attackRoll -defendRoll);
+    public void defend(int attackRoll)
+    {
+        int defendRoll = new Random().nextInt(this.defencePoints);
+        this.messageCallback.passMessage("\t- Attack roll: " + attackRoll);
+        this.messageCallback.passMessage("\t -Defence roll: " + defendRoll);
+        if(attackRoll - defendRoll > 0)
+            this.receiveDamage(attackRoll - defendRoll);
     }
 
     /**
@@ -65,10 +68,10 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     /**
      * This method is used to receive damage
      * */
-    public void receiveDamage(int amount){
-        health.decreaseHealthAmount(amount);
-        if (this.isDead())
-            this.onDeath();
+    public void receiveDamage(int amount)
+    {
+        this.health.decreaseHealthAmount(amount);
+        this.messageCallback.passMessage(this.name + " received " + amount + " damage");
     }
 
 
@@ -83,4 +86,35 @@ public abstract class UnitTile extends Tile  implements IVisitor {
         tile.move(thisX,thisY);
     }
 
+    /**
+     * getter for Unit name
+     * @return The name of the unit
+     */
+    public String getName()
+    {
+        return this.name;
+    }
+
+    /**
+     * This method returns the description of the Unit
+     */
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\n~~ Stats for ");
+        builder.append(this.name);
+        builder.append(": ~~");
+
+        builder.append("\t- Health: ");
+        builder.append(this.health.getHealthAmount());
+        builder.append('\n');
+        builder.append("\t- Attack Points: ");
+        builder.append(this.attackPoints);
+        builder.append('\n');
+        builder.append("\t- Defence Points: ");
+        builder.append(this.defencePoints);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

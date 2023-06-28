@@ -2,17 +2,19 @@ package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
-import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
-import java.security.KeyPair;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Player extends UnitTile {
+/**
+ * Abstract class Player represents a Player tile in the board
+ */
+public abstract class Player extends UnitTile
+{
     private static final int LEVEL_UP_ON_TIMES_LEVEL = 50;
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
     private static final int ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL = 1;
@@ -33,35 +35,55 @@ public abstract class Player extends UnitTile {
         this.playerLevel = INITIAL_LEVEL;
     }
 
-    public void levelUp(){
+    /**
+     * This method performs leveling up procedure, common to all player types
+     */
+    public void levelUp()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Level Up! You are now of level ");
 
         this.experience -=  LEVEL_UP_ON_TIMES_LEVEL * this.playerLevel;
         this.playerLevel++;
-        try {
-            this.health.increaseHealthPool(ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL*playerLevel);
-        } catch (Exception e) {
+        builder.append(this.playerLevel);
+        builder.append('\n');
+
+        try
+        {
+            this.health.increaseHealthPool(ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL *
+                    this.playerLevel);
+            this.health.refillHealth();
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
-        this.health.refillHealth();
-        this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * playerLevel;
-        this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * playerLevel;
+        this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * this.playerLevel;
+        this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * this.playerLevel;
     }
 
     public abstract void castAbility(List<Enemy> enemies);
 
     @Override
-    public void attack(UnitTile unitTile){
+    public void attack(UnitTile unitTile)
+    {
+        this.messageCallback.passMessage(this.name + " attacks " + unitTile.getName() + "!");
+        this.messageCallback.passMessage(this.description());
+        this.messageCallback.passMessage(unitTile.description());
         unitTile.defend(new Random().nextInt(this.attackPoints));
-
     }
+
     @Override
-    public void onDeath(){
+    public void onDeath()
+    {
         this.tile = DEAD_CHAR;
+        this.messageCallback.passMessage("Player " + this.name + " died");
     }
 
     @Override
     public  void onGameTick(){
-        while (experience >= playerLevel * LEVEL_UP_ON_TIMES_LEVEL ){
+        while (experience >= playerLevel * LEVEL_UP_ON_TIMES_LEVEL)
+        {
             this.levelUp();
         }
     }
@@ -101,20 +123,49 @@ public abstract class Player extends UnitTile {
      * Player visits enemy tile
      * */
     @Override
-    public void visit(Enemy enemy) {
+    public void visit(Enemy enemy)
+    {
         this.attack(enemy);
 
-        if (enemy.isDead()){
+        if (enemy.isDead())
+        {
             this.experience += enemy.getExperienceValue();
             this.switchPlaces(enemy);
+            enemy.onDeath();
+            this.messageCallback.passMessage("You received " + enemy.getExperienceValue() +
+                    " experience points!");
         }
-
     }
 
-    protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy){
+    /**
+     * This method checks the enemy given is dead,
+     * and if so, takes its experience
+     * @param enemy an Enemy tile
+     */
+    protected void checkIfEnemyIsDeadAndGetEx(Enemy enemy)
+    {
         if (enemy.isDead())
-            this.experience  += enemy.getExperienceValue();
+        {
+            this.experience += enemy.getExperienceValue();
+            this.messageCallback.passMessage("You received " + enemy.getExperienceValue() +
+                    " experience points!");
+        }
     }
 
+    /**
+     * This method returns the description of the PLayer
+     */
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+        builder.append("\t- Level: ");
+        builder.append(this.playerLevel);
+        builder.append('\n');
+        builder.append("\t- Experience: ");
+        builder.append(this.experience);
+        builder.append('\n');
 
+        return builder.toString();
+    }
 }

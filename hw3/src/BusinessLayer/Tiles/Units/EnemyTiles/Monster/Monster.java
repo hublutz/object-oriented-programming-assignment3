@@ -1,9 +1,10 @@
-package BusinessLayer.Tiles.Units.EnemyTiles;
+package BusinessLayer.Tiles.Units.EnemyTiles.Monster;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.Players.Player;
-import BusinessLayer.Tiles.Units.UnitTile;
 
 /**
  * Class Monster represents a monster tile in the board
@@ -71,12 +72,17 @@ public class Monster extends Enemy
     }
 
     /**
-     * Attack method of Monster
-     * @param unit the unit to attack
+     * This method returns the stats of the monster
      */
     @Override
-    public void attack(UnitTile unit)
-    {
+    public String description() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
 
+        builder.append("\t- Monster Vision Range: ");
+        builder.append(this.visionRange);
+        builder.append('\n');
+
+        return builder.toString();
     }
 }
