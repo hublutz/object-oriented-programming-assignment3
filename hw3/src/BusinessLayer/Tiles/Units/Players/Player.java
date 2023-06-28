@@ -125,4 +125,18 @@ public abstract class Player extends UnitTile {
         return health;
     }
 
+    /**
+     * used only for tests
+     * */
+    public void setExperience(int ex){
+
+    }
+
+    public int getAttack(){
+        return super.attackPoints;
+    }
+
+    public int getDefense(){
+        return super.defencePoints;
+    }
 }

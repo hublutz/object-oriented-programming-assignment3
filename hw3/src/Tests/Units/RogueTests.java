@@ -149,7 +149,7 @@ public class RogueTests extends AbstractPlayerTest {
 
         rogue.levelUp();
         Assert.assertEquals(100, rogue.getCurrentEnergy());
-        Assert.assertEquals(attack + 3 * levelB, rogue.getAttack());
+        Assert.assertEquals(attack + 7 * rogue.getLevel() , rogue.getAttack());
 
     }
 

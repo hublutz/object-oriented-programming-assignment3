@@ -142,15 +142,15 @@ public class WarriorTests extends AbstractPlayerTest{
     @Test
     public void LevelUpTest(){
 
-        int levelB = warrior.getLevel();
+
         int healthPool = warrior.getHealth().getHealthPool();
         int attack = warrior.getAttack();
         int def = warrior.getDefense();
 
         warrior.levelUp();
         Assert.assertEquals(0, warrior.getRemainingCooldown());
-        Assert.assertEquals(healthPool +5*levelB ,warrior.getHealth().getHealthPool());
-        Assert.assertEquals(attack + 2*levelB, warrior.getAttack());
-        Assert.assertEquals(def +levelB,warrior.getDefense());
+        Assert.assertEquals(healthPool +5*warrior.getLevel() ,warrior.getHealth().getHealthPool());
+        Assert.assertEquals(attack + 6*warrior.getLevel() , warrior.getAttack());
+        Assert.assertEquals(def +2*warrior.getLevel() ,warrior.getDefense());
     }
 }

@@ -62,11 +62,5 @@ public class Warrior extends Player {
         return remainingCooldown;
     }
 
-    public int getAttack(){
-        return super.attackPoints;
-    }
 
-    public int getDefense(){
-        return super.defencePoints;
-    }
 }
