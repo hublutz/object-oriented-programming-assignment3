@@ -56,4 +56,17 @@ public class Warrior extends Player {
         if(remainingCooldown>0)
             this.remainingCooldown--;
     }
+
+
+    public int getRemainingCooldown(){
+        return remainingCooldown;
+    }
+
+    public int getAttack(){
+        return super.attackPoints;
+    }
+
+    public int getDefense(){
+        return super.defencePoints;
+    }
 }

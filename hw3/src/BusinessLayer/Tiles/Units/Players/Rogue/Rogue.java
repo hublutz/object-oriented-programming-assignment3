@@ -44,4 +44,12 @@ public class Rogue extends Player {
     public void levelUp(){
         super.levelUp();
     }
+
+    public int getCurrentEnergy(){
+        return currentEnergy;
+    }
+
+    public int getAttack() {
+        return attackPoints;
+    }
 }

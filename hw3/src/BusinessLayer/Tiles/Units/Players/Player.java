@@ -4,6 +4,7 @@ import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.Health;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
@@ -116,5 +117,12 @@ public abstract class Player extends UnitTile {
             this.experience  += enemy.getExperienceValue();
     }
 
+    public int getLevel(){
+        return playerLevel;
+    }
+
+    public Health getHealth(){
+        return health;
+    }
 
 }

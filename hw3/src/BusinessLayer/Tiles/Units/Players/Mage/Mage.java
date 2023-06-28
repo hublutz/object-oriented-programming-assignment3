@@ -81,4 +81,12 @@ public class Mage extends Player {
         this.mana.refillMana(mana.getManaPool()/DIV_TIMES_REFILL_ON_LEVEL_UP);
 
     }
+
+    public Mana getMana(){
+        return mana;
+    }
+
+    public int getSpellPower(){
+        return spellPower;
+    }
 }
