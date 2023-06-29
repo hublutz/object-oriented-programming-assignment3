@@ -1,6 +1,7 @@
 package Tests.Units;
 import BusinessLayer.Tiles.Units.Players.Mage.Mana;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -9,10 +10,12 @@ public class ManaTests {
     private Mana mana;
     private int startingMana;
 
-    @BeforeEach
+    @Before
     public void initTests(){
         startingMana = 100;
         mana = new Mana(startingMana);
+        mana.refillMana(startingMana);
+
     }
 
     /**
@@ -20,6 +23,7 @@ public class ManaTests {
      * */
     @Test
     public void testInitialMana(){
+        mana = new Mana(startingMana);
         Assert.assertEquals("initial mana should be starting mana /4", startingMana/4 , mana.getManaAmount());
     }
 
@@ -36,7 +40,9 @@ public class ManaTests {
      * */
     @Test
     public void testAddMoreThenLimit(){
-        mana.refillMana(10);
+        startingMana = 100;
+        mana = new Mana(startingMana);
+        mana.refillMana(startingMana);
         Assert.assertEquals("shouldn't add beyond pool", startingMana, mana.getManaAmount());
     }
 

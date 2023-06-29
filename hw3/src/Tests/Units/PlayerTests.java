@@ -3,14 +3,15 @@ package Tests.Units;
 
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+
 
 public class PlayerTests extends AbstractUnitTest {
 
     private Mage mage;
 
-    @BeforeEach
+    @Before
     public void initTests(){
         mage = new Mage(c,x,y,name,healthPool,attackPoints,defencePoints,messageCallback,1,1,1,1,1);
     }

@@ -49,19 +49,31 @@ public class HealthTests {
     @Test
     public void increaseHealth(){
         health.decreaseHealthAmount(10);
-        health.increaseHealthAmount(5);
+        try {
+            health.increaseHealthAmount(5);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertEquals("health should decrease",initialHealthPool -5, health.getHealthAmount());
     }
 
     @Test
     public void increaseHealthAbovePool(){
-        health.increaseHealthAmount(5);
+        try {
+            health.increaseHealthAmount(5);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertEquals("healthPool shouldn't  increase",initialHealthPool, health.getHealthAmount());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void increaseHealthNegative(){
-        health.increaseHealthAmount(-5);
+        try {
+            health.increaseHealthAmount(-5);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertEquals("health shouldnt increase",initialHealthPool, health.getHealthAmount());
     }
 

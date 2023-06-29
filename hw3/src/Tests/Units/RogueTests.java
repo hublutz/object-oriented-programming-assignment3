@@ -2,11 +2,10 @@ package Tests.Units;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
-import BusinessLayer.Tiles.Units.Players.Warrior.Warrior;
-import BusinessLayer.Tiles.Units.UnitTile;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class RogueTests extends AbstractUnitTest {
         cost = 15;
     }
 
-    @BeforeAll
+    @Before
     public void initTests() {
         rogue = new Rogue(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
     }

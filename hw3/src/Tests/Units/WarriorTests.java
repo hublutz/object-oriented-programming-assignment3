@@ -1,12 +1,13 @@
 package Tests.Units;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
-import BusinessLayer.Tiles.Units.Players.Mage.Mage;
+
 import BusinessLayer.Tiles.Units.Players.Warrior.Warrior;
-import BusinessLayer.Tiles.Units.UnitTile;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class WarriorTests extends AbstractUnitTest {
         abilityCooldown =1;
     }
 
-    @BeforeAll
+    @Before
     public void initTests(){
         warrior = new Warrior(c,x,y,name,healthPool,attackPoints,defencePoints,messageCallback,abilityCooldown);
     }

@@ -2,8 +2,10 @@ package Tests.Units;
 
 import BusinessLayer.Tiles.Point;
 import org.junit.Assert;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
+
 
 public class PointTest {
 
@@ -11,7 +13,7 @@ public class PointTest {
     int x;
     int y;
 
-    @BeforeAll
+    @BeforeClass
     public void initTests(){
         x=0;
         y=0;

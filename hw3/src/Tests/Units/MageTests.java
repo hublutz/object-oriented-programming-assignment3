@@ -2,11 +2,11 @@ package Tests.Units;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
-import BusinessLayer.Tiles.Units.UnitTile;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class MageTests  extends AbstractUnitTest {
     public int manaCost;
     public int spellPower;
 
-    @BeforeAll
+    @BeforeClass
     public void BeforeAll(){
         hits =3;
         abRange = 3;
@@ -29,7 +29,7 @@ public class MageTests  extends AbstractUnitTest {
         spellPower = 10;
     }
 
-    @BeforeEach
+    @Before
     public void initTests(){
 
         mage = new Mage(this.c,this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,manaCost,manaPool);

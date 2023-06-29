@@ -1,11 +1,12 @@
 package Tests.Units;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
-import BusinessLayer.Tiles.Units.EnemyTiles.Trap;
+import BusinessLayer.Tiles.Units.EnemyTiles.Trap.Trap;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -22,7 +23,7 @@ public class TrapTest extends AbstractUnitTest{
     private int invisibleTime;
 
 
-    @BeforeEach
+    @Before
     public void initTest(){
         visibleTime =1;
         invisibleTime =2;
@@ -43,6 +44,7 @@ public class TrapTest extends AbstractUnitTest{
 
     @Test
     public void testVisibility(){
+        trap.onGameTick();
         for(int i =0; i< visibleTime; i++){
             Assert.assertTrue("should be visible",trap.getVisible());
             Assert.assertNotEquals("should be visible", ".",trap.toString());
@@ -55,6 +57,7 @@ public class TrapTest extends AbstractUnitTest{
 
             trap.onGameTick();
         }
+        trap.onGameTick();
         Assert.assertTrue("should be visible",trap.getVisible());
     }
 
