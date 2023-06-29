@@ -2,11 +2,14 @@ package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
+import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.Health;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
+import java.security.KeyPair;
 import java.util.List;
 import java.util.Random;
 
@@ -136,6 +139,7 @@ public abstract class Player extends UnitTile
             this.messageCallback.passMessage("You received " + enemy.getExperienceValue() +
                     " experience points!");
         }
+
     }
 
     /**
@@ -169,4 +173,30 @@ public abstract class Player extends UnitTile
 
         return builder.toString();
     }
+
+    public int getLevel(){
+        return playerLevel;
+    }
+
+    public Health getHealth(){
+        return health;
+    }
+
+    /**
+     * used only for tests
+     * */
+    public void setExperience(int ex){
+        experience = ex;
+    }
+
+    public int getAttack(){
+        return super.attackPoints;
+    }
+
+    public int getDefense(){
+        return super.defencePoints;
+    }
+
+
+
 }

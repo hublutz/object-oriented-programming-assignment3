@@ -109,4 +109,12 @@ public class Trap extends Enemy
 
         return builder.toString();
     }
+
+    /**
+     * used for tests
+     * */
+
+    public boolean getVisible(){
+        return visible;
+    }
 }
