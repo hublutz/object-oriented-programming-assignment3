@@ -7,7 +7,7 @@ import BusinessLayer.Tiles.VisitorPattern.IVisitor;
  */
 public class WallTile extends Tile
 {
-    private static final char WALL_TILE_CHAR = '#';
+    public static final char WALL_TILE_CHAR = '#';
 
     /**
      * WallTile constructor, initialises the tile char to be

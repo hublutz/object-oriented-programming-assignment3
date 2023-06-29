@@ -19,7 +19,7 @@ public abstract class Player extends UnitTile
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
     private static final int ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL = 1;
     private static final int ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL = 10;
-    private static final char PLAYER_TILE = '@';
+    public static final char PLAYER_TILE = '@';
     private static final char DEAD_CHAR = 'X';
     final public int INITIAL_EXPERIENCE =0;
     final public int INITIAL_LEVEL =1;

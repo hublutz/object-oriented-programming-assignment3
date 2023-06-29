@@ -153,6 +153,7 @@ public class TileFactory
         {
             Enemy enemy = this.enemiesMap.get(enemyTile).get();
             enemy.move(x, y);
+            this.enemyList.add(enemy);
             return enemy;
         }
         else
