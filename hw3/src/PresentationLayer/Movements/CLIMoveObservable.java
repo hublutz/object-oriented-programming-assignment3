@@ -32,6 +32,16 @@ public class CLIMoveObservable implements MoveObservable
     }
 
     /**
+     * Removes the given observer from the list of observers
+     * @param observer The observer to remove
+     */
+    @Override
+    public void removeObserver(MoveObserver observer)
+    {
+        this.observers.remove(observer);
+    }
+
+    /**
      * Notifies each of the observers of a new move operation
      * @param moveOperation The movement to make
      */

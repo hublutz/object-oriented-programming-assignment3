@@ -10,5 +10,5 @@ public interface MoveObserver
     /**
      * Move observer notification OnMove
      * */
-    void onMove(MoveOperation operation);
+    public void onMove(MoveOperation operation);
 }

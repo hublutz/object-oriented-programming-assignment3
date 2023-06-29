@@ -37,6 +37,14 @@ public abstract class Enemy extends UnitTile
         this.deathCallback = deathCallback;
     }
 
+    /**
+     * Enemy Player setter
+     */
+    public void setPlayer(Player player)
+    {
+        this.player = player;
+    }
+
     @Override
     public void onDeath()
     {

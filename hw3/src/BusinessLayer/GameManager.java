@@ -51,8 +51,10 @@ public class GameManager
         {
             GameBoard currentGameBoard = this.gameBoardSupplier.next();
             Player currentPlayer = gameBoardSupplier.getCurrentPlayer();
+            this.moveObservable.addObserver(currentPlayer);
             MovementFactory playerMovementFactory = new MovementFactory(this.enemyList, currentPlayer);
             playerMovementFactory.setCurrentGameBoard(currentGameBoard);
+            this.enemyList.forEach(enemy -> enemy.setPlayer(currentPlayer));
 
             while (!currentPlayer.isDead() && !this.enemyList.isEmpty())
             {
@@ -63,6 +65,7 @@ public class GameManager
                 this.moveObservable.notifyObservers(moveOperation);
                 currentGameBoard.tick();
             }
+            this.moveObservable.removeObserver(currentPlayer);
             if (currentPlayer.isDead())
             {
                 this.messageCallback.passMessage("Game Over! You lost");
