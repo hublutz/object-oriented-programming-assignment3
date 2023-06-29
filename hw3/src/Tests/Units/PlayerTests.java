@@ -25,11 +25,22 @@ public class PlayerTests extends AbstractUnitTest {
 
         mage.onGameTick();
 
-        Assert.assertEquals(levelB+1, mage.getLevel());
-        Assert.assertEquals(attackB + mage.getLevel()*4, mage.getAttack());
-        Assert.assertEquals(defB + mage.getLevel(), mage.getDefense());
-        Assert.assertEquals(mage.getHealth().getHealthPool(), mage.getHealth().getHealthAmount());
+        Assert.assertEquals("level should be updated",levelB+1, mage.getLevel());
+        Assert.assertEquals("attack should be updated",attackB + mage.getLevel()*4, mage.getAttack());
+        Assert.assertEquals("def should be updated",defB + mage.getLevel(), mage.getDefense());
+        Assert.assertEquals("health should be updated",mage.getHealth().getHealthPool(), mage.getHealth().getHealthAmount());
 
+    }
+
+    @Test
+    public void testLevelUpTwoLevels(){
+        mage.setExperience(100);
+
+        int levelB = mage.getLevel();
+
+        mage.onGameTick();
+
+        Assert.assertEquals("level should be updated",levelB+2, mage.getLevel());
     }
 
     @Test
@@ -39,7 +50,7 @@ public class PlayerTests extends AbstractUnitTest {
 
         mage.onGameTick();
 
-        Assert.assertEquals(levelB, mage.getLevel());
+        Assert.assertEquals("level shouldn't be updated",levelB, mage.getLevel());
 
     }
 

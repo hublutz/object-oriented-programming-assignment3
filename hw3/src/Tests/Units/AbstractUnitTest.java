@@ -4,14 +4,14 @@ import BusinessLayer.IMessageCallback.IMessageCallback;
 
 public abstract class AbstractUnitTest {
 
-    public char c ;
-    public int x ;
-    public int y;
-    public String name ;
-    public int healthPool;
-    public int attackPoints ;
-    public int defencePoints;
-    public String lastM;
+    protected char c ;
+    protected int x ;
+    protected int y;
+    protected String name ;
+    protected int healthPool;
+    protected int attackPoints ;
+    protected int defencePoints;
+    protected String lastM;
     IMessageCallback messageCallback;
 
     public AbstractUnitTest(){

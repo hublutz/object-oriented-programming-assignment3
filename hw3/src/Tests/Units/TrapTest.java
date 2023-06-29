@@ -18,8 +18,8 @@ public class TrapTest extends AbstractUnitTest{
 
     private boolean def;
 
-    int visibleTime;
-    int invisibleTime;
+    private int visibleTime;
+    private int invisibleTime;
 
 
     @BeforeEach
@@ -44,22 +44,25 @@ public class TrapTest extends AbstractUnitTest{
     @Test
     public void testVisibility(){
         for(int i =0; i< visibleTime; i++){
-            Assert.assertTrue(trap.getVisible());
+            Assert.assertTrue("should be visible",trap.getVisible());
+            Assert.assertNotEquals("should be visible", ".",trap.toString());
             trap.onGameTick();
         }
 
         for(int i =0; i< invisibleTime; i++){
-            Assert.assertFalse(trap.getVisible());
+            Assert.assertFalse("shouldn't be visible",trap.getVisible());
+            Assert.assertEquals("shouldn't be visible", ".",trap.toString());
+
             trap.onGameTick();
         }
-        Assert.assertTrue(trap.getVisible());
+        Assert.assertTrue("should be visible",trap.getVisible());
     }
 
     @Test
     public void testAttackOutOfRange(){
         trap.onGameTick();
 
-        Assert.assertFalse(def);
+        Assert.assertFalse("shouldn't attack player",def);
     }
 
     @Test
@@ -68,15 +71,15 @@ public class TrapTest extends AbstractUnitTest{
 
         trap.onGameTick();
 
-        Assert.assertTrue(def);
+        Assert.assertTrue("should attack player",def);
     }
 
     @Test
     public void testAttackInRangeFar(){
-        player.move(x+1,y+1);
+        player.move(x+2,y);
 
         trap.onGameTick();
 
-        Assert.assertTrue(def);
+        Assert.assertTrue("shouldn't attack player",def);
     }
 }

@@ -129,7 +129,7 @@ public abstract class Player extends UnitTile {
      * used only for tests
      * */
     public void setExperience(int ex){
-
+        experience = ex;
     }
 
     public int getAttack(){

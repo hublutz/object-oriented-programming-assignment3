@@ -52,4 +52,11 @@ public class Rogue extends Player {
     public int getAttack() {
         return attackPoints;
     }
+
+    /**
+     * used only in tests
+     * */
+    public void setCurrentEnergy(int e){
+        this.currentEnergy =0;
+    }
 }

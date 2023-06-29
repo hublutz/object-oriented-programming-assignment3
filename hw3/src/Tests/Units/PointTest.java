@@ -20,23 +20,23 @@ public class PointTest {
 
     @Test
     public void rangeTestZero(){
-        Assert.assertEquals(0.0 , point.range(new Point(x,y)));
+        Assert.assertEquals("range should be 0",0.0 , point.range(new Point(x,y)));
     }
 
     @Test
     public void rangeTestThree(){
-        Assert.assertEquals(3.0 , point.range(new Point(3,0)));
+        Assert.assertEquals("range should be 3",3.0 , point.range(new Point(3,0)));
     }
 
     @Test
     public void rangeTestTwoSqrt(){
-        Assert.assertEquals(Math.sqrt(2) , point.range(new Point(1,1)));
+        Assert.assertEquals("range should be 2^0.5",Math.sqrt(2) , point.range(new Point(1,1)));
     }
 
     @Test
     public void moveTest(){
         point.move(1,1);
-        Assert.assertEquals(1,point.getX());
-        Assert.assertEquals(1,point.getY());
+        Assert.assertEquals("x should be 1",1,point.getX());
+        Assert.assertEquals("y should be 1",1,point.getY());
     }
 }

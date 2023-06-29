@@ -2,6 +2,7 @@ package Tests.Units;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
+import BusinessLayer.Tiles.Units.Players.Warrior.Warrior;
 import BusinessLayer.Tiles.Units.UnitTile;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,12 +13,10 @@ import java.util.List;
 
 public class RogueTests extends AbstractUnitTest {
 
-    Rogue rogue;
-    int cost;
-    List<Boolean> def;
+    private Rogue rogue;
+    private int cost;
 
     public RogueTests() {
-        def = new ArrayList<Boolean>();
         cost = 15;
     }
 
@@ -32,61 +31,11 @@ public class RogueTests extends AbstractUnitTest {
      */
     @Test
     public void testCastSpell() {
-        Enemy enemy = new Enemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null) {
+        TestEnemy enemy = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
+        TestEnemy enemy1 = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
 
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void defend(int attackRoll) {
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-        Enemy enemy1 = new Enemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null) {
-
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void defend(int attackRoll) {
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
-
-        Enemy enemyToFar = new Enemy(c, 10, 10, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null) {
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void defend(int attackRoll) {
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
+        TestEnemy enemyToFar = new TestEnemy(c, 10, 10, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
         List<Enemy> l = new ArrayList<Enemy>();
         l.add(enemy);
@@ -95,10 +44,10 @@ public class RogueTests extends AbstractUnitTest {
         rogue.castAbility(l);
 
 
-        Assert.assertTrue("should hit this enemy", def.get(0));
-        Assert.assertTrue("should hit this enemy", def.get(1));
-        Assert.assertTrue("shouldn't hit this enemy because he is to far", def.size() < 3);
-        Assert.assertEquals(100 - this.cost, rogue.getCurrentEnergy());
+        Assert.assertTrue("should hit this enemy", enemy.defended);
+        Assert.assertTrue("should hit this enemy", enemy1.defended);
+        Assert.assertTrue("shouldn't hit this enemy because he is to far", enemyToFar.defended);
+        Assert.assertEquals("cost should be decreased from energy",100 - this.cost, rogue.getCurrentEnergy());
     }
 
     /**
@@ -106,25 +55,7 @@ public class RogueTests extends AbstractUnitTest {
      */
     @Test
     public void OnTick() {
-        Enemy enemy = new Enemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null) {
-
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void defend(int attackRoll) {
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
+        TestEnemy enemy = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
         List<Enemy> l = new ArrayList<Enemy>();
         l.add(enemy);
@@ -134,7 +65,7 @@ public class RogueTests extends AbstractUnitTest {
 
         rogue.onGameTick();
 
-        Assert.assertEquals(currentEnergy + 10, rogue.getCurrentEnergy());
+        Assert.assertEquals("current energy should be increased on tick",currentEnergy + 10, rogue.getCurrentEnergy());
     }
 
     /**
@@ -143,13 +74,28 @@ public class RogueTests extends AbstractUnitTest {
     @Test
     public void LevelUpTest() {
 
-        int levelB = rogue.getLevel();
         int attack = rogue.getAttack();
 
         rogue.levelUp();
-        Assert.assertEquals(100, rogue.getCurrentEnergy());
-        Assert.assertEquals(attack + 7 * rogue.getLevel() , rogue.getAttack());
+        Assert.assertEquals("energy on level up should be refilled",100, rogue.getCurrentEnergy());
+        Assert.assertEquals("attack should be updated",attack + 7 * rogue.getLevel() , rogue.getAttack());
 
+    }
+
+
+    @Test
+    public void testNotEnoughEnergy() {
+        rogue = new Rogue(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
+
+        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.rogue, null) ;
+
+        List<Enemy> l1= new ArrayList<Enemy>();
+        l1.add(enemy);
+        rogue.setCurrentEnergy(0);
+
+        rogue.castAbility(l1);
+
+        Assert.assertFalse("spell shouldnt be casted", enemy.defended);
     }
 
 }

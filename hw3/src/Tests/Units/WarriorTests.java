@@ -1,6 +1,7 @@
 package Tests.Units;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import BusinessLayer.Tiles.Units.Players.Warrior.Warrior;
 import BusinessLayer.Tiles.Units.UnitTile;
 import org.junit.Assert;
@@ -12,12 +13,10 @@ import java.util.List;
 
 public class WarriorTests extends AbstractUnitTest {
 
-    Warrior warrior;
-    int abilityCooldown;
-    List<Boolean> def;
+    private Warrior warrior;
+    private int abilityCooldown;
 
     public WarriorTests(){
-        def = new ArrayList<Boolean>();
         abilityCooldown =1;
     }
 
@@ -32,43 +31,9 @@ public class WarriorTests extends AbstractUnitTest {
      * */
     @Test
     public void testCastSpell(){
-        Enemy enemy = new Enemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) {
+        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
-
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
-        Enemy enemyToFar = new Enemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) {
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
+        TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
         List<Enemy> l= new ArrayList<Enemy>();
         l.add(enemy);
@@ -76,8 +41,8 @@ public class WarriorTests extends AbstractUnitTest {
         warrior.castAbility(l);
 
 
-        Assert.assertTrue("should hit this enemy", def.get(0));
-        Assert.assertFalse("shouldn't hit this enemy because he is to far", def.get(1));
+        Assert.assertTrue("should hit this enemy", enemy.defended);
+        Assert.assertFalse("shouldn't hit this enemy because he is to far", enemyToFar.defended);
         Assert.assertEquals(this.abilityCooldown,warrior.getRemainingCooldown());
     }
 
@@ -86,43 +51,9 @@ public class WarriorTests extends AbstractUnitTest {
      * */
     @Test
     public void testCoolDown(){
-        Enemy enemy = new Enemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) {
+        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
-
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
-        Enemy enemyToFar = new Enemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) {
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
+        TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
         List<Enemy> l= new ArrayList<Enemy>();
         l.add(enemy);
@@ -133,7 +64,7 @@ public class WarriorTests extends AbstractUnitTest {
 
         warrior.onGameTick();
 
-        Assert.assertEquals(currentCoolDown-1,warrior.getRemainingCooldown());
+        Assert.assertEquals("cooldown should be updated",currentCoolDown-1,warrior.getRemainingCooldown());
     }
 
     /**
@@ -148,9 +79,27 @@ public class WarriorTests extends AbstractUnitTest {
         int def = warrior.getDefense();
 
         warrior.levelUp();
-        Assert.assertEquals(0, warrior.getRemainingCooldown());
-        Assert.assertEquals(healthPool +5*warrior.getLevel() ,warrior.getHealth().getHealthPool());
-        Assert.assertEquals(attack + 6*warrior.getLevel() , warrior.getAttack());
-        Assert.assertEquals(def +2*warrior.getLevel() ,warrior.getDefense());
+        Assert.assertEquals("cooldown should be updated",0, warrior.getRemainingCooldown());
+        Assert.assertEquals("health should be updated",healthPool +5*warrior.getLevel() ,warrior.getHealth().getHealthPool());
+        Assert.assertEquals("attack should be updated",attack + 6*warrior.getLevel() , warrior.getAttack());
+        Assert.assertEquals("def should be updated",def +2*warrior.getLevel() ,warrior.getDefense());
+    }
+
+
+    @Test
+    public void testNotEnoughCooldown() {
+        warrior = new Warrior(c,x,y,name,healthPool,attackPoints,defencePoints,messageCallback,10);
+
+
+        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) ;
+
+        List<Enemy> l1= new ArrayList<Enemy>();
+        l1.add(enemy);
+
+        warrior.castAbility(l1);
+        warrior.onGameTick();
+        warrior.castAbility(l1);
+
+        Assert.assertNotEquals("swcound spell shouldnt be casted", 0, warrior.getRemainingCooldown());
     }
 }

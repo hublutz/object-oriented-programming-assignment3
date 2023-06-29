@@ -19,11 +19,9 @@ public class MageTests  extends AbstractUnitTest {
     public int manaPool ;
     public int manaCost;
     public int spellPower;
-    public List<Boolean> def;
 
     @BeforeAll
     public void BeforeAll(){
-        def = new ArrayList<Boolean>();
         hits =3;
         abRange = 3;
         manaPool = 100;
@@ -42,112 +40,38 @@ public class MageTests  extends AbstractUnitTest {
      * */
     @Test
     public void testCastSpell(){
-        Enemy enemy = new Enemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) {
+        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
+        TestEnemy enemy1 = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
+        TestEnemy enemy2 = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
+
+        TestEnemy enemyToManyHits = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
+
+        TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
 
 
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-        Enemy enemy1 = new Enemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) {
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-        Enemy enemy2 = new Enemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) {
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
-        Enemy enemyToManyHits = new Enemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) {
-           ;
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
-        Enemy enemyToFar = new Enemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) {
-
-            @Override
-            public void attack(UnitTile unit) {
-
-            }
-
-            @Override
-            public void  defend(int attackRoll){
-                def.add(true);
-            }
-
-            @Override
-            public void onGameTick() {
-
-            }
-        };
-
-        List<Enemy> l= new ArrayList<Enemy>();
+        List<TestEnemy> l= new ArrayList<TestEnemy>();
+        List<Enemy> l1= new ArrayList<Enemy>();
         l.add(enemy);
+        l1.add(enemy);
         l.add(enemy1);
+        l1.add(enemy1);
         l.add(enemy2);
+        l1.add(enemy2);
         l.add(enemyToManyHits);
+        l1.add(enemyToManyHits);
         l.add(enemyToFar);
-        mage.castAbility(l);
+        l1.add(enemyToFar);
+
+        mage.castAbility(l1);
 
         int totalHits =0;
-        for (boolean b: def)
-            if(b)
+        for (TestEnemy e: l)
+            if(e.defended)
                 totalHits++;
 
 
         Assert.assertEquals("should hit 3 of the enemies at random", totalHits,this.hits);
-        Assert.assertFalse("shouldn't hit this enemy because he is to far", def.get(4));
+        Assert.assertFalse("shouldn't hit this enemy because he is to far", enemyToFar.defended);
         Assert.assertEquals("mana should be lower", manaPool-manaCost, mage.getMana().getManaAmount());
     }
 
@@ -162,8 +86,8 @@ public class MageTests  extends AbstractUnitTest {
         int manaPool = mage.getMana().getManaPool();
         int spellPower = mage.getSpellPower();
         mage.levelUp();
-        Assert.assertEquals(mage.getMana().getManaPool(), manaPool + 25*levelB);
-        Assert.assertEquals(mage.getSpellPower(),spellPower +10*levelB);
+        Assert.assertEquals("mana pool should be updated",mage.getMana().getManaPool(), manaPool + 25*levelB);
+        Assert.assertEquals("spell power should be updated",mage.getSpellPower(),spellPower +10*levelB);
     }
 
     /**
@@ -179,7 +103,7 @@ public class MageTests  extends AbstractUnitTest {
     private void fullManaPoolTick() {
         int manaAmount =mage.getMana().getManaAmount();
         mage.onGameTick();
-        Assert.assertEquals(manaAmount,mage.getMana().getManaAmount());
+        Assert.assertEquals("mana should be updated",manaAmount,mage.getMana().getManaAmount());
     }
 
     private void emptyManaPoolTick() {
@@ -190,8 +114,21 @@ public class MageTests  extends AbstractUnitTest {
         }
         int manaAmount =mage.getMana().getManaAmount();
         mage.onGameTick();
-        Assert.assertEquals(manaAmount,mage.getMana().getManaAmount() +mage.getLevel());
+        Assert.assertEquals("mana amount should be updated",manaAmount,mage.getMana().getManaAmount() +mage.getLevel());
     }
 
+    @Test
+    public void testNotEnoughMana() {
+        mage = new Mage(this.c,this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,1000000,manaPool);
+        int manaB = mage.getMana().getManaAmount();
 
+        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
+
+        List<Enemy> l1= new ArrayList<Enemy>();
+        l1.add(enemy);
+
+        mage.castAbility(l1);
+
+        Assert.assertEquals("spell shouldnt be casted", manaB, mage.getMana().getManaAmount());
+    }
 }
