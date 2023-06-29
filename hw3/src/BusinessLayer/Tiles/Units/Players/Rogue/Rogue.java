@@ -57,6 +57,6 @@ public class Rogue extends Player {
      * used only in tests
      * */
     public void setCurrentEnergy(int e){
-        this.currentEnergy =0;
+        this.currentEnergy =e;
     }
 }

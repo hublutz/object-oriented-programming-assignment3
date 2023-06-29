@@ -37,11 +37,11 @@ public class RogueTests extends AbstractUnitTest {
 
         TestEnemy enemyToFar = new TestEnemy(c, 10, 10, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
-        List<Enemy> l = new ArrayList<Enemy>();
-        l.add(enemy);
-        l.add(enemy1);
-        l.add(enemyToFar);
-        rogue.castAbility(l);
+        List<Enemy> enemyList = new ArrayList<Enemy>();
+        enemyList.add(enemy);
+        enemyList.add(enemy1);
+        enemyList.add(enemyToFar);
+        rogue.castAbility(enemyList);
 
 
         Assert.assertTrue("should hit this enemy", enemy.defended);
@@ -57,9 +57,9 @@ public class RogueTests extends AbstractUnitTest {
     public void OnTick() {
         TestEnemy enemy = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
-        List<Enemy> l = new ArrayList<Enemy>();
-        l.add(enemy);
-        rogue.castAbility(l);
+        List<Enemy> enemyList = new ArrayList<Enemy>();
+        enemyList.add(enemy);
+        rogue.castAbility(enemyList);
 
         int currentEnergy = rogue.getCurrentEnergy();
 
@@ -89,11 +89,11 @@ public class RogueTests extends AbstractUnitTest {
 
         TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.rogue, null) ;
 
-        List<Enemy> l1= new ArrayList<Enemy>();
-        l1.add(enemy);
+        List<Enemy> enemyList1= new ArrayList<Enemy>();
+        enemyList1.add(enemy);
         rogue.setCurrentEnergy(0);
 
-        rogue.castAbility(l1);
+        rogue.castAbility(enemyList1);
 
         Assert.assertFalse("spell shouldnt be casted", enemy.defended);
     }

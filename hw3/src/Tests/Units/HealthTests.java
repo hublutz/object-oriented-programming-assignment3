@@ -56,7 +56,7 @@ public class HealthTests {
     @Test
     public void increaseHealthAbovePool(){
         health.increaseHealthAmount(5);
-        Assert.assertEquals("healthPool should increase",initialHealthPool, health.getHealthAmount());
+        Assert.assertEquals("healthPool shouldn't  increase",initialHealthPool, health.getHealthAmount());
     }
 
     @Test

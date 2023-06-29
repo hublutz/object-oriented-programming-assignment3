@@ -35,10 +35,10 @@ public class WarriorTests extends AbstractUnitTest {
 
         TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
-        List<Enemy> l= new ArrayList<Enemy>();
-        l.add(enemy);
-        l.add(enemyToFar);
-        warrior.castAbility(l);
+        List<Enemy> enemyList = new ArrayList<Enemy>();
+        enemyList.add(enemy);
+        enemyList.add(enemyToFar);
+        warrior.castAbility(enemyList);
 
 
         Assert.assertTrue("should hit this enemy", enemy.defended);
@@ -55,10 +55,10 @@ public class WarriorTests extends AbstractUnitTest {
 
         TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
-        List<Enemy> l= new ArrayList<Enemy>();
-        l.add(enemy);
-        l.add(enemyToFar);
-        warrior.castAbility(l);
+        List<Enemy> enemyList = new ArrayList<Enemy>();
+        enemyList.add(enemy);
+        enemyList.add(enemyToFar);
+        warrior.castAbility(enemyList);
 
         int currentCoolDown = warrior.getRemainingCooldown();
 
@@ -93,12 +93,12 @@ public class WarriorTests extends AbstractUnitTest {
 
         TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) ;
 
-        List<Enemy> l1= new ArrayList<Enemy>();
-        l1.add(enemy);
+        List<Enemy> enemyList= new ArrayList<Enemy>();
+        enemyList.add(enemy);
 
-        warrior.castAbility(l1);
+        warrior.castAbility(enemyList);
         warrior.onGameTick();
-        warrior.castAbility(l1);
+        warrior.castAbility(enemyList);
 
         Assert.assertNotEquals("swcound spell shouldnt be casted", 0, warrior.getRemainingCooldown());
     }

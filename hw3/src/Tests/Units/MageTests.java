@@ -49,23 +49,23 @@ public class MageTests  extends AbstractUnitTest {
         TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
 
 
-        List<TestEnemy> l= new ArrayList<TestEnemy>();
-        List<Enemy> l1= new ArrayList<Enemy>();
-        l.add(enemy);
-        l1.add(enemy);
-        l.add(enemy1);
-        l1.add(enemy1);
-        l.add(enemy2);
-        l1.add(enemy2);
-        l.add(enemyToManyHits);
-        l1.add(enemyToManyHits);
-        l.add(enemyToFar);
-        l1.add(enemyToFar);
+        List<TestEnemy> enemyList= new ArrayList<TestEnemy>();
+        List<Enemy> enemyList2 = new ArrayList<Enemy>();
+        enemyList.add(enemy);
+        enemyList2.add(enemy);
+        enemyList.add(enemy1);
+        enemyList2.add(enemy1);
+        enemyList.add(enemy2);
+        enemyList2.add(enemy2);
+        enemyList.add(enemyToManyHits);
+        enemyList2.add(enemyToManyHits);
+        enemyList.add(enemyToFar);
+        enemyList2.add(enemyToFar);
 
-        mage.castAbility(l1);
+        mage.castAbility(enemyList2);
 
         int totalHits =0;
-        for (TestEnemy e: l)
+        for (TestEnemy e: enemyList)
             if(e.defended)
                 totalHits++;
 
@@ -124,10 +124,10 @@ public class MageTests  extends AbstractUnitTest {
 
         TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
 
-        List<Enemy> l1= new ArrayList<Enemy>();
-        l1.add(enemy);
+        List<Enemy> enemyList1= new ArrayList<Enemy>();
+        enemyList1.add(enemy);
 
-        mage.castAbility(l1);
+        mage.castAbility(enemyList1);
 
         Assert.assertEquals("spell shouldnt be casted", manaB, mage.getMana().getManaAmount());
     }
