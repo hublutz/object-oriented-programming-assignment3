@@ -45,7 +45,7 @@ public class RogueTests extends AbstractUnitTest {
 
         Assert.assertTrue("should hit this enemy", enemy.defended);
         Assert.assertTrue("should hit this enemy", enemy1.defended);
-        Assert.assertTrue("shouldn't hit this enemy because he is to far", enemyToFar.defended);
+        Assert.assertFalse("shouldn't hit this enemy because he is to far", enemyToFar.defended);
         Assert.assertEquals("cost should be decreased from energy",100 - this.cost, rogue.getCurrentEnergy());
     }
 

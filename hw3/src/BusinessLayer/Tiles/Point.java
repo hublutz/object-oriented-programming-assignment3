@@ -57,7 +57,8 @@ public class Point
     {
         int xDelta = this.x - other.x;
         int yDelta = this.y - other.y;
-        return Math.sqrt((xDelta * xDelta) + (yDelta * yDelta));
+        double range =Math.sqrt((xDelta * xDelta) + (yDelta * yDelta));
+        return range;
     }
 
     /**

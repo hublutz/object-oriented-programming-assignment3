@@ -3,7 +3,6 @@ import BusinessLayer.Tiles.Units.Players.Mage.Mana;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 public class ManaTests {
 

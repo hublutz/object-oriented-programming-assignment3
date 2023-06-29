@@ -2,14 +2,14 @@ package Tests.Units;
 
 import BusinessLayer.Tiles.Units.Health;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 public class HealthTests {
 
     private Health health;
     private int initialHealthPool;
-    @BeforeEach
+    @Before
     public void initTest(){
         initialHealthPool =100;
         health = new Health(initialHealthPool);
@@ -18,37 +18,61 @@ public class HealthTests {
     @Test
     public void isDeadTest(){
         health = new Health(1);
-        health.decreaseHealthAmount(1);
+        try {
+            health.decreaseHealthAmount(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertTrue("should be dead",health.isDead());
     }
     @Test
     public void isDeadTestBelowZero(){
         health = new Health(1);
-        health.decreaseHealthAmount(100);
+        try {
+            health.decreaseHealthAmount(100);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertTrue("should be dead",health.isDead());
     }
 
     @Test
     public void decreaseHealth(){
-        health.decreaseHealthAmount(10);
+        try {
+            health.decreaseHealthAmount(10);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertEquals("health should be decreased",initialHealthPool -10, health.getHealthAmount());
     }
 
     @Test
     public void decreaseBelowLimitHealth(){
-        health.decreaseHealthAmount(1000);
+        try {
+            health.decreaseHealthAmount(1000);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertEquals(" health should be zero",0, health.getHealthAmount());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void decreaseHealthNegative(){
-        health.decreaseHealthAmount(-10);
+        try {
+            health.decreaseHealthAmount(-10);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         Assert.assertEquals("health shouldn't change",initialHealthPool, health.getHealthAmount());
     }
 
     @Test
     public void increaseHealth(){
-        health.decreaseHealthAmount(10);
+        try {
+            health.decreaseHealthAmount(10);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         try {
             health.increaseHealthAmount(5);
         } catch (Exception e) {

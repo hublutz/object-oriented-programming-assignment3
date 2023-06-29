@@ -3,6 +3,7 @@ package Tests.Units;
 import BusinessLayer.Tiles.Point;
 import org.junit.Assert;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class PointTest {
     int x;
     int y;
 
-    @BeforeClass
+    @Before
     public void initTests(){
         x=0;
         y=0;
@@ -22,17 +23,17 @@ public class PointTest {
 
     @Test
     public void rangeTestZero(){
-        Assert.assertEquals("range should be 0",0.0 , point.range(new Point(x,y)));
+        Assert.assertEquals("range should be 0",new Double(0) , new Double(point.range(new Point(x,y))));
     }
 
     @Test
     public void rangeTestThree(){
-        Assert.assertEquals("range should be 3",3.0 , point.range(new Point(3,0)));
+        Assert.assertEquals("range should be 3",new Double(3) , new Double(point.range(new Point(3,0))));
     }
 
     @Test
     public void rangeTestTwoSqrt(){
-        Assert.assertEquals("range should be 2^0.5",Math.sqrt(2) , point.range(new Point(1,1)));
+        Assert.assertEquals("range should be 2^0.5",new Double(Math.sqrt(2)) , new Double(point.range(new Point(1,1))));
     }
 
     @Test

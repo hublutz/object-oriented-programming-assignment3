@@ -64,7 +64,7 @@ public class Mana {
      * @return The mana pool
      * */
     public int getManaPool(){
-        return this.manaAmount;
+        return this.manaPool;
     }
 
     /**
