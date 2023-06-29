@@ -18,6 +18,7 @@ public abstract class Enemy extends UnitTile
 
     protected Player player;
     protected IEnemyDeathCallback deathCallback;
+
     /**
      * Enemy constructor, receives all UnitTile parameters and
      * experience value and the player reference
@@ -34,6 +35,14 @@ public abstract class Enemy extends UnitTile
         this.experienceValue = experienceValue;
         this.player = player;
         this.deathCallback = deathCallback;
+    }
+
+    /**
+     * Enemy Player setter
+     */
+    public void setPlayer(Player player)
+    {
+        this.player = player;
     }
 
     @Override

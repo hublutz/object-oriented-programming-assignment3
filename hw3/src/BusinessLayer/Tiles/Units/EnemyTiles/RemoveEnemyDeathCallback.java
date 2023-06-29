@@ -1,5 +1,6 @@
 package BusinessLayer.Tiles.Units.EnemyTiles;
 
+import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
 
@@ -11,15 +12,15 @@ import java.util.List;
  */
 public class RemoveEnemyDeathCallback implements IEnemyDeathCallback
 {
-    private final List<Tile> tilesList;
+    private final GameBoard gameBoard;
 
     /**
      * RemoveEnemyDeathCallback constructor
      * @param tilesList The Tiles list of the game board
      */
-    public RemoveEnemyDeathCallback(List<Tile> tilesList)
+    public RemoveEnemyDeathCallback(GameBoard gameBoard)
     {
-        this.tilesList = tilesList;
+        this.gameBoard = gameBoard;
     }
 
     /**
@@ -30,7 +31,7 @@ public class RemoveEnemyDeathCallback implements IEnemyDeathCallback
     @Override
     public void callEnemyDeath(Enemy enemy)
     {
-        this.tilesList.remove(enemy);
-        this.tilesList.add(new EmptyTile(enemy.getX(), enemy.getY()));
+        this.gameBoard.remove(enemy);
+        this.gameBoard.addTile(new EmptyTile(enemy.getX(), enemy.getY()));
     }
 }

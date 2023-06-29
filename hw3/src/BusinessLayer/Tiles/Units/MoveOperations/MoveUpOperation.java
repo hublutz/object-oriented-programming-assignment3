@@ -8,7 +8,7 @@ import BusinessLayer.GameBoard;
 public class MoveUpOperation extends AbstractBoardMovement
 {
     private static final int X_AXIS_CHANGE = 0;
-    private static final int Y_AXIS_CHANGE = 1;
+    private static final int Y_AXIS_CHANGE = -1;
 
     /**
      * MoveUpOperation constructor

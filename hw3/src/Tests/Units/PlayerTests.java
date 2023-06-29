@@ -13,7 +13,7 @@ public class PlayerTests extends AbstractUnitTest {
 
     @Before
     public void initTests(){
-        mage = new Mage(c,x,y,name,healthPool,attackPoints,defencePoints,messageCallback,1,1,1,1,1);
+        mage = new Mage(x,y,name,healthPool,attackPoints,defencePoints,messageCallback,1,1,1,1,1);
     }
 
     @Test

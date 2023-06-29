@@ -32,7 +32,7 @@ public class MageTests  extends AbstractUnitTest {
     @Before
     public void initTests(){
 
-        mage = new Mage(this.c,this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,manaCost,manaPool);
+        mage = new Mage(this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,manaCost,manaPool);
     }
 
     /**
@@ -123,7 +123,7 @@ public class MageTests  extends AbstractUnitTest {
 
     @Test
     public void testNotEnoughMana() {
-        mage = new Mage(this.c,this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,1000000,manaPool);
+        mage = new Mage(this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,1000000,manaPool);
         int manaB = mage.getMana().getManaAmount();
 
         TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;

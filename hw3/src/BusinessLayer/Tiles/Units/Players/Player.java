@@ -5,6 +5,8 @@ import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Health;
+import BusinessLayer.Tiles.Units.MoveOperations.MoveObserver;
+import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
@@ -16,12 +18,13 @@ import java.util.Random;
 /**
  * Abstract class Player represents a Player tile in the board
  */
-public abstract class Player extends UnitTile
+public abstract class Player extends UnitTile implements MoveObserver
 {
     private static final int LEVEL_UP_ON_TIMES_LEVEL = 50;
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
     private static final int ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL = 1;
     private static final int ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL = 10;
+    public static final char PLAYER_TILE = '@';
     private static final char DEAD_CHAR = 'X';
     final public int INITIAL_EXPERIENCE =0;
     final public int INITIAL_LEVEL =1;
@@ -32,8 +35,8 @@ public abstract class Player extends UnitTile
     /**
      * Player constructor
      */
-    public Player(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+        super(PLAYER_TILE, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.experience = INITIAL_EXPERIENCE;
         this.playerLevel = INITIAL_LEVEL;
     }
@@ -196,6 +199,13 @@ public abstract class Player extends UnitTile
         return super.defencePoints;
     }
 
-
-
+    /**
+     * Moves the player according to the move operation
+     * @param operation The movement operation to make
+     */
+    @Override
+    public void onMove(MoveOperation operation)
+    {
+        operation.move(this);
+    }
 }

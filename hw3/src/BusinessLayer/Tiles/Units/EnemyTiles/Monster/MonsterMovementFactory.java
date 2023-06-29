@@ -50,6 +50,15 @@ public class MonsterMovementFactory
     }
 
     /**
+     * Setter for gameBoardField
+     * @param gameBoard the new game board
+     */
+    public void setGameBoard(GameBoard gameBoard)
+    {
+        this.gameBoard = gameBoard;
+    }
+
+    /**
      * Thi method gets the movement
      * @param movement the requested movement
      * @return a MoveOperation of the requested type
