@@ -1,7 +1,6 @@
 package PresentationLayer;
 
 import BusinessLayer.AbstractGameBoardIterator;
-import BusinessLayer.GameBoard;
 import BusinessLayer.GameManager;
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.PlayerMovementConverter;
@@ -9,11 +8,11 @@ import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.MoveOperations.MoveObservable;
 import BusinessLayer.Tiles.Units.Players.Player;
 import PresentationLayer.Factories.TileFactory;
+import PresentationLayer.MessageCallbacks.PrintMessageCallback;
 import PresentationLayer.Movements.CLIMoveObservable;
 import PresentationLayer.Movements.CLIPlayerMovementConverter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,6 +38,7 @@ public class GameInitializer
     {
         List<Player> availablePlayers = this.tileFactory.getPlayersList();
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to Dungeons and Dragons!");
         System.out.println("<~~ Choose your player: ~~>");
         for (int i = 0; i < availablePlayers.size(); i++)
         {

@@ -13,7 +13,7 @@ import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
 import BusinessLayer.Tiles.Units.Players.Warrior.Warrior;
 import BusinessLayer.Tiles.WallTile;
-import PresentationLayer.PrintMessageCallback;
+import PresentationLayer.MessageCallbacks.PrintMessageCallback;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.MessageCallbacks;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 
