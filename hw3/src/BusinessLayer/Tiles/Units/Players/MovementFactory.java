@@ -1,4 +1,4 @@
-package PresentationLayer;
+package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
@@ -16,7 +16,13 @@ import java.util.function.Supplier;
  */
 public class MovementFactory
 {
-    private Map<Character, Supplier<MoveOperation>> movementsMap;
+    public enum PlayerMovements
+    {
+        MOVE_UP, MOVE_DOWN, MOVE_RIGHT, MOVE_LEFT,
+        CAST_ABILITY, NO_MOVEMENT
+    }
+
+    private Map<PlayerMovements, Supplier<MoveOperation>> movementsMap;
     private GameBoard currentGameBoard;
     private final List<Enemy> enemyList;
     private final Player player;
@@ -40,12 +46,12 @@ public class MovementFactory
     private void initialiseMovementsMap()
     {
         this.movementsMap = new HashMap<>();
-        this.movementsMap.put('w', () -> new MoveUpOperation(this.currentGameBoard));
-        this.movementsMap.put('s', () -> new MoveDownOperation(this.currentGameBoard));
-        this.movementsMap.put('a', () -> new MoveLeftOperation(this.currentGameBoard));
-        this.movementsMap.put('d', () -> new MoveRightOperation(this.currentGameBoard));
-        this.movementsMap.put('e', () -> new CastAbilityMoveOperation(this.player, this.enemyList));
-        this.movementsMap.put('q', NothingMoveOperation::new);
+        this.movementsMap.put(PlayerMovements.MOVE_UP, () -> new MoveUpOperation(this.currentGameBoard));
+        this.movementsMap.put(PlayerMovements.MOVE_DOWN, () -> new MoveDownOperation(this.currentGameBoard));
+        this.movementsMap.put(PlayerMovements.MOVE_LEFT, () -> new MoveLeftOperation(this.currentGameBoard));
+        this.movementsMap.put(PlayerMovements.MOVE_RIGHT, () -> new MoveRightOperation(this.currentGameBoard));
+        this.movementsMap.put(PlayerMovements.CAST_ABILITY, () -> new CastAbilityMoveOperation(this.player, this.enemyList));
+        this.movementsMap.put(PlayerMovements.NO_MOVEMENT, NothingMoveOperation::new);
     }
 
     /**
@@ -59,18 +65,18 @@ public class MovementFactory
 
     /**
      * This method creates a movement operation according to given char
-     * @param movementChar the char representing which movement to make
-     * @return A move operation corresponding to the char
+     * @param movement the requested movement
+     * @return A move operation requested
      */
-    public MoveOperation getMoveOperation(char movementChar) throws Exception
+    public MoveOperation getMoveOperation(PlayerMovements movement) throws Exception
     {
-        if (this.movementsMap.containsKey(movementChar))
+        if (this.movementsMap.containsKey(movement))
         {
-            return this.movementsMap.get(movementChar).get();
+            return this.movementsMap.get(movement).get();
         }
         else
         {
-            throw new Exception("The given movement char is illegal");
+            throw new Exception("The requested movement is illegal");
         }
     }
 }
