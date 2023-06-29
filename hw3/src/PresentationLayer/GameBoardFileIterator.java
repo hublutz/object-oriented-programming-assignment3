@@ -1,10 +1,12 @@
 package PresentationLayer;
 
+import BusinessLayer.AbstractGameBoardIterator;
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.WallTile;
+import PresentationLayer.Factories.TileFactory;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -15,7 +17,7 @@ import java.util.*;
  * Class GameBoardFileIterator is a GameBoard iterator that provides
  * game levels from files
  */
-public class GameBoardFileIterator implements Iterator<GameBoard>
+public class GameBoardFileIterator extends AbstractGameBoardIterator
 {
     private Queue<File> files;
     private int chosenPlayerIndex;
@@ -74,13 +76,16 @@ public class GameBoardFileIterator implements Iterator<GameBoard>
                 for (int y = 0; y < columnLength; y++)
                 {
                     char tile = lines.get(x).charAt(y);
-                    Tile newTile = switch (tile)
-                    {
-                        case EmptyTile.EMPTY_TILE_CHAR -> this.tileFactory.createEmptyTile(x, y);
-                        case WallTile.WALL_TILE_CHAR -> this.tileFactory.createWallTile(x, y);
-                        case Player.PLAYER_TILE -> this.tileFactory.createPlayer(this.chosenPlayerIndex, x, y);
-                        default -> this.tileFactory.createEnemy(tile, x, y);
-                    };
+                    Tile newTile;
+                    switch (tile) {
+                        case EmptyTile.EMPTY_TILE_CHAR -> newTile = this.tileFactory.createEmptyTile(x, y);
+                        case WallTile.WALL_TILE_CHAR -> newTile = this.tileFactory.createWallTile(x, y);
+                        case Player.PLAYER_TILE -> {
+                            this.currentPlayer = this.tileFactory.createPlayer(this.chosenPlayerIndex, x, y);
+                            newTile = this.currentPlayer;
+                        }
+                        default -> newTile = this.tileFactory.createEnemy(tile, x, y);
+                    }
                     tiles[x][y] = newTile;
                 }
             }

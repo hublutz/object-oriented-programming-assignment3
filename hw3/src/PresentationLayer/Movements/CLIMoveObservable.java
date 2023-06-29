@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.Movements;
 
 import BusinessLayer.Tiles.Units.MoveOperations.MoveObservable;
 import BusinessLayer.Tiles.Units.MoveOperations.MoveObserver;

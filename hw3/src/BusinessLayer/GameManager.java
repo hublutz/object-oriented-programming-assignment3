@@ -15,31 +15,27 @@ import java.util.List;
  */
 public class GameManager
 {
-    private Player player;
     private PlayerMovementConverter movementConverter;
-    private MovementFactory playerMovementFactory;
+    //private MovementFactory playerMovementFactory;
     private MoveObservable moveObservable;
     private IMessageCallback messageCallback;
-    private Iterator<GameBoard> gameBoardSupplier;
+    private AbstractGameBoardIterator gameBoardSupplier;
     private List<Enemy> enemyList;
 
     /**
      * GameManager constructor
-     * @param player The player of the game
      * @param playerMovementConverter Movement converter, used to generate which type of movement to make
      * @param moveObservable Observable, notifies observers to move
      * @param enemyList The enemy list of the game
      * @param messageCallback Used to pass messages
      * @param gameBoardSupplier Iterator that supplies the manager with game boards
      */
-    public GameManager(Player player, PlayerMovementConverter playerMovementConverter,
+    public GameManager(PlayerMovementConverter playerMovementConverter,
                        MoveObservable moveObservable, List<Enemy> enemyList, IMessageCallback messageCallback,
-                       Iterator<GameBoard> gameBoardSupplier)
+                       AbstractGameBoardIterator gameBoardSupplier)
     {
-        this.player = player;
         this.enemyList = enemyList;
         this.movementConverter = playerMovementConverter;
-        this.playerMovementFactory = new MovementFactory(this.enemyList, this.player);
         this.moveObservable = moveObservable;
         this.messageCallback = messageCallback;
         this.gameBoardSupplier = gameBoardSupplier;
@@ -54,15 +50,18 @@ public class GameManager
         while (this.gameBoardSupplier.hasNext())
         {
             GameBoard currentGameBoard = this.gameBoardSupplier.next();
-            this.player.getHealth().refillHealth();
-            while (!this.player.isDead() && !this.enemyList.isEmpty())
+            Player currentPlayer = gameBoardSupplier.getCurrentPlayer();
+            MovementFactory playerMovementFactory = new MovementFactory(this.enemyList, currentPlayer);
+            playerMovementFactory.setCurrentGameBoard(currentGameBoard);
+
+            while (!currentPlayer.isDead() && !this.enemyList.isEmpty())
             {
                 MovementFactory.PlayerMovements movement = this.movementConverter.generatePlayerMovement();
-                MoveOperation moveOperation = this.playerMovementFactory.getMoveOperation(movement);
+                MoveOperation moveOperation = playerMovementFactory.getMoveOperation(movement);
                 this.moveObservable.notifyObservers(moveOperation);
                 currentGameBoard.tick();
             }
-            if (player.isDead())
+            if (currentPlayer.isDead())
             {
                 this.messageCallback.passMessage("Game Over! You lost");
                 return;

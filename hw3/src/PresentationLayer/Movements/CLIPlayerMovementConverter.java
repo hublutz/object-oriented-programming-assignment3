@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.Movements;
 
 import BusinessLayer.PlayerMovementConverter;
 import BusinessLayer.Tiles.Units.Players.MovementFactory;

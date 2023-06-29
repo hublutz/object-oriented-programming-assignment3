@@ -3,7 +3,6 @@ package BusinessLayer.Tiles.Units.Players;
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.MoveOperations.*;
-import BusinessLayer.Tiles.Units.Players.Player;
 
 import java.util.HashMap;
 import java.util.List;
