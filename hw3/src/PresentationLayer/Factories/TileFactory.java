@@ -37,7 +37,7 @@ public class TileFactory
         this.initialisePlayersList();
         this.initialiseEnemyMap();
         this.selectedPlayer = null;
-        this.monsterMovementFactory = null;
+        this.monsterMovementFactory = new MonsterMovementFactory(null);
         this.enemyList = enemyList;
         this.currentGameBoard = null;
         this.messageCallback = new PrintMessageCallback();

@@ -56,6 +56,8 @@ public class GameManager
 
             while (!currentPlayer.isDead() && !this.enemyList.isEmpty())
             {
+                this.messageCallback.passMessage("<~~ Current Board: ~~>");
+                this.messageCallback.passMessage(currentGameBoard.toString());
                 MovementFactory.PlayerMovements movement = this.movementConverter.generatePlayerMovement();
                 MoveOperation moveOperation = playerMovementFactory.getMoveOperation(movement);
                 this.moveObservable.notifyObservers(moveOperation);

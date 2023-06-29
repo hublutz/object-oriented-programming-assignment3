@@ -33,6 +33,7 @@ public class CLIPlayerMovementConverter implements PlayerMovementConverter
     public MovementFactory.PlayerMovements generatePlayerMovement()
     {
         char movement;
+        System.out.println("Player, enter movement: ");
         Scanner scanner = new Scanner(System.in);
         movement = scanner.next().charAt(0);
         while (! this.movementsTransformer.containsKey(movement))

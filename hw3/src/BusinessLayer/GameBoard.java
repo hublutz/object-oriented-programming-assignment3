@@ -20,6 +20,8 @@ public class GameBoard
      * list of all the tiles in the game
      * */
     private final List<Tile> boardTiles;
+    private int rowsAmount;
+    private int columnsAmount;
 
     /**
      * GameBoard constructor
@@ -31,6 +33,9 @@ public class GameBoard
         for(Tile[] tileRow: boardTiles){
             Collections.addAll(this.boardTiles, tileRow);
         }
+
+        this.rowsAmount = boardTiles.length;
+        this.columnsAmount = boardTiles[0].length;
     }
 
     /**
@@ -82,9 +87,9 @@ public class GameBoard
     {
         StringBuilder ret = new StringBuilder();
 
-        for(int y = 0; y < Math.sqrt(boardTiles.size()); y++)
+        for(int y = 0; y < this.rowsAmount; y++)
         {
-            for (int x = 0; x < Math.sqrt(boardTiles.size()); x++)
+            for (int x = 0; x < this.columnsAmount; x++)
                 ret.append(getTile(x, y));
 
             ret.append("\n");

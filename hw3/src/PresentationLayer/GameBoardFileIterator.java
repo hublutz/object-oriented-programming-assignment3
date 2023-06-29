@@ -49,7 +49,7 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
     @Override
     public boolean hasNext()
     {
-        return files.isEmpty();
+        return !files.isEmpty();
     }
 
     /**
@@ -67,26 +67,26 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
         try
         {
             List<String> lines = Files.readAllLines(Paths.get(currentFile.toURI()));
-            int rowLength = lines.get(0).length();
-            int columnLength = lines.size();
+            int rowLength = lines.size();
+            int columnLength = lines.get(0).length();
             Tile[][] tiles = new Tile[rowLength][columnLength];
 
-            for (int x = 0; x < rowLength; x++)
+            for (int row = 0; row < rowLength; row++)
             {
-                for (int y = 0; y < columnLength; y++)
+                for (int column = 0; column < columnLength; column++)
                 {
-                    char tile = lines.get(x).charAt(y);
+                    char tile = lines.get(row).charAt(column);
                     Tile newTile;
                     switch (tile) {
-                        case EmptyTile.EMPTY_TILE_CHAR -> newTile = this.tileFactory.createEmptyTile(x, y);
-                        case WallTile.WALL_TILE_CHAR -> newTile = this.tileFactory.createWallTile(x, y);
+                        case EmptyTile.EMPTY_TILE_CHAR -> newTile = this.tileFactory.createEmptyTile(column, row);
+                        case WallTile.WALL_TILE_CHAR -> newTile = this.tileFactory.createWallTile(column, row);
                         case Player.PLAYER_TILE -> {
-                            this.currentPlayer = this.tileFactory.createPlayer(this.chosenPlayerIndex, x, y);
+                            this.currentPlayer = this.tileFactory.createPlayer(this.chosenPlayerIndex, column, row);
                             newTile = this.currentPlayer;
                         }
-                        default -> newTile = this.tileFactory.createEnemy(tile, x, y);
+                        default -> newTile = this.tileFactory.createEnemy(tile, column, row);
                     }
-                    tiles[x][y] = newTile;
+                    tiles[row][column] = newTile;
                 }
             }
 

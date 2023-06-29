@@ -43,7 +43,7 @@ public class GameInitializer
         for (int i = 0; i < availablePlayers.size(); i++)
         {
             System.out.println("Player " + (i + 1) + ":");
-            System.out.println(availablePlayers.get(i).description() + "\n");
+            System.out.println(availablePlayers.get(i).description());
         }
         int playerChoice = scanner.nextInt();
         while (playerChoice <= 0 || playerChoice > availablePlayers.size())
