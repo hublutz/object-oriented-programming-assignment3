@@ -54,6 +54,8 @@ public class Health
      */
     public void increaseHealthAmount(int amount) throws Exception
     {
+        if(amount<=0)
+            throw new Exception("Cannot increase health amount by negative num");
         if (this.isDead())
         {
             throw new Exception("Cannot increase health amount of a dead unit");
@@ -71,11 +73,15 @@ public class Health
      *
      * @param amount the amount to decrease the healthAmount
      */
-    public void decreaseHealthAmount(int amount) {
-        if(this.healthAmount - amount > DEAD_HEALTH_AMOUNT)
-            this.healthAmount -= amount;
-        else
-            this.healthAmount = DEAD_HEALTH_AMOUNT;
+    public void decreaseHealthAmount(int amount) throws Exception{
+        if(amount>0) {
+            if (this.healthAmount - amount > DEAD_HEALTH_AMOUNT)
+                this.healthAmount -= amount;
+            else
+                this.healthAmount = DEAD_HEALTH_AMOUNT;
+        }else
+            throw new Exception("Cannot increase health amount by negative num");
+
     }
 
     /**

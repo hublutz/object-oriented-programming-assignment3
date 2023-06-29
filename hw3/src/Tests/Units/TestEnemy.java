@@ -31,6 +31,11 @@ public class TestEnemy extends Enemy {
 
     @Override
     public void defend(int attackRoll) {
+        defended = true;
+    }
 
+    @Override
+    public void receiveDamage(int amount){
+        defended = true;
     }
 }

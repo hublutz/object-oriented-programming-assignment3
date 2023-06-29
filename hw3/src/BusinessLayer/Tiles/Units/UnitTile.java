@@ -70,7 +70,11 @@ public abstract class UnitTile extends Tile  implements IVisitor {
      * */
     public void receiveDamage(int amount)
     {
-        this.health.decreaseHealthAmount(amount);
+        try {
+            this.health.decreaseHealthAmount(amount);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         this.messageCallback.passMessage(this.name + " received " + amount + " damage");
     }
 

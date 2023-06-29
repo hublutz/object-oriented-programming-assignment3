@@ -8,7 +8,7 @@ import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
+
 
 import java.util.List;
 
@@ -78,11 +78,11 @@ public class TrapTest extends AbstractUnitTest{
     }
 
     @Test
-    public void testAttackInRangeFar(){
+    public void testAttackJustOutOfRange(){
         player.move(x+2,y);
 
         trap.onGameTick();
 
-        Assert.assertTrue("shouldn't attack player",def);
+        Assert.assertFalse("shouldn't attack player",def);
     }
 }

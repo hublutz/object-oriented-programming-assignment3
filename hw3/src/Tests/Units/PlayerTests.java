@@ -35,7 +35,7 @@ public class PlayerTests extends AbstractUnitTest {
 
     @Test
     public void testLevelUpTwoLevels(){
-        mage.setExperience(100);
+        mage.setExperience(150);
 
         int levelB = mage.getLevel();
 
