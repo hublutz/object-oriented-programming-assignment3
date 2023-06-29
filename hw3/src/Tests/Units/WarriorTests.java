@@ -23,7 +23,7 @@ public class WarriorTests extends AbstractUnitTest {
 
     @Before
     public void initTests(){
-        warrior = new Warrior(c,x,y,name,healthPool,attackPoints,defencePoints,messageCallback,abilityCooldown);
+        warrior = new Warrior(x,y,name,healthPool,attackPoints,defencePoints,messageCallback,abilityCooldown);
     }
 
 
@@ -89,7 +89,7 @@ public class WarriorTests extends AbstractUnitTest {
 
     @Test
     public void testNotEnoughCooldown() {
-        warrior = new Warrior(c,x,y,name,healthPool,attackPoints,defencePoints,messageCallback,10);
+        warrior = new Warrior(x,y,name,healthPool,attackPoints,defencePoints,messageCallback,10);
 
 
         TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) ;

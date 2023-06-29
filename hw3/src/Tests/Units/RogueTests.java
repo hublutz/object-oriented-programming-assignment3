@@ -21,7 +21,7 @@ public class RogueTests extends AbstractUnitTest {
 
     @Before
     public void initTests() {
-        rogue = new Rogue(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
+        rogue = new Rogue(x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
     }
 
 
@@ -84,7 +84,7 @@ public class RogueTests extends AbstractUnitTest {
 
     @Test
     public void testNotEnoughEnergy() {
-        rogue = new Rogue(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
+        rogue = new Rogue(x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
 
         TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.rogue, null) ;
 

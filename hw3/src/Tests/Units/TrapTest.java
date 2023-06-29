@@ -28,7 +28,7 @@ public class TrapTest extends AbstractUnitTest{
         visibleTime =1;
         invisibleTime =2;
         def = false;
-        player = new Player(c,x+100,y+100,name,healthPool,attackPoints,defencePoints,messageCallback) {
+        player = new Player(x+100,y+100,name,healthPool,attackPoints,defencePoints,messageCallback) {
             @Override
             public void defend(int attackRoll){
                 def =true;
