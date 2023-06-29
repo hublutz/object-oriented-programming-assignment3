@@ -33,6 +33,22 @@ public class Monster extends Enemy
         this.movementFactory = movementFactory;
     }
 
+    /**
+     * Monster constructor, receives all Enemy parameters and
+     * the vision range of the monster
+     * @param visionRange The vision range of the monster
+     * @param movementFactory The movement factory for the monster
+     */
+    public Monster(char tile, String name, int healthPool, int attackPoints,
+                   int defencePoints, IMessageCallback messageCallback, int experienceValue,
+                   Player player, IEnemyDeathCallback deathCallback, int visionRange,
+                   MonsterMovementFactory movementFactory)
+    {
+        this(tile, 0, 0, name, healthPool, attackPoints, defencePoints,
+                messageCallback, experienceValue, player, deathCallback,
+                visionRange, movementFactory);
+    }
+
 
     /**
      * Performs Monster movement after a game tick

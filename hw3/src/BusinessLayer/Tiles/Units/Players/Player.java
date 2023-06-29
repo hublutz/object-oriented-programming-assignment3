@@ -19,6 +19,7 @@ public abstract class Player extends UnitTile
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
     private static final int ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL = 1;
     private static final int ON_LEVEL_UP_ADD_HEALTHPOOL_IN_RELATION_TO_LEVEL = 10;
+    private static final char PLAYER_TILE = '@';
     private static final char DEAD_CHAR = 'X';
     final public int INITIAL_EXPERIENCE =0;
     final public int INITIAL_LEVEL =1;
@@ -29,8 +30,8 @@ public abstract class Player extends UnitTile
     /**
      * Player constructor
      */
-    public Player(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+        super(PLAYER_TILE, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.experience = INITIAL_EXPERIENCE;
         this.playerLevel = INITIAL_LEVEL;
     }

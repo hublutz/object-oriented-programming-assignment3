@@ -18,6 +18,7 @@ public abstract class Enemy extends UnitTile
 
     protected Player player;
     protected IEnemyDeathCallback deathCallback;
+
     /**
      * Enemy constructor, receives all UnitTile parameters and
      * experience value and the player reference

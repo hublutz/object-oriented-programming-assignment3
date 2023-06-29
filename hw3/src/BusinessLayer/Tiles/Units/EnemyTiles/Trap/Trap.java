@@ -38,6 +38,21 @@ public class Trap extends Enemy
     }
 
     /**
+     * Trap constructor, receives all Enemy parameters,
+     * visibility and invisibility times
+     * @param visibilityTime The visibility time of the trap
+     * @param invisibilityTime The invisibility time of the trap
+     */
+    public Trap(char tile, String name, int healthPool, int attackPoints,
+                int defencePoints, IMessageCallback messageCallback, int experienceValue,
+                Player player, IEnemyDeathCallback deathCallback, int visibilityTime, int invisibilityTime)
+    {
+        this(tile, 0, 0, name, healthPool, attackPoints, defencePoints,
+                messageCallback, experienceValue, player, deathCallback, visibilityTime,
+                invisibilityTime);
+    }
+
+    /**
      * Performs Trap state update after a game tick
      */
     @Override

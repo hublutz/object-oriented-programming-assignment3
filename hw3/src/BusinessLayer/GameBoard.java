@@ -56,6 +56,15 @@ public class GameBoard
     }
 
     /**
+     * This method adds a new Tile to the game board
+     * @param tile the new tile to add
+     */
+    public void addTile(Tile tile)
+    {
+        this.boardTiles.add(tile);
+    }
+
+    /**
      * Removes an enemy and replaces it with an empty tile
      * @param enemy the enemy to remove
      * */

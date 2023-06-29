@@ -30,16 +30,29 @@ public class Mage extends Player {
      * @param abilityRange the initial ability range
 
      */
-    public Mage(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+    public Mage(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
                 IMessageCallback messageCallback, int abilityRange, int hitsCount, int spellPower, int manaCost, int manaPool) {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
 
         this.manaCost = manaCost;
         this.spellPower =spellPower;
         this.hitsCount = hitsCount;
         this.abilityRange = abilityRange;
         this.mana = new Mana(manaPool);
+    }
 
+    /**
+     * Mage constructor
+     * @param manaCost the initial mana cost of spells
+     * @param spellPower the initial spell power
+     * @param hitsCount the initial hitsCount
+     * @param abilityRange the initial ability range
+     */
+    public Mage(String name, int healthPool, int attackPoints, int defencePoints,
+                IMessageCallback messageCallback, int abilityRange, int hitsCount,
+                int spellPower, int manaCost, int manaPool) {
+        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback,
+                abilityRange, hitsCount, spellPower, manaCost, manaPool);
     }
 
     /**

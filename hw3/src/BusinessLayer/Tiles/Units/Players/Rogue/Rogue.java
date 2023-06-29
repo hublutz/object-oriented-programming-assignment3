@@ -20,11 +20,20 @@ public class Rogue extends Player {
      * Tile constructor
      * @param cost the cost of the rogues ability
      */
-    public Rogue(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+    public Rogue(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
                  IMessageCallback messageCallback, int cost) {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.currentEnergy = MAX_ENERGY;
         this.cost = cost;
+    }
+
+    /**
+     * Tile constructor
+     * @param cost the cost of the rogues ability
+     */
+    public Rogue(String name, int healthPool, int attackPoints, int defencePoints,
+                 IMessageCallback messageCallback, int cost) {
+        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
     }
 
     /**

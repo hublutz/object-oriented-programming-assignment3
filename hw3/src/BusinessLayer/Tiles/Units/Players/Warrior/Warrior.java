@@ -26,11 +26,22 @@ public class Warrior extends Player {
      *
      * @param abilityCooldown the ability cooldown of the warier
      */
-    public Warrior(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+    public Warrior(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
                    IMessageCallback messageCallback, int abilityCooldown) {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.abilityCooldown = abilityCooldown;
         this.remainingCooldown = INITIAL_REMAINING_COOLDOWN;
+    }
+
+    /**
+     * Warrior constructor
+     *
+     * @param abilityCooldown the ability cooldown of the warier
+     */
+    public Warrior(String name, int healthPool, int attackPoints, int defencePoints,
+                   IMessageCallback messageCallback, int abilityCooldown)
+    {
+        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback, abilityCooldown);
     }
 
     /**
