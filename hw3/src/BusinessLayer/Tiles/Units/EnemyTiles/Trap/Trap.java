@@ -1,7 +1,9 @@
-package BusinessLayer.Tiles.Units.EnemyTiles;
+package BusinessLayer.Tiles.Units.EnemyTiles.Trap;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.UnitTile;
 
@@ -58,23 +60,39 @@ public class Trap extends Enemy
     }
 
     /**
-     * Attack method of Trap
-     * @param unit the unit to attack
-     */
-    @Override
-    public void attack(UnitTile unit)
-    {
-
-    }
-
-    /**
      * Represents the Trap as a String, according to its visibility state
      * @return the tile character of the Trap, if visible, else the tile of an empty tile
      */
     @Override
     public String toString()
     {
-        return String.valueOf(this.visible ? this.tile : EmptyTile.EMPTY_TILE_CHAR);
+        return String.valueOf(this.visible ? this.tile :
+                EmptyTile.EMPTY_TILE_CHAR);
+    }
+
+    /**
+     * This method returns the stats of the Trap
+     */
+    @Override
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Trap Visibility Time: ");
+        builder.append(this.visibilityTime);
+        builder.append('\n');
+        builder.append("\t- Trap Invisibility Time: ");
+        builder.append(this.invisibilityTime);
+        builder.append('\n');
+        builder.append("\t- Ticks Count: ");
+        builder.append(this.ticksCount);
+        builder.append('\n');
+        builder.append("\t- Is Visible: ");
+        builder.append(this.visible);
+        builder.append('\n');
+
+        return builder.toString();
     }
 
     /**

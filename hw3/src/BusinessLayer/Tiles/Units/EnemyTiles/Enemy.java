@@ -7,13 +7,14 @@ import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
+import java.util.Random;
+
 /**
  * Abstract class Enemy represents an Enemy Tile in the game board
  */
 public abstract class Enemy extends UnitTile
 {
     protected int experienceValue;
-
 
     protected Player player;
     protected IEnemyDeathCallback deathCallback;
@@ -38,14 +39,16 @@ public abstract class Enemy extends UnitTile
     @Override
     public void onDeath()
     {
+        this.messageCallback.passMessage("Enemy " + this.name + " died");
         this.deathCallback.callEnemyDeath(this);
     }
 
     /**
      * experienceValue getter
      * */
-    public int getExperienceValue() {
-        return experienceValue;
+    public int getExperienceValue()
+    {
+        return this.experienceValue;
     }
 
     /**
@@ -73,8 +76,24 @@ public abstract class Enemy extends UnitTile
      * Enemy visits player tile
      * */
     @Override
-    public void visit(Player player) {
+    public void visit(Player player)
+    {
         this.attack(player);
+    }
+
+    /**
+     * Enemy attack method, enrolls a random attack value
+     * and attacks the given unit
+     * @param unit the unit to attack
+     */
+    @Override
+    public void attack(UnitTile unit)
+    {
+        unit.defend(new Random().nextInt(this.attackPoints));
+        if (unit.isDead())
+        {
+            unit.onDeath();
+        }
     }
 
     /**
@@ -82,4 +101,20 @@ public abstract class Enemy extends UnitTile
      * */
     @Override
     public void visit(Enemy enemy) {}
+
+    /**
+     * This method returns the stats of the enemy
+     */
+    @Override
+    public String description()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Enemy Experience Value: ");
+        builder.append(this.experienceValue);
+        builder.append('\n');
+
+        return builder.toString();
+    }
 }

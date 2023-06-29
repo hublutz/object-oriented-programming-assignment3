@@ -67,6 +67,12 @@ public class Mana {
         return this.manaAmount;
     }
 
+    /**
+     * This method increases the current mana with the value specified.
+     * If the current mana will be bigger than the mana pool, the current
+     * mana will be the mana pool
+     * @param amount the amount of mana to add
+     */
     public void refillMana(int amount){
         if(this.manaAmount +amount > this.manaPool)
             manaAmount = manaPool;
