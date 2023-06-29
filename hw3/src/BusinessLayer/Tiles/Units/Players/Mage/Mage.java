@@ -140,4 +140,12 @@ public class Mage extends Player {
 
         return builder.toString();
     }
+
+    public Mana getMana(){
+        return mana;
+    }
+
+    public int getSpellPower(){
+        return spellPower;
+    }
 }

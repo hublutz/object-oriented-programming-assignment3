@@ -96,4 +96,19 @@ public class Rogue extends Player {
 
         return builder.toString();
     }
+
+    public int getCurrentEnergy(){
+        return currentEnergy;
+    }
+
+    public int getAttack() {
+        return attackPoints;
+    }
+
+    /**
+     * used only in tests
+     * */
+    public void setCurrentEnergy(int e){
+        this.currentEnergy =e;
+    }
 }

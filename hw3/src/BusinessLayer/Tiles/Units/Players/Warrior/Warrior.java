@@ -120,4 +120,14 @@ public class Warrior extends Player {
 
         return builder.toString();
     }
+
+
+
+
+    public int getRemainingCooldown(){
+        return remainingCooldown;
+    }
+
+
 }
+

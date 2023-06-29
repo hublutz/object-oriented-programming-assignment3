@@ -25,7 +25,7 @@ public class Mana {
     }
     /**
      * ManaAmount getter
-     * @return the manaAmount
+     * @return the  manaAmount
      * */
     public int getManaAmount() {
         return manaAmount;
