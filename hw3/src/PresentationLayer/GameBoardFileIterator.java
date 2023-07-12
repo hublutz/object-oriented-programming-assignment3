@@ -4,6 +4,7 @@ import BusinessLayer.AbstractGameBoardIterator;
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
+import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.WallTile;
 import PresentationLayer.Factories.TileFactory;
@@ -70,6 +71,8 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
             int rowLength = lines.size();
             int columnLength = lines.get(0).length();
             Tile[][] tiles = new Tile[rowLength][columnLength];
+            List<Enemy> enemyList = new ArrayList<>();
+            Player newPlayer;
 
             for (int row = 0; row < rowLength; row++)
             {
@@ -77,14 +80,21 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
                 {
                     char tile = lines.get(row).charAt(column);
                     Tile newTile;
-                    switch (tile) {
+                    switch (tile)
+                    {
                         case EmptyTile.EMPTY_TILE_CHAR -> newTile = this.tileFactory.createEmptyTile(column, row);
                         case WallTile.WALL_TILE_CHAR -> newTile = this.tileFactory.createWallTile(column, row);
                         case Player.PLAYER_TILE -> {
                             this.currentPlayer = this.tileFactory.createPlayer(this.chosenPlayerIndex, column, row);
+                            newPlayer = this.currentPlayer;
                             newTile = this.currentPlayer;
                         }
-                        default -> newTile = this.tileFactory.createEnemy(tile, column, row);
+                        default ->
+                        {
+                            Enemy newEnemy = this.tileFactory.createEnemy(tile, column, row);
+                            enemyList.add(newEnemy);
+                            newTile = newEnemy;
+                        }
                     }
                     tiles[row][column] = newTile;
                 }

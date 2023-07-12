@@ -63,6 +63,17 @@ public abstract class Enemy extends UnitTile
     public void initialise(int x, int y, Player player, IEnemyDeathCallback deathCallback)
     {
         this.initialise(x, y);
+        this.initialise(player, deathCallback);
+    }
+
+    /**
+     * This method initialises the Enemy with its player
+     * and death callback
+     * @param player the player of the board
+     * @param deathCallback the death callback of the enemy, called upon its death
+     */
+    public void initialise(Player player, IEnemyDeathCallback deathCallback)
+    {
         this.player = player;
         this.deathCallback = deathCallback;
     }

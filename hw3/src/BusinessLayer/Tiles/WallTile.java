@@ -21,14 +21,6 @@ public class WallTile extends Tile
     }
 
     /**
-     * WallTile constructor, initialises the tile char to be '#'
-     */
-    public WallTile()
-    {
-        super(WALL_TILE_CHAR);
-    }
-
-    /**
      * Updates the WallTile after a game tick.
      * Practically, it is empty since the tile can't update
      */
