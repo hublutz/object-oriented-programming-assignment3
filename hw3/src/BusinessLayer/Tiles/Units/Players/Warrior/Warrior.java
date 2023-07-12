@@ -66,10 +66,13 @@ public class Warrior extends Player {
 
             List<Enemy> enemiesInRange = enemies.stream().filter((enemy) -> this.range(enemy) < ABILITY_RANGE)
                     .collect(Collectors.toList());
-            Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
-            enemy.receiveDamage(this.health.getHealthPool() /
-                    AMOUNT_ABILITY_DAMAGE_FROM_HEALTHPOOL);
-            checkIfEnemyIsDeadAndGetEx(enemy);
+            if (!enemiesInRange.isEmpty())
+            {
+                Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
+                enemy.receiveDamage(this.health.getHealthPool() /
+                        AMOUNT_ABILITY_DAMAGE_FROM_HEALTHPOOL);
+                checkIfEnemyIsDeadAndGetEx(enemy);
+            }
         }
         else
         {
