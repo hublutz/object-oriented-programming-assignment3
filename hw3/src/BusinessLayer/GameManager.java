@@ -6,6 +6,8 @@ import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.Players.MovementFactory;
 import BusinessLayer.Tiles.Units.Players.Player;
 
+import java.util.Iterator;
+
 /**
  * Class GameManager is responsible for running the game procedure
  */
@@ -14,7 +16,7 @@ public class GameManager
     private PlayerMovementConverter movementConverter;
     private MoveObservable moveObservable;
     private IMessageCallback messageCallback;
-    private AbstractGameBoardIterator gameBoardSupplier;
+    private Iterator<GameBoard> gameBoardSupplier;
 
     /**
      * GameManager constructor
@@ -25,7 +27,7 @@ public class GameManager
      */
     public GameManager(PlayerMovementConverter playerMovementConverter,
                        MoveObservable moveObservable, IMessageCallback messageCallback,
-                       AbstractGameBoardIterator gameBoardSupplier)
+                       Iterator<GameBoard> gameBoardSupplier)
     {
         this.movementConverter = playerMovementConverter;
         this.moveObservable = moveObservable;

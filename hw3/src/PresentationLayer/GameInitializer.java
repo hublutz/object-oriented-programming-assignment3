@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import BusinessLayer.AbstractGameBoardIterator;
+import BusinessLayer.GameBoard;
 import BusinessLayer.GameManager;
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.PlayerMovementConverter;
@@ -13,6 +13,7 @@ import PresentationLayer.Movements.CLIMoveObservable;
 import PresentationLayer.Movements.CLIPlayerMovementConverter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -56,7 +57,7 @@ public class GameInitializer
 
     public void runGame() throws Exception
     {
-        AbstractGameBoardIterator gameBoardIterator = new GameBoardFileIterator(this.levelsFolder,
+        Iterator<GameBoard> gameBoardIterator = new GameBoardFileIterator(this.levelsFolder,
                 this.chosenPlayerIndex, this.tileFactory);
         PlayerMovementConverter movementConverter = new CLIPlayerMovementConverter();
         MoveObservable moveObservable = new CLIMoveObservable();

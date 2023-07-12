@@ -1,6 +1,5 @@
 package PresentationLayer;
 
-import BusinessLayer.AbstractGameBoardIterator;
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Tile;
@@ -18,7 +17,7 @@ import java.util.*;
  * Class GameBoardFileIterator is a GameBoard iterator that provides
  * game levels from files
  */
-public class GameBoardFileIterator extends AbstractGameBoardIterator
+public class GameBoardFileIterator implements Iterator<GameBoard>
 {
     private Queue<File> files;
     private int chosenPlayerIndex;
@@ -85,9 +84,8 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
                         case EmptyTile.EMPTY_TILE_CHAR -> newTile = this.tileFactory.createEmptyTile(column, row);
                         case WallTile.WALL_TILE_CHAR -> newTile = this.tileFactory.createWallTile(column, row);
                         case Player.PLAYER_TILE -> {
-                            this.currentPlayer = this.tileFactory.createPlayer(this.chosenPlayerIndex, column, row);
-                            newPlayer = this.currentPlayer;
-                            newTile = this.currentPlayer;
+                            newPlayer = this.tileFactory.createPlayer(this.chosenPlayerIndex, column, row);
+                            newTile = newPlayer;
                         }
                         default ->
                         {
