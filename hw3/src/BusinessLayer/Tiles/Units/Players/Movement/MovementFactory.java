@@ -1,7 +1,7 @@
-package BusinessLayer.Tiles.Units.Players;
+package BusinessLayer.Tiles.Units.Players.Movement;
 
 import BusinessLayer.GameBoard;
-import BusinessLayer.Tiles.Units.MoveOperations.*;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,15 +44,6 @@ public class MovementFactory
         this.movementsMap.put(PlayerMovements.CAST_ABILITY, () -> new CastAbilityMoveOperation(this.currentGameBoard.getPlayer(),
                 this.currentGameBoard.getEnemyList()));
         this.movementsMap.put(PlayerMovements.NO_MOVEMENT, NothingMoveOperation::new);
-    }
-
-    /**
-     * Setter of currentGameBoard
-     * @param gameBoard the new game board
-     */
-    public void setCurrentGameBoard(GameBoard gameBoard)
-    {
-        this.currentGameBoard = gameBoard;
     }
 
     /**

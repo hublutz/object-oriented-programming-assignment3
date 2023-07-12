@@ -2,16 +2,14 @@ package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
-import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Health;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObserver;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObserver;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
-import java.security.KeyPair;
 import java.util.List;
 import java.util.Random;
 

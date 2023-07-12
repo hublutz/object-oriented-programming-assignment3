@@ -1,6 +1,4 @@
-package BusinessLayer;
-
-import BusinessLayer.Tiles.Units.Players.MovementFactory;
+package BusinessLayer.Tiles.Units.Players.Movement;
 
 public interface PlayerMovementConverter
 {

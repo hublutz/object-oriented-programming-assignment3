@@ -3,7 +3,7 @@ package BusinessLayer.Tiles.Units.EnemyTiles.Monster;
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.Players.Player;
 
 /**

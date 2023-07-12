@@ -1,9 +1,10 @@
 package BusinessLayer;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObservable;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
-import BusinessLayer.Tiles.Units.Players.MovementFactory;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObservable;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Players.Movement.MovementFactory;
+import BusinessLayer.Tiles.Units.Players.Movement.PlayerMovementConverter;
 import BusinessLayer.Tiles.Units.Players.Player;
 
 import java.util.Iterator;
@@ -53,6 +54,8 @@ public class GameManager
             {
                 this.messageCallback.passMessage("<~~ Current Board: ~~>");
                 this.messageCallback.passMessage(currentGameBoard.toString());
+                this.messageCallback.passMessage(String.format("\t- Current amount of enemies: %d",
+                        currentGameBoard.getEnemyAmount()));
 
                 MovementFactory.PlayerMovements movement = this.movementConverter.generatePlayerMovement();
                 MoveOperation moveOperation = playerMovementFactory.getMoveOperation(movement);

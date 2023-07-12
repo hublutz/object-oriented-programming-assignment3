@@ -1,4 +1,6 @@
-package BusinessLayer.Tiles.Units.MoveOperations;
+package BusinessLayer.Tiles.Units.Movement.Observer;
+
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 
 /**
  * Interface MoveObserver represents objects that wait for movement

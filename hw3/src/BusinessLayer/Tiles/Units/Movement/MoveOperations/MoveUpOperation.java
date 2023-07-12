@@ -1,4 +1,4 @@
-package BusinessLayer.Tiles.Units.MoveOperations;
+package BusinessLayer.Tiles.Units.Movement.MoveOperations;
 
 import BusinessLayer.GameBoard;
 

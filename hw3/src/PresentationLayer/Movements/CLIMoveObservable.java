@@ -1,8 +1,8 @@
 package PresentationLayer.Movements;
 
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObservable;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObserver;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObservable;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObserver;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 
 import java.util.ArrayList;
 import java.util.List;

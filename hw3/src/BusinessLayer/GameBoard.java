@@ -77,6 +77,14 @@ public class GameBoard
     }
 
     /**
+     * Returns the amount of enemies remaining in the board
+     */
+    public int getEnemyAmount()
+    {
+        return this.enemyList.size();
+    }
+
+    /**
      * Return a tile according to its location
      * @param x the x value of the tile
      * @param y the y value of the tile
