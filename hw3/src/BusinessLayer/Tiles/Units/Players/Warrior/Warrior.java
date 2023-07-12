@@ -27,10 +27,10 @@ public class Warrior extends Player {
      * @param abilityCooldown the ability cooldown of the warier
      */
     public Warrior(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
-                   IMessageCallback messageCallback, int abilityCooldown) {
-        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
-        this.abilityCooldown = abilityCooldown;
-        this.remainingCooldown = INITIAL_REMAINING_COOLDOWN;
+                   IMessageCallback messageCallback, int abilityCooldown)
+    {
+        this(name, healthPool, attackPoints, defencePoints, messageCallback, abilityCooldown);
+        this.initialise(x, y);
     }
 
     /**
@@ -41,7 +41,9 @@ public class Warrior extends Player {
     public Warrior(String name, int healthPool, int attackPoints, int defencePoints,
                    IMessageCallback messageCallback, int abilityCooldown)
     {
-        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback, abilityCooldown);
+        super(name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.abilityCooldown = abilityCooldown;
+        this.remainingCooldown = INITIAL_REMAINING_COOLDOWN;
     }
 
     /**

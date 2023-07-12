@@ -21,6 +21,14 @@ public class EmptyTile extends Tile
     }
 
     /**
+     * EmptyTile constructor, initialises the tile char to be '.'
+     */
+    public EmptyTile()
+    {
+        super(EMPTY_TILE_CHAR);
+    }
+
+    /**
      * Updates the EmptyTile after a game tick.
      * Practically, it is empty since the tile can't update
      */

@@ -34,9 +34,34 @@ public abstract class Player extends UnitTile implements MoveObserver
 
     /**
      * Player constructor
+     *
+     * @param name the name of the player character
+     * @param healthPool the initial health pool of the player
+     * @param attackPoints the attack points of the player
+     * @param defencePoints the defence points of the player
+     * @param messageCallback used to pass messages from the player
      */
-    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+                  IMessageCallback messageCallback)
+    {
         super(PLAYER_TILE, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.experience = INITIAL_EXPERIENCE;
+        this.playerLevel = INITIAL_LEVEL;
+    }
+
+    /**
+     * Player constructor
+     *
+     * @param name the name of the player character
+     * @param healthPool the initial health pool of the player
+     * @param attackPoints the attack points of the player
+     * @param defencePoints the defence points of the player
+     * @param messageCallback used to pass messages from the player
+     */
+    public Player(String name, int healthPool, int attackPoints, int defencePoints,
+                  IMessageCallback messageCallback)
+    {
+        super(PLAYER_TILE, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.experience = INITIAL_EXPERIENCE;
         this.playerLevel = INITIAL_LEVEL;
     }

@@ -26,11 +26,9 @@ public class Monster extends Enemy
                    Player player, IEnemyDeathCallback deathCallback, int visionRange,
                    MonsterMovementFactory movementFactory)
     {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints,
-                messageCallback, experienceValue, player, deathCallback);
-        this.visionRange = visionRange;
-
-        this.movementFactory = movementFactory;
+        this(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue,
+                visionRange, movementFactory);
+        this.initialise(x, y, player, deathCallback);
     }
 
     /**
@@ -41,12 +39,11 @@ public class Monster extends Enemy
      */
     public Monster(char tile, String name, int healthPool, int attackPoints,
                    int defencePoints, IMessageCallback messageCallback, int experienceValue,
-                   Player player, IEnemyDeathCallback deathCallback, int visionRange,
-                   MonsterMovementFactory movementFactory)
+                   int visionRange, MonsterMovementFactory movementFactory)
     {
-        this(tile, 0, 0, name, healthPool, attackPoints, defencePoints,
-                messageCallback, experienceValue, player, deathCallback,
-                visionRange, movementFactory);
+        super(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue);
+        this.movementFactory = movementFactory;
+        this.visionRange = visionRange;
     }
 
 

@@ -32,6 +32,5 @@ public class RemoveEnemyDeathCallback implements IEnemyDeathCallback
     public void callEnemyDeath(Enemy enemy)
     {
         this.gameBoard.remove(enemy);
-        this.gameBoard.addTile(new EmptyTile(enemy.getX(), enemy.getY()));
     }
 }
