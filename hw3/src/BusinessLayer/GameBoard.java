@@ -4,6 +4,8 @@ import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Point;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.RemoveEnemyDeathCallback;
+import BusinessLayer.Tiles.Units.Players.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +22,9 @@ public class GameBoard
      * list of all the tiles in the game
      * */
     private final List<Tile> boardTiles;
+    private final List<Enemy> enemyList;
+    private final Player player;
+
     private int rowsAmount;
     private int columnsAmount;
 
@@ -27,15 +32,30 @@ public class GameBoard
      * GameBoard constructor
      * @param boardTiles an array of all the boardTiles
      * */
-    public GameBoard(Tile[][] boardTiles){
+    public GameBoard(Tile[][] boardTiles, List<Enemy> enemyList, Player player)
+    {
         this.boardTiles = new ArrayList<>();
 
-        for(Tile[] tileRow: boardTiles){
+        for(Tile[] tileRow: boardTiles)
+        {
             Collections.addAll(this.boardTiles, tileRow);
         }
 
+        this.enemyList = enemyList;
+        this.player = player;
         this.rowsAmount = boardTiles.length;
         this.columnsAmount = boardTiles[0].length;
+        this.initialiseEnemies();
+    }
+
+    /**
+     * This method initialises every enemy in the game board with the player and a
+     * death callback
+     */
+    private void initialiseEnemies()
+    {
+        this.enemyList.forEach(enemy -> enemy.initialise(player,
+                new RemoveEnemyDeathCallback(this)));
     }
 
     /**
@@ -61,21 +81,13 @@ public class GameBoard
     }
 
     /**
-     * This method adds a new Tile to the game board
-     * @param tile the new tile to add
-     */
-    public void addTile(Tile tile)
-    {
-        this.boardTiles.add(tile);
-    }
-
-    /**
      * Removes an enemy and replaces it with an empty tile
      * @param enemy the enemy to remove
      * */
     public void remove(Enemy enemy)
     {
-        boardTiles.remove(enemy);
+        this.boardTiles.remove(enemy);
+        this.enemyList.remove(enemy);
         boardTiles.add(new EmptyTile(enemy.getX(),enemy.getY()));
     }
 

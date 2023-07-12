@@ -72,7 +72,7 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
             int columnLength = lines.get(0).length();
             Tile[][] tiles = new Tile[rowLength][columnLength];
             List<Enemy> enemyList = new ArrayList<>();
-            Player newPlayer;
+            Player newPlayer = null;
 
             for (int row = 0; row < rowLength; row++)
             {
@@ -100,7 +100,7 @@ public class GameBoardFileIterator extends AbstractGameBoardIterator
                 }
             }
 
-            GameBoard gameBoard = new GameBoard(tiles);
+            GameBoard gameBoard = new GameBoard(tiles, enemyList, newPlayer);
             this.tileFactory.setCurrentGameBoard(gameBoard);
             return gameBoard;
         }

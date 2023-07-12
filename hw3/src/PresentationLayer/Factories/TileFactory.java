@@ -26,20 +26,16 @@ public class TileFactory
 {
     private List<Supplier<Player>> playersList;
     private Map<Character, Supplier<Enemy>> enemiesMap;
-    private Player selectedPlayer;
     private MonsterMovementFactory monsterMovementFactory;
     private List<Enemy> enemyList;
-    private GameBoard currentGameBoard;
     private final IMessageCallback messageCallback;
 
     public TileFactory(List<Enemy> enemyList)
     {
         this.initialisePlayersList();
         this.initialiseEnemyMap();
-        this.selectedPlayer = null;
         this.monsterMovementFactory = new MonsterMovementFactory(null);
         this.enemyList = enemyList;
-        this.currentGameBoard = null;
         this.messageCallback = new PrintMessageCallback();
     }
 
@@ -103,21 +99,11 @@ public class TileFactory
     }
 
     /**
-     * Setter for selectedPlayer
-     * @param player the player chosen
-     */
-    public void setSelectedPlayer(Player player)
-    {
-        this.selectedPlayer = player;
-    }
-
-    /**
      * Setter for currentGameBoard
      * @param gameBoard the current board of the game
      */
     public void setCurrentGameBoard(GameBoard gameBoard)
     {
-        this.currentGameBoard = gameBoard;
         this.monsterMovementFactory.setGameBoard(gameBoard);
     }
 
@@ -163,7 +149,6 @@ public class TileFactory
     public Player createPlayer(int chosenPlayerIndex, int x, int y)
     {
         Player player = this.playersList.get(chosenPlayerIndex).get();
-        this.setSelectedPlayer(player);
         player.initialise(x, y);
         return player;
     }
