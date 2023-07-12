@@ -63,7 +63,7 @@ public class GameInitializer
         IMessageCallback messageCallback = new PrintMessageCallback();
 
         GameManager gameManager = new GameManager(movementConverter, moveObservable,
-                this.gameEnemyList, messageCallback, gameBoardIterator);
+                messageCallback, gameBoardIterator);
         gameManager.runGame();
     }
 }

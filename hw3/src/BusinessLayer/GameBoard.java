@@ -59,6 +59,24 @@ public class GameBoard
     }
 
     /**
+     * Getter of the game level player
+     * @return The player of the current level
+     */
+    public Player getPlayer()
+    {
+        return this.player;
+    }
+
+    /**
+     * Getter of the game level enemies
+     * @return The enemy list of the current level
+     */
+    public List<Enemy> getEnemyList()
+    {
+        return this.enemyList;
+    }
+
+    /**
      * Return a tile according to its location
      * @param x the x value of the tile
      * @param y the y value of the tile
@@ -118,4 +136,19 @@ public class GameBoard
         boardTiles.forEach(Tile::onGameTick);
     }
 
+    /**
+     * Returns whether the current game level is finished
+     */
+    public boolean isLevelFinished()
+    {
+        return this.enemyList.isEmpty();
+    }
+
+    /**
+     * Returns whether the player of the game is dead
+     */
+    public boolean isPlayerDead()
+    {
+        return this.player.isDead();
+    }
 }
