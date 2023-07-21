@@ -72,6 +72,7 @@ public class Mage extends Player {
             if(mana.useMana(this.manaCost))
             {
                 this.messageCallback.passMessage("Blizzard!");
+                this.messageCallback.passMessage(this.description());
                 List<Enemy> enemiesInRange = enemies.stream().
                         filter((enemy -> this.range(enemy) < abilityRange))
                         .collect(Collectors.toList());
@@ -80,10 +81,12 @@ public class Mage extends Player {
                 while (hits < hitsCount && !enemiesInRange.isEmpty())
                 {
                     Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
+                    this.messageCallback.passMessage("Attacking: ");
+                    this.messageCallback.passMessage(enemy.description());
                     enemy.defend(this.spellPower);
                     checkIfEnemyIsDeadAndGetEx(enemy);
                     if(enemy.isDead())
-                        enemiesInRange.remove(enemy);
+                        enemy.onDeath();
                     hits++;
                 }
             }

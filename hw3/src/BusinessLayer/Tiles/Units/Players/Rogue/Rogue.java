@@ -49,13 +49,18 @@ public class Rogue extends Player {
         if(this.currentEnergy >= this.cost)
         {
             this.messageCallback.passMessage("Fan of Knives!");
+            this.messageCallback.passMessage(this.description());
             this.currentEnergy -= this.cost;
             List<Enemy> enemiesInRange = enemies.stream().filter((enemy) -> this.range(enemy) < ABILITY_RANGE)
                     .collect(Collectors.toList());
             for (Enemy enemy : enemiesInRange)
             {
                 enemy.defend(this.attackPoints);
+                this.messageCallback.passMessage("Attacking: ");
+                this.messageCallback.passMessage(enemy.description());
                 this.checkIfEnemyIsDeadAndGetEx(enemy);
+                if (enemy.isDead())
+                    enemy.onDeath();
             }
         }
         else

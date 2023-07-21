@@ -56,6 +56,7 @@ public class Warrior extends Player {
         if (this.remainingCooldown == INITIAL_REMAINING_COOLDOWN)
         {
             this.messageCallback.passMessage("Avenger's Shield!");
+            this.messageCallback.passMessage(this.description());
             this.remainingCooldown = this.abilityCooldown;
             try {
                 this.health.increaseHealthAmount(defencePoints *
@@ -71,9 +72,13 @@ public class Warrior extends Player {
             if (!enemiesInRange.isEmpty())
             {
                 Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
+                this.messageCallback.passMessage("Attacking: ");
+                this.messageCallback.passMessage(enemy.description());
                 enemy.receiveDamage(this.health.getHealthPool() /
                         AMOUNT_ABILITY_DAMAGE_FROM_HEALTHPOOL);
                 checkIfEnemyIsDeadAndGetEx(enemy);
+                if (enemy.isDead())
+                    enemy.onDeath();
             }
         }
         else
