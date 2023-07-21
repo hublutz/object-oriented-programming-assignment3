@@ -8,6 +8,7 @@ import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Monster;
 import BusinessLayer.Tiles.Units.EnemyTiles.Monster.MonsterMovementFactory;
 import BusinessLayer.Tiles.Units.EnemyTiles.RemoveEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.EnemyTiles.Trap.Trap;
+import BusinessLayer.Tiles.Units.Players.Hunter.Hunter;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
@@ -56,7 +57,9 @@ public class TileFactory
                 () -> new Rogue("Arya Stark", 150, 40, 2,
                         this.messageCallback, 20),
                 () -> new Rogue("Bronn", 250, 35, 3,
-                        this.messageCallback, 50)
+                        this.messageCallback, 50),
+                () -> new Hunter("Ygritte", 220, 30, 2,
+                        this.messageCallback, 6)
         );
     }
 
