@@ -98,7 +98,7 @@ public class Hunter extends Player
     @Override
     public void castAbility(List<Enemy> enemies)
     {
-        if (this.arrowsCount == NO_ARROWS)
+        if (this.arrowsCount > NO_ARROWS)
         {
             List<Enemy> enemiesByRange = enemies.stream().sorted((enemy1, enemy2) ->
                             Double.compare(this.range(enemy1), this.range(enemy2))).
