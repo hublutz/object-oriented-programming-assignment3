@@ -37,10 +37,7 @@ public class GameBoardFileIterator implements Iterator<GameBoard>
         this.chosenPlayerIndex = chosenPlayerIndex;
 
         File folder = new File(folderName);
-        for (File file : folder.listFiles())
-        {
-            this.files.add(file);
-        }
+        Collections.addAll(this.files, folder.listFiles());
     }
 
     /**

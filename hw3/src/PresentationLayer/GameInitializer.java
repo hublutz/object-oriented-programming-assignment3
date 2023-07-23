@@ -12,11 +12,16 @@ import PresentationLayer.MessageCallbacks.PrintMessageCallback;
 import PresentationLayer.Movements.CLIMoveObservable;
 import PresentationLayer.Movements.CLIPlayerMovementConverter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * CLass GameInitializer is responsible for initializing the game from the
+ * CLI presentation layer
+ */
 public class GameInitializer
 {
     private String levelsFolder;
@@ -24,17 +29,42 @@ public class GameInitializer
     private TileFactory tileFactory;
     private int chosenPlayerIndex;
 
+    /**
+     * GameInitializer constructor
+     * @param args the command line arguments of the program
+     */
     public GameInitializer(String[] args)
+    {
+        this.levelsFolder = this.extractLevelsFolder(args);;
+        this.gameEnemyList = new ArrayList<>();
+        this.tileFactory = new TileFactory(this.gameEnemyList);
+    }
+
+    /**
+     * This method extracts the levels folder given as a command line args
+     * @param args the command line arguments of the program
+     * @return the levels folder given to the game, if valid
+     */
+    private String extractLevelsFolder(String[] args)
     {
         if (args.length < 1)
         {
             throw new IllegalArgumentException("You must provide a levels folder for the game!");
         }
-        this.levelsFolder = args[0];
-        this.gameEnemyList = new ArrayList<>();
-        this.tileFactory = new TileFactory(this.gameEnemyList);
+
+        String folderName = args[0];
+        File folder = new File(folderName);
+        if (!folder.exists())
+        {
+            throw new IllegalArgumentException("The given levels folder doesn't exist");
+        }
+
+        return folderName;
     }
 
+    /**
+     * This method allows the player to choose its character
+     */
     public void choosePlayer()
     {
         List<Player> availablePlayers = this.tileFactory.getPlayersList();
@@ -55,6 +85,9 @@ public class GameInitializer
         this.chosenPlayerIndex = playerChoice - 1;
     }
 
+    /**
+     * This method runs the game
+     */
     public void runGame() throws Exception
     {
         Iterator<GameBoard> gameBoardIterator = new GameBoardFileIterator(this.levelsFolder,

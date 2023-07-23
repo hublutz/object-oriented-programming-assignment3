@@ -12,7 +12,7 @@ public class Main
         }
         catch (Exception exception)
         {
-            System.out.println(exception);
+            System.err.println("Error: " + exception.getMessage());
         }
     }
 }
