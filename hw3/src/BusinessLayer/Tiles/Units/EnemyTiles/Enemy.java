@@ -139,6 +139,9 @@ public abstract class Enemy extends UnitTile
     @Override
     public void attack(UnitTile unit)
     {
+        this.messageCallback.passMessage(this.name + " attacks " + unit.getName() + "!");
+        this.messageCallback.passMessage(this.description());
+        this.messageCallback.passMessage(unit.description());
         unit.defend(new Random().nextInt(this.attackPoints));
         if (unit.isDead())
         {

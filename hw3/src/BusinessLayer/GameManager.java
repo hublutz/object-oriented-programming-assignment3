@@ -67,6 +67,7 @@ public class GameManager
             this.moveObservable.removeObserver(currentPlayer);
             if (currentGameBoard.isPlayerDead())
             {
+                this.messageCallback.passMessage(currentGameBoard.toString());
                 this.messageCallback.passMessage("Game Over! You lost");
                 return;
             }

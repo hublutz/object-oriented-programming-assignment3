@@ -125,9 +125,9 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     public String description()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("\n~~ Stats for ");
+        builder.append("~~ Stats for ");
         builder.append(this.name);
-        builder.append(": ~~");
+        builder.append(": ~~\n");
 
         builder.append("\t- Health: ");
         builder.append(this.health.getHealthAmount());
