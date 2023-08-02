@@ -1,6 +1,6 @@
-package BusinessLayer.Tiles.Units.MoveOperations;
+package BusinessLayer.Tiles.Units.Movement.Observer;
 
-import BusinessLayer.Tiles.Units.Players.MovementFactory;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 
 /**
  * Interface MoveObservable is used to notify MoveObservers of new movements

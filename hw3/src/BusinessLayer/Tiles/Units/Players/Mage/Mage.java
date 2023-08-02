@@ -31,14 +31,13 @@ public class Mage extends Player {
 
      */
     public Mage(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
-                IMessageCallback messageCallback, int abilityRange, int hitsCount, int spellPower, int manaCost, int manaPool) {
-        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+                IMessageCallback messageCallback, int abilityRange, int hitsCount,
+                int spellPower, int manaCost, int manaPool)
+    {
 
-        this.manaCost = manaCost;
-        this.spellPower =spellPower;
-        this.hitsCount = hitsCount;
-        this.abilityRange = abilityRange;
-        this.mana = new Mana(manaPool);
+        this(name, healthPool, attackPoints, defencePoints, messageCallback,
+                abilityRange, hitsCount, spellPower, manaCost, manaPool);
+        this.initialise(x, y);
     }
 
     /**
@@ -50,9 +49,15 @@ public class Mage extends Player {
      */
     public Mage(String name, int healthPool, int attackPoints, int defencePoints,
                 IMessageCallback messageCallback, int abilityRange, int hitsCount,
-                int spellPower, int manaCost, int manaPool) {
-        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback,
-                abilityRange, hitsCount, spellPower, manaCost, manaPool);
+                int spellPower, int manaCost, int manaPool)
+    {
+        super(name, healthPool, attackPoints, defencePoints, messageCallback);
+
+        this.manaCost = manaCost;
+        this.spellPower =spellPower;
+        this.hitsCount = hitsCount;
+        this.abilityRange = abilityRange;
+        this.mana = new Mana(manaPool);
     }
 
     /**
@@ -67,6 +72,7 @@ public class Mage extends Player {
             if(mana.useMana(this.manaCost))
             {
                 this.messageCallback.passMessage("Blizzard!");
+                this.messageCallback.passMessage(this.description());
                 List<Enemy> enemiesInRange = enemies.stream().
                         filter((enemy -> this.range(enemy) < abilityRange))
                         .collect(Collectors.toList());
@@ -75,10 +81,12 @@ public class Mage extends Player {
                 while (hits < hitsCount && !enemiesInRange.isEmpty())
                 {
                     Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
+                    this.messageCallback.passMessage("Attacking: ");
+                    this.messageCallback.passMessage(enemy.description());
                     enemy.defend(this.spellPower);
                     checkIfEnemyIsDeadAndGetEx(enemy);
                     if(enemy.isDead())
-                        enemiesInRange.remove(enemy);
+                        enemy.onDeath();
                     hits++;
                 }
             }

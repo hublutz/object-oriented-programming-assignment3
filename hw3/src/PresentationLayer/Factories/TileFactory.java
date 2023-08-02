@@ -26,20 +26,16 @@ public class TileFactory
 {
     private List<Supplier<Player>> playersList;
     private Map<Character, Supplier<Enemy>> enemiesMap;
-    private Player selectedPlayer;
     private MonsterMovementFactory monsterMovementFactory;
     private List<Enemy> enemyList;
-    private GameBoard currentGameBoard;
     private final IMessageCallback messageCallback;
 
     public TileFactory(List<Enemy> enemyList)
     {
         this.initialisePlayersList();
         this.initialiseEnemyMap();
-        this.selectedPlayer = null;
         this.monsterMovementFactory = new MonsterMovementFactory(null);
         this.enemyList = enemyList;
-        this.currentGameBoard = null;
         this.messageCallback = new PrintMessageCallback();
     }
 
@@ -71,54 +67,35 @@ public class TileFactory
     {
         List<Supplier<Enemy>> enemies = Arrays.asList(
                 () -> new Monster('s', "Lannister Solider", 80, 8, 3, this.messageCallback,
-                        25, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        3, this.monsterMovementFactory),
+                        25, 3, this.monsterMovementFactory),
                 () -> new Monster('k', "Lannister Knight", 200, 14, 8, this.messageCallback,
-                        50, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        4, this.monsterMovementFactory),
+                        50, 4, this.monsterMovementFactory),
                 () -> new Monster('q', "Queen's Guard", 400, 20, 15, this.messageCallback,
-                        100, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        5, this.monsterMovementFactory),
+                        100, 5, this.monsterMovementFactory),
                 () -> new Monster('z', "Wright", 600, 30, 15, this.messageCallback,
-                        100, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        3, this.monsterMovementFactory),
+                        100, 3, this.monsterMovementFactory),
                 () -> new Monster('b', "Bear-Wright", 1000, 75, 30, this.messageCallback,
-                        250, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        4, this.monsterMovementFactory),
+                        250, 4, this.monsterMovementFactory),
                 () -> new Monster('g', "Giant-Wright",1500, 100, 40, this.messageCallback,
-                        500, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        5, this.monsterMovementFactory),
+                        500, 5, this.monsterMovementFactory),
                 () -> new Monster('w', "White Walker", 2000, 150, 50, this.messageCallback,
-                        1000, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        6, this.monsterMovementFactory),
+                        1000, 6, this.monsterMovementFactory),
                 () -> new Monster('M', "The Mountain", 1000, 60, 25, this.messageCallback,
-                        500, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        6, this.monsterMovementFactory),
+                        500, 6, this.monsterMovementFactory),
                 () -> new Monster('C', "Queen Cersei", 100, 10, 10, this.messageCallback,
-                        1000, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        1, this.monsterMovementFactory),
+                        1000, 1, this.monsterMovementFactory),
                 () -> new Monster('K', "Night's King", 5000, 300, 150, this.messageCallback,
-                        5000, this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard),
-                        8, this.monsterMovementFactory),
-                () -> new Trap('B', "Bonus Trap", 1, 1, 1, this.messageCallback, 250,
-                        this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard), 1, 10),
+                        5000, 8, this.monsterMovementFactory),
+                () -> new Trap('B', "Bonus Trap", 1, 1,
+                        1, this.messageCallback, 250, 1, 10),
                 () -> new Trap('Q', "Queen's Trap", 250, 50, 10, this.messageCallback, 100,
-                        this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard) , 3, 10),
+                        3, 10),
                 () -> new Trap('D', "Death Trap", 500, 100, 20, this.messageCallback, 250,
-                        this.selectedPlayer, new RemoveEnemyDeathCallback(this.currentGameBoard), 1, 10)
+                        1, 10)
         );
 
         this.enemiesMap = enemies.stream().collect(Collectors.
                 toMap(s -> s.get().getTile(), Function.identity()));
-    }
-
-    /**
-     * Setter for selectedPlayer
-     * @param player the player chosen
-     */
-    public void setSelectedPlayer(Player player)
-    {
-        this.selectedPlayer = player;
     }
 
     /**
@@ -127,7 +104,6 @@ public class TileFactory
      */
     public void setCurrentGameBoard(GameBoard gameBoard)
     {
-        this.currentGameBoard = gameBoard;
         this.monsterMovementFactory.setGameBoard(gameBoard);
     }
 
@@ -153,7 +129,7 @@ public class TileFactory
         if (this.enemiesMap.containsKey(enemyTile))
         {
             Enemy enemy = this.enemiesMap.get(enemyTile).get();
-            enemy.move(x, y);
+            enemy.initialise(x, y);
             this.enemyList.add(enemy);
             return enemy;
         }
@@ -173,8 +149,7 @@ public class TileFactory
     public Player createPlayer(int chosenPlayerIndex, int x, int y)
     {
         Player player = this.playersList.get(chosenPlayerIndex).get();
-        this.setSelectedPlayer(player);
-        player.move(x, y);
+        player.initialise(x, y);
         return player;
     }
 

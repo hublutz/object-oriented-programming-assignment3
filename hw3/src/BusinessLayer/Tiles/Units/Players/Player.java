@@ -2,16 +2,14 @@ package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
-import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Health;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObserver;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObserver;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
-import java.security.KeyPair;
 import java.util.List;
 import java.util.Random;
 
@@ -34,9 +32,34 @@ public abstract class Player extends UnitTile implements MoveObserver
 
     /**
      * Player constructor
+     *
+     * @param name the name of the player character
+     * @param healthPool the initial health pool of the player
+     * @param attackPoints the attack points of the player
+     * @param defencePoints the defence points of the player
+     * @param messageCallback used to pass messages from the player
      */
-    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+                  IMessageCallback messageCallback)
+    {
         super(PLAYER_TILE, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.experience = INITIAL_EXPERIENCE;
+        this.playerLevel = INITIAL_LEVEL;
+    }
+
+    /**
+     * Player constructor
+     *
+     * @param name the name of the player character
+     * @param healthPool the initial health pool of the player
+     * @param attackPoints the attack points of the player
+     * @param defencePoints the defence points of the player
+     * @param messageCallback used to pass messages from the player
+     */
+    public Player(String name, int healthPool, int attackPoints, int defencePoints,
+                  IMessageCallback messageCallback)
+    {
+        super(PLAYER_TILE, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.experience = INITIAL_EXPERIENCE;
         this.playerLevel = INITIAL_LEVEL;
     }

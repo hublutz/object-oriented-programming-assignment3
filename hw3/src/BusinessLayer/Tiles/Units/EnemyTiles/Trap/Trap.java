@@ -18,6 +18,7 @@ public class Trap extends Enemy
     private boolean visible;
 
     private static final int ATTACK_RANGE = 2;
+    private static final int INITIAL_TICKS_COUNT = 0;
 
     /**
      * Trap constructor, receives all Enemy parameters,
@@ -29,12 +30,9 @@ public class Trap extends Enemy
                 int defencePoints, IMessageCallback messageCallback, int experienceValue,
                 Player player, IEnemyDeathCallback deathCallback, int visibilityTime, int invisibilityTime)
     {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints,
-                messageCallback, experienceValue, player, deathCallback);
-        this.visibilityTime = visibilityTime;
-        this.invisibilityTime = invisibilityTime;
-        this.ticksCount = 0;
-        this.visible = false;
+        this(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue,
+                visibilityTime, invisibilityTime);
+        this.initialise(x, y, player, deathCallback);
     }
 
     /**
@@ -45,11 +43,13 @@ public class Trap extends Enemy
      */
     public Trap(char tile, String name, int healthPool, int attackPoints,
                 int defencePoints, IMessageCallback messageCallback, int experienceValue,
-                Player player, IEnemyDeathCallback deathCallback, int visibilityTime, int invisibilityTime)
+                int visibilityTime, int invisibilityTime)
     {
-        this(tile, 0, 0, name, healthPool, attackPoints, defencePoints,
-                messageCallback, experienceValue, player, deathCallback, visibilityTime,
-                invisibilityTime);
+        super(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue);
+        this.visibilityTime = visibilityTime;
+        this.invisibilityTime = invisibilityTime;
+        this.ticksCount = INITIAL_TICKS_COUNT;
+        this.visible = false;
     }
 
     /**

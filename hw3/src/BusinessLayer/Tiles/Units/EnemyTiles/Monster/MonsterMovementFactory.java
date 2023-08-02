@@ -1,7 +1,7 @@
 package BusinessLayer.Tiles.Units.EnemyTiles.Monster;
 
-import BusinessLayer.Tiles.Units.MoveOperations.*;
 import BusinessLayer.GameBoard;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -27,10 +27,10 @@ public class Warrior extends Player {
      * @param abilityCooldown the ability cooldown of the warier
      */
     public Warrior(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
-                   IMessageCallback messageCallback, int abilityCooldown) {
-        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
-        this.abilityCooldown = abilityCooldown;
-        this.remainingCooldown = INITIAL_REMAINING_COOLDOWN;
+                   IMessageCallback messageCallback, int abilityCooldown)
+    {
+        this(name, healthPool, attackPoints, defencePoints, messageCallback, abilityCooldown);
+        this.initialise(x, y);
     }
 
     /**
@@ -41,7 +41,9 @@ public class Warrior extends Player {
     public Warrior(String name, int healthPool, int attackPoints, int defencePoints,
                    IMessageCallback messageCallback, int abilityCooldown)
     {
-        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback, abilityCooldown);
+        super(name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.abilityCooldown = abilityCooldown;
+        this.remainingCooldown = INITIAL_REMAINING_COOLDOWN;
     }
 
     /**
@@ -54,6 +56,7 @@ public class Warrior extends Player {
         if (this.remainingCooldown == INITIAL_REMAINING_COOLDOWN)
         {
             this.messageCallback.passMessage("Avenger's Shield!");
+            this.messageCallback.passMessage(this.description());
             this.remainingCooldown = this.abilityCooldown;
             try {
                 this.health.increaseHealthAmount(defencePoints *
@@ -66,10 +69,17 @@ public class Warrior extends Player {
 
             List<Enemy> enemiesInRange = enemies.stream().filter((enemy) -> this.range(enemy) < ABILITY_RANGE)
                     .collect(Collectors.toList());
-            Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
-            enemy.receiveDamage(this.health.getHealthPool() /
-                    AMOUNT_ABILITY_DAMAGE_FROM_HEALTHPOOL);
-            checkIfEnemyIsDeadAndGetEx(enemy);
+            if (!enemiesInRange.isEmpty())
+            {
+                Enemy enemy = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
+                this.messageCallback.passMessage("Attacking: ");
+                this.messageCallback.passMessage(enemy.description());
+                enemy.receiveDamage(this.health.getHealthPool() /
+                        AMOUNT_ABILITY_DAMAGE_FROM_HEALTHPOOL);
+                checkIfEnemyIsDeadAndGetEx(enemy);
+                if (enemy.isDead())
+                    enemy.onDeath();
+            }
         }
         else
         {

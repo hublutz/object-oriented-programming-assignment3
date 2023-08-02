@@ -30,6 +30,26 @@ public abstract class UnitTile extends Tile  implements IVisitor {
         this.defencePoints = defencePoints;
         this.messageCallback = messageCallback;
     }
+
+    /**
+     * Unit Tile constructor
+     *
+     * @param tile the tile character
+     * @param name the name of the unit
+     * @param healthPool the health pool of the unit
+     * @param attackPoints the attack points of the unit
+     * @param defencePoints the defence points of the unit
+     * @param messageCallback used to pass messages from the unit
+     */
+    public UnitTile(char tile, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+        super(tile);
+        this.name = name;
+        this.health = new Health(healthPool);
+        this.attackPoints = attackPoints;
+        this.defencePoints = defencePoints;
+        this.messageCallback = messageCallback;
+    }
+
     /**
      * The method that is used to attack other units
      *
@@ -105,9 +125,9 @@ public abstract class UnitTile extends Tile  implements IVisitor {
     public String description()
     {
         StringBuilder builder = new StringBuilder();
-        builder.append("\n~~ Stats for ");
+        builder.append("~~ Stats for ");
         builder.append(this.name);
-        builder.append(": ~~");
+        builder.append(": ~~\n");
 
         builder.append("\t- Health: ");
         builder.append(this.health.getHealthAmount());
