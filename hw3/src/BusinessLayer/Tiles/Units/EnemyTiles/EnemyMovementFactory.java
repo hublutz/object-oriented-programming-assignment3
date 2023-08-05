@@ -1,4 +1,4 @@
-package BusinessLayer.Tiles.Units.EnemyTiles.Monster;
+package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.Units.Movement.MoveOperations.*;
@@ -12,25 +12,25 @@ import java.util.function.Supplier;
 /**
  * Class MonsterMovementFactory is a factory of monster movements
  */
-public class MonsterMovementFactory
+public class EnemyMovementFactory
 {
     /**
      * Enum MonsterMovements represents codes for monster movements, used in MonsterMovementFactory
      */
-    public enum MonsterMovements
+    public enum EnemyMovements
     {
         MOVE_UP, MOVE_DOWN, MOVE_LEFT,
         MOVE_RIGHT, NO_MOVEMENT
     }
 
     private GameBoard gameBoard;
-    private final Map<MonsterMovements, Supplier<MoveOperation>> movements;
+    private final Map<EnemyMovements, Supplier<MoveOperation>> movements;
 
     /**
      * MonsterMovementFactory constructor
      * @param gameBoard the current game level
      */
-    public MonsterMovementFactory(GameBoard gameBoard)
+    public EnemyMovementFactory(GameBoard gameBoard)
     {
         this.gameBoard = gameBoard;
         this.movements = new HashMap<>();
@@ -42,11 +42,11 @@ public class MonsterMovementFactory
      */
     private void initialiseMovements()
     {
-        this.movements.put(MonsterMovements.MOVE_UP, () -> new MoveUpOperation(this.gameBoard));
-        this.movements.put(MonsterMovements.MOVE_DOWN, () -> new MoveDownOperation(this.gameBoard));
-        this.movements.put(MonsterMovements.MOVE_LEFT, () -> new MoveLeftOperation(this.gameBoard));
-        this.movements.put(MonsterMovements.MOVE_RIGHT, () -> new MoveRightOperation(this.gameBoard));
-        this.movements.put(MonsterMovements.NO_MOVEMENT, NothingMoveOperation::new);
+        this.movements.put(EnemyMovements.MOVE_UP, () -> new MoveUpOperation(this.gameBoard));
+        this.movements.put(EnemyMovements.MOVE_DOWN, () -> new MoveDownOperation(this.gameBoard));
+        this.movements.put(EnemyMovements.MOVE_LEFT, () -> new MoveLeftOperation(this.gameBoard));
+        this.movements.put(EnemyMovements.MOVE_RIGHT, () -> new MoveRightOperation(this.gameBoard));
+        this.movements.put(EnemyMovements.NO_MOVEMENT, NothingMoveOperation::new);
     }
 
     /**
@@ -63,7 +63,7 @@ public class MonsterMovementFactory
      * @param movement the requested movement
      * @return a MoveOperation of the requested type
      */
-    public MoveOperation getMoveOperation(MonsterMovements movement)
+    public MoveOperation getMoveOperation(EnemyMovements movement)
     {
         return this.movements.get(movement).get();
     }
