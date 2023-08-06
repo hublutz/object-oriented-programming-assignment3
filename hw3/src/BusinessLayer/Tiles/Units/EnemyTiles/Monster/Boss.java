@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Boss extends Monster implements HeroicUnit {
 
-    private int abilityFrequency;
+    private final int abilityFrequency;
     private int combatTicks;
 
 
@@ -33,7 +33,8 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public void castAbility(List<Enemy>... args) {
-        this.attack(this.player);
+        player.defend(this.attackPoints);
+        messageCallback.passMessage("Boss casted special ability on the player");
     }
 
     @Override
@@ -60,7 +61,7 @@ public class Boss extends Monster implements HeroicUnit {
                                 getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_RIGHT);
                     }
                 } else {
-                    if (dx > 0)
+                    if (dy > 0)
                         moveOperation = this.movementFactory.
                                 getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_UP);
                     else

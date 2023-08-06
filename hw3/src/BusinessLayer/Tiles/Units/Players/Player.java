@@ -97,6 +97,7 @@ public abstract class Player extends UnitTile implements MoveObserver, HeroicUni
         for(List<Enemy> l : args){
             if(!casted){
                 this.castAbility(l);
+                casted =true;
             }else
                 throw new RuntimeException("Cant castAbility on more then one List");
         }

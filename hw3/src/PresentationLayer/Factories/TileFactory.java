@@ -4,6 +4,7 @@ import BusinessLayer.GameBoard;
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Boss;
 import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Monster;
 import BusinessLayer.Tiles.Units.EnemyTiles.EnemyMovementFactory;
 import BusinessLayer.Tiles.Units.EnemyTiles.Trap.Trap;
@@ -79,12 +80,12 @@ public class TileFactory
                         500, 5, this.enemyMovementFactory),
                 () -> new Monster('w', "White Walker", 2000, 150, 50, this.messageCallback,
                         1000, 6, this.enemyMovementFactory),
-                () -> new Monster('M', "The Mountain", 1000, 60, 25, this.messageCallback,
-                        500, 6, this.enemyMovementFactory),
-                () -> new Monster('C', "Queen Cersei", 100, 10, 10, this.messageCallback,
-                        1000, 1, this.enemyMovementFactory),
-                () -> new Monster('K', "Night's King", 5000, 300, 150, this.messageCallback,
-                        5000, 8, this.enemyMovementFactory),
+                () -> new Boss('M', "The Mountain", 1000, 60, 25, this.messageCallback,
+                        500, 6, this.enemyMovementFactory,5),
+                () -> new Boss('C', "Queen Cersei", 100, 10, 10, this.messageCallback,
+                        1000, 1, this.enemyMovementFactory,8),
+                () -> new Boss('K', "Night's King", 5000, 300, 150, this.messageCallback,
+                        5000, 8, this.enemyMovementFactory,3),
                 () -> new Trap('B', "Bonus Trap", 1, 1,
                         1, this.messageCallback, 250, 1, 10),
                 () -> new Trap('Q', "Queen's Trap", 250, 50, 10, this.messageCallback, 100,

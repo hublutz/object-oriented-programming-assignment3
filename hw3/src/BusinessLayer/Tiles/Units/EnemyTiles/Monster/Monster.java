@@ -71,7 +71,7 @@ public class Monster extends Enemy
             }
             else
             {
-                if (dx > 0)
+                if (dy > 0)
                     moveOperation = this.movementFactory.
                             getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_UP);
                 else
