@@ -55,7 +55,7 @@ public class Boss extends Monster implements HeroicUnit {
                 this.combatTicks++;
                 int dx = this.getX() - this.player.getX();
                 int dy = this.getY() - this.player.getY();
-                moveOperation = getMoveOperationFromDxDy(dx,dy);
+                moveOperation = getPlayerApproachMoveOperation (dx,dy);
             }
 
         } else {

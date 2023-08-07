@@ -60,7 +60,7 @@ public class Monster extends Enemy
         {
             int dx = this.getX() - this.player.getX();
             int dy = this.getY() - this.player.getY();
-            moveOperation = getMoveOperationFromDxDy(dx,dy);
+            moveOperation = getPlayerApproachMoveOperation (dx,dy);
         }
         else
             moveOperation = this.movementFactory.getRandomMovement();
@@ -83,7 +83,7 @@ public class Monster extends Enemy
         return builder.toString();
     }
 
-    protected MoveOperation getMoveOperationFromDxDy(int dx, int dy){
+    protected MoveOperation getPlayerApproachMoveOperation(int dx, int dy){
         if (Math.abs(dx) > Math.abs(dy))
         {
             if (dx > 0)
