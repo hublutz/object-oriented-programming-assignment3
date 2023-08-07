@@ -62,6 +62,24 @@ public class Hunter extends Player
     }
 
     /**
+     * arrowsCount Getter
+     * @return the amount of arrows of the hunter
+     */
+    public int getArrowsCount()
+    {
+        return arrowsCount;
+    }
+
+    /**
+     * arrowsCount Setter
+     * @param arrowsCount The new arrow count for the hunter
+     */
+    public void setArrowsCount(int arrowsCount)
+    {
+        this.arrowsCount = arrowsCount;
+    }
+
+    /**
      * This method performs the level up procedure of the Hunter player class
      */
     @Override
