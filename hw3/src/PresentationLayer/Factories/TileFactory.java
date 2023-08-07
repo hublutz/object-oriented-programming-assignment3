@@ -23,6 +23,9 @@ import java.util.function.Supplier;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Class TileFactory is responsible for creating tiles for the game baords
+ */
 public class TileFactory
 {
     private List<Supplier<Player>> playersList;
@@ -31,6 +34,10 @@ public class TileFactory
     private List<Enemy> enemyList;
     private final IMessageCallback messageCallback;
 
+    /**
+     * TileFactory constructor
+     * @param enemyList A list of enemies that appears throughout the levels
+     */
     public TileFactory(List<Enemy> enemyList)
     {
         this.initialisePlayersList();
@@ -51,9 +58,9 @@ public class TileFactory
                 () -> new Warrior("The Hound", 400, 20, 6,
                         this.messageCallback, 5),
                 () -> new Mage("Melisandre", 100, 5, 1,
-                        this.messageCallback, 300, 30, 15, 5, 6),
+                        this.messageCallback, 6, 5, 15, 30, 300),
                 () -> new Mage("Thoros of Myr", 250, 25, 4,
-                        this.messageCallback, 150, 20, 20, 3, 4),
+                        this.messageCallback, 4, 3, 20, 20, 150),
                 () -> new Rogue("Arya Stark", 150, 40, 2,
                         this.messageCallback, 20),
                 () -> new Rogue("Bronn", 250, 35, 3,
@@ -90,9 +97,9 @@ public class TileFactory
                 () -> new Boss('K', "Night's King", 5000, 300, 150, this.messageCallback,
                         5000, 8, this.enemyMovementFactory,3),
                 () -> new Trap('B', "Bonus Trap", 1, 1,
-                        1, this.messageCallback, 250, 1, 10),
+                        1, this.messageCallback, 250, 1, 5),
                 () -> new Trap('Q', "Queen's Trap", 250, 50, 10, this.messageCallback, 100,
-                        3, 10),
+                        3, 7),
                 () -> new Trap('D', "Death Trap", 500, 100, 20, this.messageCallback, 250,
                         1, 10)
         );
