@@ -1,4 +1,4 @@
-package Tests.Units;
+package Tests.UnitTests;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;

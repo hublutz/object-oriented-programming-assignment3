@@ -1,10 +1,8 @@
-package Tests.Units;
+package Tests.UnitTests;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.EnemyTiles.Trap.Trap;
-import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import BusinessLayer.Tiles.Units.Players.Player;
-import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

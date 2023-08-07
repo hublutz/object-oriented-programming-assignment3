@@ -1,4 +1,4 @@
-package Tests.Units;
+package Tests.UnitTests;
 
 import BusinessLayer.Tiles.Units.Health;
 import org.junit.Assert;
