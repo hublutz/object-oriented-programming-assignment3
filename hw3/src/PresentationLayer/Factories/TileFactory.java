@@ -4,9 +4,9 @@ import BusinessLayer.GameBoard;
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Boss;
 import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Monster;
-import BusinessLayer.Tiles.Units.EnemyTiles.Monster.MonsterMovementFactory;
-import BusinessLayer.Tiles.Units.EnemyTiles.RemoveEnemyDeathCallback;
+import BusinessLayer.Tiles.Units.EnemyTiles.EnemyMovementFactory;
 import BusinessLayer.Tiles.Units.EnemyTiles.Trap.Trap;
 import BusinessLayer.Tiles.Units.Players.Hunter.Hunter;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
@@ -27,7 +27,7 @@ public class TileFactory
 {
     private List<Supplier<Player>> playersList;
     private Map<Character, Supplier<Enemy>> enemiesMap;
-    private MonsterMovementFactory monsterMovementFactory;
+    private EnemyMovementFactory enemyMovementFactory;
     private List<Enemy> enemyList;
     private final IMessageCallback messageCallback;
 
@@ -35,7 +35,7 @@ public class TileFactory
     {
         this.initialisePlayersList();
         this.initialiseEnemyMap();
-        this.monsterMovementFactory = new MonsterMovementFactory(null);
+        this.enemyMovementFactory = new EnemyMovementFactory(null);
         this.enemyList = enemyList;
         this.messageCallback = new PrintMessageCallback();
     }
@@ -70,25 +70,25 @@ public class TileFactory
     {
         List<Supplier<Enemy>> enemies = Arrays.asList(
                 () -> new Monster('s', "Lannister Solider", 80, 8, 3, this.messageCallback,
-                        25, 3, this.monsterMovementFactory),
+                        25, 3, this.enemyMovementFactory),
                 () -> new Monster('k', "Lannister Knight", 200, 14, 8, this.messageCallback,
-                        50, 4, this.monsterMovementFactory),
+                        50, 4, this.enemyMovementFactory),
                 () -> new Monster('q', "Queen's Guard", 400, 20, 15, this.messageCallback,
-                        100, 5, this.monsterMovementFactory),
+                        100, 5, this.enemyMovementFactory),
                 () -> new Monster('z', "Wright", 600, 30, 15, this.messageCallback,
-                        100, 3, this.monsterMovementFactory),
+                        100, 3, this.enemyMovementFactory),
                 () -> new Monster('b', "Bear-Wright", 1000, 75, 30, this.messageCallback,
-                        250, 4, this.monsterMovementFactory),
+                        250, 4, this.enemyMovementFactory),
                 () -> new Monster('g', "Giant-Wright",1500, 100, 40, this.messageCallback,
-                        500, 5, this.monsterMovementFactory),
+                        500, 5, this.enemyMovementFactory),
                 () -> new Monster('w', "White Walker", 2000, 150, 50, this.messageCallback,
-                        1000, 6, this.monsterMovementFactory),
-                () -> new Monster('M', "The Mountain", 1000, 60, 25, this.messageCallback,
-                        500, 6, this.monsterMovementFactory),
-                () -> new Monster('C', "Queen Cersei", 100, 10, 10, this.messageCallback,
-                        1000, 1, this.monsterMovementFactory),
-                () -> new Monster('K', "Night's King", 5000, 300, 150, this.messageCallback,
-                        5000, 8, this.monsterMovementFactory),
+                        1000, 6, this.enemyMovementFactory),
+                () -> new Boss('M', "The Mountain", 1000, 60, 25, this.messageCallback,
+                        500, 6, this.enemyMovementFactory,5),
+                () -> new Boss('C', "Queen Cersei", 100, 10, 10, this.messageCallback,
+                        1000, 1, this.enemyMovementFactory,8),
+                () -> new Boss('K', "Night's King", 5000, 300, 150, this.messageCallback,
+                        5000, 8, this.enemyMovementFactory,3),
                 () -> new Trap('B', "Bonus Trap", 1, 1,
                         1, this.messageCallback, 250, 1, 10),
                 () -> new Trap('Q', "Queen's Trap", 250, 50, 10, this.messageCallback, 100,
@@ -107,7 +107,7 @@ public class TileFactory
      */
     public void setCurrentGameBoard(GameBoard gameBoard)
     {
-        this.monsterMovementFactory.setGameBoard(gameBoard);
+        this.enemyMovementFactory.setGameBoard(gameBoard);
     }
 
     /**

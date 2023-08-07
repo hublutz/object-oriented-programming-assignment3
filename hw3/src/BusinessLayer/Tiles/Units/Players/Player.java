@@ -4,6 +4,7 @@ import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Health;
+import BusinessLayer.Tiles.Units.HeroicUnit;
 import BusinessLayer.Tiles.Units.Movement.Observer.MoveObserver;
 import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.UnitTile;
@@ -16,7 +17,7 @@ import java.util.Random;
 /**
  * Abstract class Player represents a Player tile in the board
  */
-public abstract class Player extends UnitTile implements MoveObserver
+public abstract class Player extends UnitTile implements MoveObserver, HeroicUnit
 {
     private static final int LEVEL_UP_ON_TIMES_LEVEL = 50;
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
@@ -89,6 +90,19 @@ public abstract class Player extends UnitTile implements MoveObserver
         }
         this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * this.playerLevel;
         this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * this.playerLevel;
+    }
+
+    public void castAbility(List<Enemy>... args){
+        boolean casted = false;
+        for(List<Enemy> l : args){
+            if(!casted){
+                this.castAbility(l);
+                casted =true;
+            }else
+                throw new RuntimeException("Cant castAbility on more then one List");
+        }
+        if(!casted)
+            throw new RuntimeException("Cant castAbility failed");
     }
 
     public abstract void castAbility(List<Enemy> enemies);
