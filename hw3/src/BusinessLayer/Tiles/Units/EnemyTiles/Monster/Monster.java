@@ -60,24 +60,7 @@ public class Monster extends Enemy
         {
             int dx = this.getX() - this.player.getX();
             int dy = this.getY() - this.player.getY();
-            if (Math.abs(dx) > Math.abs(dy))
-            {
-                if (dx > 0)
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_LEFT);
-                else
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_RIGHT);
-            }
-            else
-            {
-                if (dy > 0)
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_UP);
-                else
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_DOWN);
-            }
+            moveOperation = getMoveOperationFromDxDy(dx,dy);
         }
         else
             moveOperation = this.movementFactory.getRandomMovement();
@@ -98,5 +81,26 @@ public class Monster extends Enemy
         builder.append('\n');
 
         return builder.toString();
+    }
+
+    protected MoveOperation getMoveOperationFromDxDy(int dx, int dy){
+        if (Math.abs(dx) > Math.abs(dy))
+        {
+            if (dx > 0)
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_LEFT);
+            else
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_RIGHT);
+        }
+        else
+        {
+            if (dy > 0)
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_UP);
+            else
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_DOWN);
+        }
     }
 }

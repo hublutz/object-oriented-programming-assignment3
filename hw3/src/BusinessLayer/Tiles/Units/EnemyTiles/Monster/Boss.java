@@ -33,8 +33,12 @@ public class Boss extends Monster implements HeroicUnit {
 
     @Override
     public void castAbility(List<Enemy>... args) {
+        messageCallback.passMessage("Boss special ability!");
+        messageCallback.passMessage(this.description());
         player.defend(this.attackPoints);
-        messageCallback.passMessage("Boss casted special ability on the player");
+        if(player.isDead())
+            player.onDeath();
+        messageCallback.passMessage("Boss attacked player " + player.description());
     }
 
     @Override
@@ -51,23 +55,7 @@ public class Boss extends Monster implements HeroicUnit {
                 this.combatTicks++;
                 int dx = this.getX() - this.player.getX();
                 int dy = this.getY() - this.player.getY();
-
-                if (Math.abs(dx) > Math.abs(dy)) {
-                    if (dx > 0) {
-                        moveOperation = this.movementFactory.
-                                getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_LEFT);
-                    } else {
-                        moveOperation = this.movementFactory.
-                                getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_RIGHT);
-                    }
-                } else {
-                    if (dy > 0)
-                        moveOperation = this.movementFactory.
-                                getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_UP);
-                    else
-                        moveOperation = this.movementFactory.
-                                getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_DOWN);
-                }
+                moveOperation = getMoveOperationFromDxDy(dx,dy);
             }
 
         } else {
@@ -75,6 +63,20 @@ public class Boss extends Monster implements HeroicUnit {
             moveOperation = this.movementFactory.getRandomMovement();
         }
         moveOperation.move(this);
+    }
+
+    @Override
+    public String description() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(super.description());
+
+        builder.append("\t- Boss Ability Frequency: ");
+        builder.append(this.abilityFrequency);
+        builder.append("\t- Boss Combat Ticks: ");
+        builder.append(this.combatTicks);
+        builder.append('\n');
+
+        return builder.toString();
     }
 }
     
