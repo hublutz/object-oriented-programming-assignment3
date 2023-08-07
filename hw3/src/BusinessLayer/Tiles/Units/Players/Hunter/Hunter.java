@@ -71,6 +71,15 @@ public class Hunter extends Player
     }
 
     /**
+     * ticksCount Getter
+     * @return the count of ticks until arrows increase
+     */
+    public int getTicksCount()
+    {
+        return ticksCount;
+    }
+
+    /**
      * arrowsCount Setter
      * @param arrowsCount The new arrow count for the hunter
      */

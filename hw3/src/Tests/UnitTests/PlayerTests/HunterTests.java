@@ -154,4 +154,42 @@ public class HunterTests extends AbstractUnitTest
         Assert.assertEquals("The arrows count should decrease to " + (arrowsCount - 1),
                 arrowsCount - 1, this.hunter.getArrowsCount());
     }
+
+    /**
+     * This method tests the Hunter ticks count increases by one
+     * on a "normal" game tick
+     */
+    @Test
+    public void testGameTickIncrementSuccess()
+    {
+        int previousTickCount = this.hunter.getTicksCount();
+
+        this.hunter.onGameTick();
+
+        Assert.assertEquals("The ticks count should increase by 1",
+                previousTickCount + 1, this.hunter.getTicksCount());
+    }
+
+    /**
+     * This method tests the Hunter ticks count resets upon 10 ticks
+     * and the Hunter gets new arrows
+     */
+    @Test
+    public void testGameTickIncrementArrowsCountSuccess()
+    {
+        int initialTicksCount = 0;
+        int playerLevel = this.hunter.getLevel();
+        int previousArrowsCount = this.hunter.getArrowsCount();
+
+        int ticksForIncrease = 10;
+        for (int i = 0; i <= ticksForIncrease; i++)
+        {
+            this.hunter.onGameTick();
+        }
+
+        Assert.assertEquals("The ticks count should reset to " + initialTicksCount,
+                initialTicksCount, this.hunter.getTicksCount());
+        Assert.assertEquals("The arrows count should increase by " + playerLevel,
+                previousArrowsCount + playerLevel, this.hunter.getArrowsCount());
+    }
 }
