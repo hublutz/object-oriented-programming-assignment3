@@ -16,7 +16,7 @@ public class RemoveEnemyDeathCallback implements IEnemyDeathCallback
 
     /**
      * RemoveEnemyDeathCallback constructor
-     * @param tilesList The Tiles list of the game board
+     * @param gameBoard The Tiles list of the game board
      */
     public RemoveEnemyDeathCallback(GameBoard gameBoard)
     {

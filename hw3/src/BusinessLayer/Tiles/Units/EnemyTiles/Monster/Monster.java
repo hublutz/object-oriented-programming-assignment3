@@ -83,7 +83,7 @@ public class Monster extends Enemy
         return builder.toString();
     }
 
-    protected MoveOperation getPlayerApproachMoveOperation(int dx, int dy){
+    public MoveOperation getPlayerApproachMoveOperation(int dx, int dy){
         if (Math.abs(dx) > Math.abs(dy))
         {
             if (dx > 0)
