@@ -11,6 +11,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class HunterTests in responsible for testing the Hunter methods and
+ * procedures
+ */
 public class HunterTests extends AbstractUnitTest
 {
     private Hunter hunter;
@@ -191,5 +195,37 @@ public class HunterTests extends AbstractUnitTest
                 initialTicksCount, this.hunter.getTicksCount());
         Assert.assertEquals("The arrows count should increase by " + playerLevel,
                 previousArrowsCount + playerLevel, this.hunter.getArrowsCount());
+    }
+
+    /**
+     * This method tests the level up procedure of the Hunter player class succeeds
+     */
+    @Test
+    public void testHunterLevelUpSuccess()
+    {
+        final int arrowsCountIncrease = 10;
+        final int playerAttackIncrease = 4, playerDefenceIncrease = 1;
+        final int hunterAttackIncrease = 2, hunterDefenceIncrease = 1;
+
+        int previousLevel = this.hunter.getLevel();
+        int expectedLevel = previousLevel + 1;
+        int previousArrowsCount = this.hunter.getArrowsCount();
+        int expectedArrowsCount = previousArrowsCount + (arrowsCountIncrease * expectedLevel);
+        int previousAttackPoints = this.hunter.getAttack();
+        int expectedAttackPoints = previousAttackPoints + (playerAttackIncrease * expectedLevel) + (hunterAttackIncrease * expectedLevel);
+        int previousDefencePoints = this.hunter.getDefense();
+        int expectedDefencePoints = previousDefencePoints + (playerDefenceIncrease * expectedLevel) + (hunterDefenceIncrease * expectedLevel);
+
+        this.hunter.levelUp();
+        int currentLevel = this.hunter.getLevel();
+
+        Assert.assertEquals("The Hunter level should increase by 1",
+                expectedLevel, currentLevel);
+        Assert.assertEquals("The Hunter arrows count should increase by " + arrowsCountIncrease + " * level",
+                expectedArrowsCount, this.hunter.getArrowsCount());
+        Assert.assertEquals("The Hunter attack points should have regular player increase and " + hunterAttackIncrease + " * level",
+                expectedAttackPoints, this.hunter.getAttack());
+        Assert.assertEquals("The Hunter defence points should have regular player increase and " + hunterDefenceIncrease + " * level",
+                expectedDefencePoints, this.hunter.getDefense());
     }
 }
