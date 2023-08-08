@@ -78,11 +78,15 @@ public class Boss extends Monster implements HeroicUnit {
 
         return builder.toString();
     }
-
+    /**
+     * used only in tests
+     * */
     public int getCombatTicks(){
         return  combatTicks;
     }
-
+    /**
+     * used only in tests
+     * */
     public void setVisionRange(int newVision){
         this.visionRange = newVision;
     }

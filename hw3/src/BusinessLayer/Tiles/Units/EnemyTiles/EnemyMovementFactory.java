@@ -36,6 +36,14 @@ public class EnemyMovementFactory
         this.movements = new HashMap<>();
         this.initialiseMovements();
     }
+    /**
+     * Used only in tests
+     * */
+    public EnemyMovementFactory(){
+        this.gameBoard = null;
+        this.movements = new HashMap<>();
+        this.initialiseMovements();
+    }
 
     /**
      * This method initialises the movements map

@@ -10,6 +10,7 @@ import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Monster;
 import BusinessLayer.Tiles.Units.Movement.MoveOperations.*;
 import BusinessLayer.Tiles.Units.Players.Player;
 import Tests.UnitTests.AbstractUnitTest;
+import Tests.UnitTests.EnemyMovementFactoryTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class BossTest extends AbstractUnitTest {
     @Before
     public void initTest(){
         attacked = false;
-        movementFactory = new EnemyMovementFactory();///////////////////////////
+        movementFactory = new EnemyMovementFactoryTest();
         abilityFreq =3;
         visionRange = 10000;
         player = new Player(x,y,name,healthPool,attackPoints,defencePoints,messageCallback) {
@@ -59,7 +60,8 @@ public class BossTest extends AbstractUnitTest {
         Assert.assertEquals("should be only one combat tick",boss.getCombatTicks(),1);
         boss.onGameTick();
         boss.onGameTick();
-        Assert.assertEquals("should casted an ability and reset ticks", boss.getCombatTicks(),0);
+        boss.onGameTick();
+        Assert.assertEquals("should casted an ability and reset ticks",0 ,boss.getCombatTicks());
         Assert.assertTrue("should attack player", attacked);
     }
 
