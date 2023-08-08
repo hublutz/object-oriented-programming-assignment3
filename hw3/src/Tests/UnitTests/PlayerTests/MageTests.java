@@ -1,10 +1,11 @@
-package Tests.Units;
+package Tests.UnitTests.PlayerTests;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
+import Tests.UnitTests.AbstractUnitTest;
+import Tests.UnitTests.TestEnemy;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 

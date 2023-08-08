@@ -1,4 +1,4 @@
-package Tests.Units;
+package Tests.UnitTests;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 
@@ -12,7 +12,7 @@ public abstract class AbstractUnitTest {
     protected int attackPoints ;
     protected int defencePoints;
     protected String lastM;
-    IMessageCallback messageCallback;
+    protected IMessageCallback messageCallback;
 
     public AbstractUnitTest(){
         lastM ="";

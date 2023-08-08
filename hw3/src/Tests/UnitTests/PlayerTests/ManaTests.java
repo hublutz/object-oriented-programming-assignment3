@@ -1,4 +1,4 @@
-package Tests.Units;
+package Tests.UnitTests.PlayerTests;
 import BusinessLayer.Tiles.Units.Players.Mage.Mana;
 import org.junit.Assert;
 import org.junit.Before;
