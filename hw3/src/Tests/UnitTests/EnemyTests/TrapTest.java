@@ -1,8 +1,9 @@
-package Tests.UnitTests;
+package Tests.UnitTests.EnemyTests;
 
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.EnemyTiles.Trap.Trap;
 import BusinessLayer.Tiles.Units.Players.Player;
+import Tests.UnitTests.AbstractUnitTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class TrapTest extends AbstractUnitTest{
+public class TrapTest extends AbstractUnitTest {
 
     private Trap trap;
     private Player player;
