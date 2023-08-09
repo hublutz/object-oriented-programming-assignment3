@@ -2,7 +2,6 @@ package BusinessLayer.Tiles.Units.EnemyTiles;
 
 import BusinessLayer.GameBoard;
 import BusinessLayer.Tiles.Units.Movement.MoveOperations.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class EnemyMovementFactory
         this.initialiseMovements();
     }
     /**
-     * Used only in tests
+     * MonsterMovementFactory empty constructor
      * */
     public EnemyMovementFactory(){
         this.gameBoard = null;

@@ -5,7 +5,7 @@ import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Warrior.Warrior;
 
 import Tests.UnitTests.AbstractUnitTest;
-import Tests.UnitTests.TestEnemy;
+import Tests.UnitTests.MockEnemy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +34,9 @@ public class WarriorTests extends AbstractUnitTest {
      * */
     @Test
     public void testCastSpell(){
-        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
+        MockEnemy enemy = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
-        TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
+        MockEnemy enemyToFar = new MockEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
         List<Enemy> enemyList = new ArrayList<Enemy>();
         enemyList.add(enemy);
@@ -54,9 +54,9 @@ public class WarriorTests extends AbstractUnitTest {
      * */
     @Test
     public void testCoolDown(){
-        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
+        MockEnemy enemy = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
-        TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
+        MockEnemy enemyToFar = new MockEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null);
 
         List<Enemy> enemyList = new ArrayList<Enemy>();
         enemyList.add(enemy);
@@ -94,7 +94,7 @@ public class WarriorTests extends AbstractUnitTest {
         warrior = new Warrior(x,y,name,healthPool,attackPoints,defencePoints,messageCallback,10);
 
 
-        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) ;
+        MockEnemy enemy = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.warrior, null) ;
 
         List<Enemy> enemyList= new ArrayList<Enemy>();
         enemyList.add(enemy);

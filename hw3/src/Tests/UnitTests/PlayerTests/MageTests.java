@@ -3,7 +3,7 @@ package Tests.UnitTests.PlayerTests;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Mage.Mage;
 import Tests.UnitTests.AbstractUnitTest;
-import Tests.UnitTests.TestEnemy;
+import Tests.UnitTests.MockEnemy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,16 +43,16 @@ public class MageTests  extends AbstractUnitTest {
     public void testCastSpell(){
         mage.getMana().refillMana(manaPool);
 
-        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
-        TestEnemy enemy1 = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
-        TestEnemy enemy2 = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
+        MockEnemy enemy = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
+        MockEnemy enemy1 = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
+        MockEnemy enemy2 = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
 
-        TestEnemy enemyToManyHits = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
+        MockEnemy enemyToManyHits = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
 
-        TestEnemy enemyToFar = new TestEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
+        MockEnemy enemyToFar = new MockEnemy(c,10,10,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null);
 
 
-        List<TestEnemy> enemyList= new ArrayList<TestEnemy>();
+        List<MockEnemy> enemyList= new ArrayList<MockEnemy>();
         List<Enemy> enemyList2 = new ArrayList<Enemy>();
         enemyList.add(enemy);
         enemyList2.add(enemy);
@@ -68,7 +68,7 @@ public class MageTests  extends AbstractUnitTest {
         mage.castAbility(enemyList2);
 
         int totalHits =0;
-        for (TestEnemy e: enemyList)
+        for (MockEnemy e: enemyList)
             if(e.defended)
                 totalHits++;
 
@@ -127,7 +127,7 @@ public class MageTests  extends AbstractUnitTest {
         mage = new Mage(this.x,this.y, this.name, healthPool, attackPoints, defencePoints, messageCallback,abRange,hits,spellPower,1000000,manaPool);
         int manaB = mage.getMana().getManaAmount();
 
-        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
+        MockEnemy enemy = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.mage, null) ;
 
         List<Enemy> enemyList1= new ArrayList<Enemy>();
         enemyList1.add(enemy);

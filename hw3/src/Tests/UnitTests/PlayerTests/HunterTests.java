@@ -3,7 +3,7 @@ package Tests.UnitTests.PlayerTests;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Hunter.Hunter;
 import Tests.UnitTests.AbstractUnitTest;
-import Tests.UnitTests.TestEnemy;
+import Tests.UnitTests.MockEnemy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class HunterTests extends AbstractUnitTest
     @Test
     public void testShootAbilityOneEnemySuccess()
     {
-        TestEnemy testEnemy = new TestEnemy(this.x, this.y, 1000,
+        MockEnemy testEnemy = new MockEnemy(this.x, this.y, 1000,
                 this.messageCallback, this.hunter);
         List<Enemy> enemyList = List.of(testEnemy);
         int arrowsCount = 1;
@@ -62,7 +62,7 @@ public class HunterTests extends AbstractUnitTest
     @Test
     public void testShootAbilityEnemyTooFarFailure()
     {
-        TestEnemy testEnemy = new TestEnemy(1000, 1000, 1000,
+        MockEnemy testEnemy = new MockEnemy(1000, 1000, 1000,
                 this.messageCallback, this.hunter);
         List<Enemy> enemyList = List.of(testEnemy);
         int arrowsCount = 1;
@@ -81,7 +81,7 @@ public class HunterTests extends AbstractUnitTest
     @Test
     public void testShootAbilityNoArrowsFailure()
     {
-        TestEnemy testEnemy = new TestEnemy(0, 0, 1000,
+        MockEnemy testEnemy = new MockEnemy(0, 0, 1000,
                 this.messageCallback, this.hunter);
         List<Enemy> enemyList = List.of(testEnemy);
         int noArrowsAmount = 0;
@@ -117,11 +117,11 @@ public class HunterTests extends AbstractUnitTest
     @Test
     public void testShootAbilityMultipleEnemiesInRangeSuccess()
     {
-        TestEnemy testEnemy1 = new TestEnemy(this.x, this.y, 1000,
+        MockEnemy testEnemy1 = new MockEnemy(this.x, this.y, 1000,
                 this.messageCallback, this.hunter);
-        TestEnemy testEnemy2 = new TestEnemy(this.x + 1, this.y + 1, 1000,
+        MockEnemy testEnemy2 = new MockEnemy(this.x + 1, this.y + 1, 1000,
                 this.messageCallback, this.hunter);
-        TestEnemy testEnemy3 = new TestEnemy(this.x + 2, this.y + 1, 1000,
+        MockEnemy testEnemy3 = new MockEnemy(this.x + 2, this.y + 1, 1000,
                 this.messageCallback, this.hunter);
         List<Enemy> enemyList = List.of(testEnemy1, testEnemy2);
         int arrowsCount = 3;
@@ -143,9 +143,9 @@ public class HunterTests extends AbstractUnitTest
     @Test
     public void testShootAbilitySameRangeSuccess()
     {
-        TestEnemy testEnemy1 = new TestEnemy(this.x, this.y, 1000,
+        MockEnemy testEnemy1 = new MockEnemy(this.x, this.y, 1000,
                 this.messageCallback, this.hunter);
-        TestEnemy testEnemy2 = new TestEnemy(this.x, this.y, 1000,
+        MockEnemy testEnemy2 = new MockEnemy(this.x, this.y, 1000,
                 this.messageCallback, this.hunter);
         List<Enemy> enemyList = List.of(testEnemy1, testEnemy2);
         int arrowsCount = 2;

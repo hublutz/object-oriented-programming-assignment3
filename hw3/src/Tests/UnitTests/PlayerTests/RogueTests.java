@@ -3,7 +3,7 @@ package Tests.UnitTests.PlayerTests;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Players.Rogue.Rogue;
 import Tests.UnitTests.AbstractUnitTest;
-import Tests.UnitTests.TestEnemy;
+import Tests.UnitTests.MockEnemy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,11 +32,11 @@ public class RogueTests extends AbstractUnitTest {
      */
     @Test
     public void testCastSpell() {
-        TestEnemy enemy = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
-        TestEnemy enemy1 = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
+        MockEnemy enemy = new MockEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
+        MockEnemy enemy1 = new MockEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
 
-        TestEnemy enemyToFar = new TestEnemy(c, 10, 10, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
+        MockEnemy enemyToFar = new MockEnemy(c, 10, 10, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
         List<Enemy> enemyList = new ArrayList<Enemy>();
         enemyList.add(enemy);
@@ -56,7 +56,7 @@ public class RogueTests extends AbstractUnitTest {
      */
     @Test
     public void OnTick() {
-        TestEnemy enemy = new TestEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
+        MockEnemy enemy = new MockEnemy(c, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, 10, this.rogue, null);
 
         List<Enemy> enemyList = new ArrayList<Enemy>();
         enemyList.add(enemy);
@@ -88,7 +88,7 @@ public class RogueTests extends AbstractUnitTest {
     public void testNotEnoughEnergy() {
         rogue = new Rogue(x, y, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
 
-        TestEnemy enemy = new TestEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.rogue, null) ;
+        MockEnemy enemy = new MockEnemy(c,x,y,name,healthPool,attackPoints,defencePoints, messageCallback, 10, this.rogue, null) ;
 
         List<Enemy> enemyList1= new ArrayList<Enemy>();
         enemyList1.add(enemy);

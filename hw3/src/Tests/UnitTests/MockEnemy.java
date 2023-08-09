@@ -6,7 +6,7 @@ import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.Players.Player;
 import BusinessLayer.Tiles.Units.UnitTile;
 
-public class TestEnemy extends Enemy {
+public class MockEnemy extends Enemy {
     private static final char DEFAULT_TILE = 'e';
     private static final String DEFAULT_NAME = "Test Enemy";
     private static final int DEFAULT_ATTACK_POINTS = 10;
@@ -17,7 +17,7 @@ public class TestEnemy extends Enemy {
     /**
 
      */
-    public TestEnemy(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback,
+    public MockEnemy(char tile, int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback,
                      int experienceValue, Player player, IEnemyDeathCallback deathCallback)
     {
         super(tile, x, y, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue, player, deathCallback);
@@ -25,7 +25,7 @@ public class TestEnemy extends Enemy {
         defended = false;
     }
 
-    public TestEnemy(int x, int y, int healthPool, IMessageCallback messageCallback,
+    public MockEnemy(int x, int y, int healthPool, IMessageCallback messageCallback,
                      Player player)
     {
         this(DEFAULT_TILE, x, y, DEFAULT_NAME, healthPool, DEFAULT_ATTACK_POINTS,

@@ -1,16 +1,13 @@
 package Tests.UnitTests.EnemyTests;
 
-import BusinessLayer.GameBoard;
-import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.EnemyTiles.EnemyMovementFactory;
 import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Boss;
-import BusinessLayer.Tiles.Units.EnemyTiles.Monster.Monster;
-import BusinessLayer.Tiles.Units.Movement.MoveOperations.*;
+
 import BusinessLayer.Tiles.Units.Players.Player;
 import Tests.UnitTests.AbstractUnitTest;
-import Tests.UnitTests.EnemyMovementFactoryTest;
+import Tests.UnitTests.EnemyMovementFactoryMock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,9 +34,9 @@ public class BossTest extends AbstractUnitTest {
     @Before
     public void initTest(){
         attacked = false;
-        movementFactory = new EnemyMovementFactoryTest();
+        movementFactory = new EnemyMovementFactoryMock();
         abilityFreq =3;
-        visionRange = 10000;
+        visionRange = 10;
         player = new Player(x,y,name,healthPool,attackPoints,defencePoints,messageCallback) {
             @Override
             public void defend(int attackRoll){
@@ -58,6 +55,12 @@ public class BossTest extends AbstractUnitTest {
     public void testOnTick(){
         boss.onGameTick();
         Assert.assertEquals("should be only one combat tick",boss.getCombatTicks(),1);
+
+    }
+
+    @Test
+    public void abilityCastTest(){
+        boss.onGameTick();
         boss.onGameTick();
         boss.onGameTick();
         boss.onGameTick();
@@ -69,7 +72,7 @@ public class BossTest extends AbstractUnitTest {
     public void testOnTickExitCombat(){
         boss.onGameTick();
         Assert.assertEquals("should be only one combat tick",boss.getCombatTicks(),1);
-        boss.setVisionRange(-100);
+        player.move(10000,1000);
         boss.onGameTick();
         Assert.assertEquals("should exited combat and reset ticks", boss.getCombatTicks(),0);
     }
