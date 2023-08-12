@@ -9,9 +9,9 @@ import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.EnemyTiles.RemoveEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.Players.Player;
 
-
-
-import java.util.*;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * This class represents a game board of a certain level
@@ -184,14 +184,4 @@ public class GameBoard
         return boardTiles;
     }
 
-    private class Pair<T> {
-        private T first;
-        private T second;
-
-        public Pair (T first, T second){
-            this.first = first;
-            this.second = second;
-        }
-
-    }
 }
