@@ -1,19 +1,17 @@
 package BusinessLayer;
 
-import BusinessLayer.IMessageCallback.IMessageCallback;
+
 import BusinessLayer.Tiles.EmptyTile;
 import BusinessLayer.Tiles.Point;
 import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
-import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
+
 import BusinessLayer.Tiles.Units.EnemyTiles.RemoveEnemyDeathCallback;
 import BusinessLayer.Tiles.Units.Players.Player;
-import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * This class represents a game board of a certain level
@@ -24,12 +22,12 @@ public class GameBoard
     /**
      * list of all the tiles in the game
      * */
-    private final List<Tile> boardTiles;
-    private final List<Enemy> enemyList;
+    private final TreeMap<Integer,Tile> boardTiles;
+    private final TreeSet<Enemy> enemyList;
     private final Player player;
 
-    private int rowsAmount;
-    private int columnsAmount;
+    final private int rowsAmount;
+    final private int columnsAmount;
 
     /**
      * GameBoard constructor
@@ -37,14 +35,15 @@ public class GameBoard
      * */
     public GameBoard(Tile[][] boardTiles, List<Enemy> enemyList, Player player)
     {
-        this.boardTiles = new ArrayList<>();
+        this.boardTiles = new TreeMap<Integer,Tile>();
 
         for(Tile[] tileRow: boardTiles)
-        {
-            Collections.addAll(this.boardTiles, tileRow);
-        }
+            for(Tile tile : tileRow)
+                this.boardTiles.put(encodeToInt(tile), tile);
 
-        this.enemyList = enemyList;
+
+        this.enemyList = new TreeSet<Enemy>((x, y) -> (encodeToInt(x.getX(), x.getY()) - encodeToInt(y.getX(), y.getY())));
+        this.enemyList.addAll(enemyList);
         this.player = player;
         this.rowsAmount = boardTiles.length;
         this.columnsAmount = boardTiles[0].length;
@@ -74,7 +73,7 @@ public class GameBoard
      * Getter of the game level enemies
      * @return The enemy list of the current level
      */
-    public List<Enemy> getEnemyList()
+    public TreeSet<Enemy> getEnemyList()
     {
         return this.enemyList;
     }
@@ -95,8 +94,7 @@ public class GameBoard
      * */
     public Tile getTile(int x, int y)
     {
-        return this.boardTiles.stream().filter(tile -> tile.getX() == x &&
-                tile.getY() == y).collect(Collectors.toList()).get(0);
+        return this.boardTiles.get(encodeToInt(x,y));
     }
 
     /**
@@ -117,7 +115,7 @@ public class GameBoard
     {
         this.boardTiles.remove(enemy);
         this.enemyList.remove(enemy);
-        boardTiles.add(new EmptyTile(enemy.getX(),enemy.getY()));
+        boardTiles.put(encodeToInt(enemy),new EmptyTile(enemy.getX(),enemy.getY()));
     }
 
     /**
@@ -144,7 +142,9 @@ public class GameBoard
      * */
     public void tick()
     {
-        boardTiles.forEach(Tile::onGameTick);
+        for (Tile tile : boardTiles.values()) {
+            tile.onGameTick();
+        }
     }
 
     /**
@@ -162,4 +162,26 @@ public class GameBoard
     {
         return this.player.isDead();
     }
+
+    /**
+     * return encoding of row and column into a unique integer, uses cantors pairing function
+     * @param row
+     * @param column
+     * @return the encoding
+     */
+    public int encodeToInt(int row, int column){
+        row++;
+        column++;
+        return (row + column) * (row + column + 1) / 2 + row;
+    }
+
+    public int encodeToInt(Tile tile){
+        return encodeToInt(tile.getX(),tile.getY());
+    }
+
+
+    public TreeMap<Integer, Tile> getAllTiles(){
+        return boardTiles;
+    }
+
 }

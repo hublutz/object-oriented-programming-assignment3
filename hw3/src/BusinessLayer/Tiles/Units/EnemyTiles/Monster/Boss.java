@@ -8,6 +8,7 @@ import BusinessLayer.Tiles.Units.HeroicUnit;
 import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.Players.Player;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Boss extends Monster implements HeroicUnit {
@@ -32,7 +33,7 @@ public class Boss extends Monster implements HeroicUnit {
     }
 
     @Override
-    public void castAbility(List<Enemy>... args) {
+    public void castAbility(Collection<Enemy>... args) {
         messageCallback.passMessage("Boss special ability!");
         messageCallback.passMessage(this.description());
         player.defend(this.attackPoints);

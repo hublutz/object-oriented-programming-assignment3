@@ -11,6 +11,7 @@ import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -92,9 +93,9 @@ public abstract class Player extends UnitTile implements MoveObserver, HeroicUni
         this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * this.playerLevel;
     }
 
-    public void castAbility(List<Enemy>... args){
+    public void castAbility(Collection<Enemy>... args){
         boolean casted = false;
-        for(List<Enemy> l : args){
+        for(Collection<Enemy> l : args){
             if(!casted){
                 this.castAbility(l);
                 casted =true;
