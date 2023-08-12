@@ -1,14 +1,13 @@
 package BusinessLayer;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
-import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObservable;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
-import BusinessLayer.Tiles.Units.Players.MovementFactory;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObservable;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Players.Movement.MovementFactory;
+import BusinessLayer.Tiles.Units.Players.Movement.PlayerMovementConverter;
 import BusinessLayer.Tiles.Units.Players.Player;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Class GameManager is responsible for running the game procedure
@@ -16,25 +15,21 @@ import java.util.List;
 public class GameManager
 {
     private PlayerMovementConverter movementConverter;
-    //private MovementFactory playerMovementFactory;
     private MoveObservable moveObservable;
     private IMessageCallback messageCallback;
-    private AbstractGameBoardIterator gameBoardSupplier;
-    private List<Enemy> enemyList;
+    private Iterator<GameBoard> gameBoardSupplier;
 
     /**
      * GameManager constructor
      * @param playerMovementConverter Movement converter, used to generate which type of movement to make
      * @param moveObservable Observable, notifies observers to move
-     * @param enemyList The enemy list of the game
      * @param messageCallback Used to pass messages
      * @param gameBoardSupplier Iterator that supplies the manager with game boards
      */
     public GameManager(PlayerMovementConverter playerMovementConverter,
-                       MoveObservable moveObservable, List<Enemy> enemyList, IMessageCallback messageCallback,
-                       AbstractGameBoardIterator gameBoardSupplier)
+                       MoveObservable moveObservable, IMessageCallback messageCallback,
+                       Iterator<GameBoard> gameBoardSupplier)
     {
-        this.enemyList = enemyList;
         this.movementConverter = playerMovementConverter;
         this.moveObservable = moveObservable;
         this.messageCallback = messageCallback;
@@ -50,24 +45,29 @@ public class GameManager
         while (this.gameBoardSupplier.hasNext())
         {
             GameBoard currentGameBoard = this.gameBoardSupplier.next();
-            Player currentPlayer = gameBoardSupplier.getCurrentPlayer();
+            Player currentPlayer = currentGameBoard.getPlayer();
             this.moveObservable.addObserver(currentPlayer);
-            MovementFactory playerMovementFactory = new MovementFactory(this.enemyList, currentPlayer);
-            playerMovementFactory.setCurrentGameBoard(currentGameBoard);
-            this.enemyList.forEach(enemy -> enemy.setPlayer(currentPlayer));
 
-            while (!currentPlayer.isDead() && !this.enemyList.isEmpty())
+            MovementFactory playerMovementFactory = new MovementFactory(currentGameBoard);
+
+            while (!currentGameBoard.isPlayerDead()&& !currentGameBoard.isLevelFinished())
             {
                 this.messageCallback.passMessage("<~~ Current Board: ~~>");
                 this.messageCallback.passMessage(currentGameBoard.toString());
+                this.messageCallback.passMessage(String.format("\t- Current amount of enemies: %d",
+                        currentGameBoard.getEnemyAmount()));
+
                 MovementFactory.PlayerMovements movement = this.movementConverter.generatePlayerMovement();
                 MoveOperation moveOperation = playerMovementFactory.getMoveOperation(movement);
+
                 this.moveObservable.notifyObservers(moveOperation);
                 currentGameBoard.tick();
             }
+
             this.moveObservable.removeObserver(currentPlayer);
-            if (currentPlayer.isDead())
+            if (currentGameBoard.isPlayerDead())
             {
+                this.messageCallback.passMessage(currentGameBoard.toString());
                 this.messageCallback.passMessage("Game Over! You lost");
                 return;
             }

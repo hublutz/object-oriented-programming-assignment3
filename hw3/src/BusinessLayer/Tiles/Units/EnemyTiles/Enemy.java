@@ -30,9 +30,50 @@ public abstract class Enemy extends UnitTile
                  int attackPoints, int defencePoints, IMessageCallback messageCallback,
                  int experienceValue, Player player, IEnemyDeathCallback deathCallback)
     {
-        super(tile, x, y, name, healthPool, attackPoints,
-                defencePoints, messageCallback);
+        this(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue);
+        this.initialise(x, y, player, deathCallback);
+    }
+
+    /**
+     * Enemy constructor
+     * @param tile the tile char of the enemy
+     * @param name the name of the enemy
+     * @param healthPool the initial health pool if the enemy
+     * @param attackPoints the attack points of the enemy
+     * @param defencePoints the defence points of the enemy
+     * @param messageCallback used to pass messages from the enemy
+     * @param experienceValue the experience given to the player upon killing the enemy
+     */
+    public Enemy(char tile, String name, int healthPool,
+                 int attackPoints, int defencePoints, IMessageCallback messageCallback,
+                 int experienceValue)
+    {
+        super(tile, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.experienceValue = experienceValue;
+    }
+
+    /**
+     * This method initialises the Enemy with its position, player
+     * and death callback
+     * @param x the x-axes value of the position
+     * @param y the y-axes value of the position
+     * @param player the player of the board
+     * @param deathCallback the death callback of the enemy, called upon its death
+     */
+    public void initialise(int x, int y, Player player, IEnemyDeathCallback deathCallback)
+    {
+        this.initialise(x, y);
+        this.initialise(player, deathCallback);
+    }
+
+    /**
+     * This method initialises the Enemy with its player
+     * and death callback
+     * @param player the player of the board
+     * @param deathCallback the death callback of the enemy, called upon its death
+     */
+    public void initialise(Player player, IEnemyDeathCallback deathCallback)
+    {
         this.player = player;
         this.deathCallback = deathCallback;
     }
@@ -98,6 +139,9 @@ public abstract class Enemy extends UnitTile
     @Override
     public void attack(UnitTile unit)
     {
+        this.messageCallback.passMessage(this.name + " attacks " + unit.getName() + "!");
+        this.messageCallback.passMessage(this.description());
+        this.messageCallback.passMessage(unit.description());
         unit.defend(new Random().nextInt(this.attackPoints));
         if (unit.isDead())
         {

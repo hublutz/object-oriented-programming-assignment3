@@ -2,23 +2,23 @@ package BusinessLayer.Tiles.Units.Players;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.EmptyTile;
-import BusinessLayer.Tiles.Tile;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
 import BusinessLayer.Tiles.Units.Health;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveObserver;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.HeroicUnit;
+import BusinessLayer.Tiles.Units.Movement.Observer.MoveObserver;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.UnitTile;
 import BusinessLayer.Tiles.VisitorPattern.IVisitor;
 import BusinessLayer.Tiles.WallTile;
 
-import java.security.KeyPair;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Abstract class Player represents a Player tile in the board
  */
-public abstract class Player extends UnitTile implements MoveObserver
+public abstract class Player extends UnitTile implements MoveObserver, HeroicUnit
 {
     private static final int LEVEL_UP_ON_TIMES_LEVEL = 50;
     private static final int ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL = 4;
@@ -34,9 +34,34 @@ public abstract class Player extends UnitTile implements MoveObserver
 
     /**
      * Player constructor
+     *
+     * @param name the name of the player character
+     * @param healthPool the initial health pool of the player
+     * @param attackPoints the attack points of the player
+     * @param defencePoints the defence points of the player
+     * @param messageCallback used to pass messages from the player
      */
-    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints, IMessageCallback messageCallback) {
+    public Player(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
+                  IMessageCallback messageCallback)
+    {
         super(PLAYER_TILE, x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.experience = INITIAL_EXPERIENCE;
+        this.playerLevel = INITIAL_LEVEL;
+    }
+
+    /**
+     * Player constructor
+     *
+     * @param name the name of the player character
+     * @param healthPool the initial health pool of the player
+     * @param attackPoints the attack points of the player
+     * @param defencePoints the defence points of the player
+     * @param messageCallback used to pass messages from the player
+     */
+    public Player(String name, int healthPool, int attackPoints, int defencePoints,
+                  IMessageCallback messageCallback)
+    {
+        super(PLAYER_TILE, name, healthPool, attackPoints, defencePoints, messageCallback);
         this.experience = INITIAL_EXPERIENCE;
         this.playerLevel = INITIAL_LEVEL;
     }
@@ -66,6 +91,19 @@ public abstract class Player extends UnitTile implements MoveObserver
         }
         this.attackPoints += ON_LEVEL_UP_ADD_ATTACK_IN_RELATION_TO_LEVEL * this.playerLevel;
         this.defencePoints += ON_LEVEL_UP_ADD_DEFENCE_IN_RELATION_TO_LEVEL * this.playerLevel;
+    }
+
+    public void castAbility(Collection<Enemy>... args){
+        boolean casted = false;
+        for(Collection<Enemy> l : args){
+            if(!casted){
+                this.castAbility(l);
+                casted =true;
+            }else
+                throw new RuntimeException("Cant castAbility on more then one List");
+        }
+        if(!casted)
+            throw new RuntimeException("Cant castAbility failed");
     }
 
     public abstract void castAbility(List<Enemy> enemies);

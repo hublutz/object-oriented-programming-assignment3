@@ -16,7 +16,7 @@ public class RemoveEnemyDeathCallback implements IEnemyDeathCallback
 
     /**
      * RemoveEnemyDeathCallback constructor
-     * @param tilesList The Tiles list of the game board
+     * @param gameBoard The Tiles list of the game board
      */
     public RemoveEnemyDeathCallback(GameBoard gameBoard)
     {
@@ -32,6 +32,5 @@ public class RemoveEnemyDeathCallback implements IEnemyDeathCallback
     public void callEnemyDeath(Enemy enemy)
     {
         this.gameBoard.remove(enemy);
-        this.gameBoard.addTile(new EmptyTile(enemy.getX(), enemy.getY()));
     }
 }

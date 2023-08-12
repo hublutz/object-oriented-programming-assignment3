@@ -17,23 +17,26 @@ public class Rogue extends Player {
     private int currentEnergy;
 
     /**
-     * Tile constructor
+     * Rogue constructor
      * @param cost the cost of the rogues ability
      */
     public Rogue(int x, int y, String name, int healthPool, int attackPoints, int defencePoints,
-                 IMessageCallback messageCallback, int cost) {
-        super(x, y, name, healthPool, attackPoints, defencePoints, messageCallback);
-        this.currentEnergy = MAX_ENERGY;
-        this.cost = cost;
+                 IMessageCallback messageCallback, int cost)
+    {
+        this(name, healthPool, attackPoints, defencePoints, messageCallback, cost);
+        this.initialise(x, y);
     }
 
     /**
-     * Tile constructor
+     * Rogue constructor
      * @param cost the cost of the rogues ability
      */
     public Rogue(String name, int healthPool, int attackPoints, int defencePoints,
-                 IMessageCallback messageCallback, int cost) {
-        this(0, 0, name, healthPool, attackPoints, defencePoints, messageCallback, cost);
+                 IMessageCallback messageCallback, int cost)
+    {
+        super(name, healthPool, attackPoints, defencePoints, messageCallback);
+        this.currentEnergy = MAX_ENERGY;
+        this.cost = cost;
     }
 
     /**
@@ -46,13 +49,18 @@ public class Rogue extends Player {
         if(this.currentEnergy >= this.cost)
         {
             this.messageCallback.passMessage("Fan of Knives!");
+            this.messageCallback.passMessage(this.description());
             this.currentEnergy -= this.cost;
             List<Enemy> enemiesInRange = enemies.stream().filter((enemy) -> this.range(enemy) < ABILITY_RANGE)
                     .collect(Collectors.toList());
             for (Enemy enemy : enemiesInRange)
             {
                 enemy.defend(this.attackPoints);
+                this.messageCallback.passMessage("Attacking: ");
+                this.messageCallback.passMessage(enemy.description());
                 this.checkIfEnemyIsDeadAndGetEx(enemy);
+                if (enemy.isDead())
+                    enemy.onDeath();
             }
         }
         else

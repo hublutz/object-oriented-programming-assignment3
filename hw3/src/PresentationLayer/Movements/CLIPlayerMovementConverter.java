@@ -1,7 +1,7 @@
 package PresentationLayer.Movements;
 
-import BusinessLayer.PlayerMovementConverter;
-import BusinessLayer.Tiles.Units.Players.MovementFactory;
+import BusinessLayer.Tiles.Units.Players.Movement.PlayerMovementConverter;
+import BusinessLayer.Tiles.Units.Players.Movement.MovementFactory;
 
 import java.util.HashMap;
 import java.util.Map;

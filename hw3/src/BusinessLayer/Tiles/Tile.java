@@ -23,6 +23,25 @@ public abstract class Tile implements IVisited
     }
 
     /**
+     * Tile constructor
+     * @param tile the tile char
+     */
+    public Tile(char tile)
+    {
+        this.tile = tile;
+    }
+
+    /**
+     * This method initialises the position of the Tile
+     * @param x the x-axes value of the position
+     * @param y the y-axes value of the position
+     */
+    public void initialise(int x, int y)
+    {
+        this.position = new Point(x, y);
+    }
+
+    /**
      * Check the object is a Tile and its tile character and
      * position are equal to this one's
      * @param obj an object

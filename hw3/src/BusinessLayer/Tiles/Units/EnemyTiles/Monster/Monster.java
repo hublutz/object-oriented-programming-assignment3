@@ -2,8 +2,9 @@ package BusinessLayer.Tiles.Units.EnemyTiles.Monster;
 
 import BusinessLayer.IMessageCallback.IMessageCallback;
 import BusinessLayer.Tiles.Units.EnemyTiles.Enemy;
+import BusinessLayer.Tiles.Units.EnemyTiles.EnemyMovementFactory;
 import BusinessLayer.Tiles.Units.EnemyTiles.IEnemyDeathCallback;
-import BusinessLayer.Tiles.Units.MoveOperations.MoveOperation;
+import BusinessLayer.Tiles.Units.Movement.MoveOperations.MoveOperation;
 import BusinessLayer.Tiles.Units.Players.Player;
 
 /**
@@ -11,8 +12,8 @@ import BusinessLayer.Tiles.Units.Players.Player;
  */
 public class Monster extends Enemy
 {
-    private int visionRange;
-    private final MonsterMovementFactory movementFactory;
+    protected int visionRange;
+    protected final EnemyMovementFactory movementFactory;
 
 
     /**
@@ -24,13 +25,11 @@ public class Monster extends Enemy
     public Monster(char tile, int x, int y, String name, int healthPool, int attackPoints,
                    int defencePoints, IMessageCallback messageCallback, int experienceValue,
                    Player player, IEnemyDeathCallback deathCallback, int visionRange,
-                   MonsterMovementFactory movementFactory)
+                   EnemyMovementFactory movementFactory)
     {
-        super(tile, x, y, name, healthPool, attackPoints, defencePoints,
-                messageCallback, experienceValue, player, deathCallback);
-        this.visionRange = visionRange;
-
-        this.movementFactory = movementFactory;
+        this(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue,
+                visionRange, movementFactory);
+        this.initialise(x, y, player, deathCallback);
     }
 
     /**
@@ -41,12 +40,11 @@ public class Monster extends Enemy
      */
     public Monster(char tile, String name, int healthPool, int attackPoints,
                    int defencePoints, IMessageCallback messageCallback, int experienceValue,
-                   Player player, IEnemyDeathCallback deathCallback, int visionRange,
-                   MonsterMovementFactory movementFactory)
+                   int visionRange, EnemyMovementFactory movementFactory)
     {
-        this(tile, 0, 0, name, healthPool, attackPoints, defencePoints,
-                messageCallback, experienceValue, player, deathCallback,
-                visionRange, movementFactory);
+        super(tile, name, healthPool, attackPoints, defencePoints, messageCallback, experienceValue);
+        this.movementFactory = movementFactory;
+        this.visionRange = visionRange;
     }
 
 
@@ -62,24 +60,7 @@ public class Monster extends Enemy
         {
             int dx = this.getX() - this.player.getX();
             int dy = this.getY() - this.player.getY();
-            if (Math.abs(dx) > Math.abs(dy))
-            {
-                if (dx > 0)
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_LEFT);
-                else
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_RIGHT);
-            }
-            else
-            {
-                if (dx > 0)
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_UP);
-                else
-                    moveOperation = this.movementFactory.
-                            getMoveOperation(MonsterMovementFactory.MonsterMovements.MOVE_DOWN);
-            }
+            moveOperation = getPlayerApproachMoveOperation (dx,dy);
         }
         else
             moveOperation = this.movementFactory.getRandomMovement();
@@ -100,5 +81,26 @@ public class Monster extends Enemy
         builder.append('\n');
 
         return builder.toString();
+    }
+
+    public MoveOperation getPlayerApproachMoveOperation(int dx, int dy){
+        if (Math.abs(dx) > Math.abs(dy))
+        {
+            if (dx > 0)
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_LEFT);
+            else
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_RIGHT);
+        }
+        else
+        {
+            if (dy > 0)
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_UP);
+            else
+                return this.movementFactory.
+                        getMoveOperation(EnemyMovementFactory.EnemyMovements.MOVE_DOWN);
+        }
     }
 }
